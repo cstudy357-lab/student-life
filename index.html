@@ -119,10 +119,65 @@ function addFolder(){let n=v('folderInput').trim();if(!n)return;if(d.folders.som
 function deleteFolder(){let f=window.noteFolder||'All';if(f==='All'||f==='General')return toast('General folder cannot be deleted');if(!confirm('Delete folder and keep notes in General?'))return;d.notes.forEach(n=>{if(n.folder===f)n.folder='General'});d.folders=d.folders.filter(x=>x!==f);window.noteFolder='All';save();toast('Folder deleted');render()}
 function addTextNote(){let title=v('noteTitle'),text=v('noteText');if(!title||!text)return toast('Title and note are required');d.notes.push({id:id(),type:'text',title,subject:v('noteSubject'),text,folder:v('noteFolder')||'General',date:todayLocal()});save();toast('Note saved');render()}
 function editNote(id){let n=d.notes.find(x=>x.id===id);if(!n)return;let t=prompt('Title:',n.title);if(t===null)return;let tx=prompt('Note:',n.text||'');if(tx===null)return;n.title=t.trim()||n.title;n.text=tx;save();toast('Note updated');render()}
-async function uploadPDF(file){if(!file)return;if(file.type!=='application/pdf')return toast('Please select a PDF');if(file.size>20*1024*1024)return toast('PDF limit is 20 MB');let data=await fileToData(file);try{await dbPut(file.name,data)}catch(e){return toast('Could not store PDF. Try a smaller file.')}let n={id:id(),type:'pdf',title:file.name,subject:'',file:file.name,folder:window.noteFolder&&window.noteFolder!=='All'?window.noteFolder:'General',date:todayLocal()};d.notes.push(n);save();toast('PDF saved');render()}
+async function uploadPDF(file){
+  if(!file)return;
+  if(file.type!=='application/pdf')return toast('Please select a PDF');
+  if(file.size>20*1024*1024)return toast('PDF limit is 20 MB');
+
+  const noteId=id();
+  const storageKey='pdf-'+noteId+'-'+file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+  const data=await fileToData(file);
+
+  try{
+    await dbPut(storageKey,data);
+  }catch(e){
+    console.error('PDF upload error:',e);
+    return toast('Could not store PDF. Try a smaller file.');
+  }
+
+  let n={
+    id:noteId,
+    type:'pdf',
+    title:file.name,
+    subject:'',
+    file:storageKey,
+    originalFileName:file.name,
+    folder:window.noteFolder&&window.noteFolder!=='All'?window.noteFolder:'General',
+    date:todayLocal()
+  };
+
+  d.notes.push(n);
+  await save();
+  toast('PDF saved');
+  render();
+}
 function fileToData(file){return new Promise((res,rej)=>{let r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsArrayBuffer(file)})}
 function openPDF(id){let n=d.notes.find(x=>x.id===id);if(!n)return;if(n.data){try{let w=window.open();if(w){w.document.write('<title>'+esc(n.title)+'</title><iframe src=\"'+n.data+'\" style=\"position:fixed;inset:0;width:100%;height:100%;border:0\"></iframe>');w.document.close();return}}catch(e){}}if(!pdfDB)return toast('PDF storage is not ready');dbGet(n.file).then(buf=>{if(!buf)return toast('PDF file missing');let blob=new Blob([buf],{type:'application/pdf'}),url=URL.createObjectURL(blob);window.open(url,'_blank')}).catch(()=>toast('Could not open PDF'))}
-async function deleteNote(id){if(!confirm('Delete this note?'))return;let n=d.notes.find(x=>x.id===id);if(n?.type==='pdf')await dbDelete(n.file);d.notes=d.notes.filter(x=>x.id!==id);save();toast('Deleted');render()}
+async function deleteNote(id){
+  if(!confirm('Delete this note?'))return;
+
+  const index=d.notes.findIndex(x=>x.id===id);
+  if(index===-1)return toast('Item not found');
+
+  const n=d.notes[index];
+
+  // Delete only this PDF from storage.
+  if(n.type==='pdf' && n.file){
+    try{
+      await dbDelete(n.file);
+    }catch(e){
+      console.error('PDF delete error:',e);
+      return toast('Could not delete the PDF. Please try again.');
+    }
+  }
+
+  // Remove only the clicked item from the local/cloud data.
+  d.notes.splice(index,1);
+  await save();
+
+  toast('Deleted');
+  render();
+}
 function moveNote(id){let n=d.notes.find(x=>x.id===id);if(!n)return;let f=prompt('Folder:',n.folder);if(f===null)return;if(!d.folders.includes(f.trim()))return toast('Folder not found');n.folder=f.trim();save();render()}
 function workout(a){a.innerHTML=`<div class="hero"><div><div class="eyebrow">Health break</div><h1>Workout</h1><p>Keep movement simple and consistent.</p></div></div><div class="card"><div class="row"><input class="input" id="wTitle" placeholder="Workout / walk"><input class="input" id="wMin" type="number" min="1" placeholder="Minutes"><button class="primary" onclick="addWorkout()">Add</button></div></div><div class="card"><h2>History</h2>${d.workouts.slice().reverse().map(w=>`<div class="item"><div class="item-row"><div class="item-main"><b>${esc(w.title)}</b><div class="item-sub">${w.date} • ${w.minutes} min</div></div><div class="actions"><button class="secondary" onclick="editWorkout('${w.id}')">Edit</button><button class="danger" onclick="delWorkout('${w.id}')">Delete</button></div></div></div>`).join('')||'<div class="empty">No workouts yet.</div>'}</div>`}
 function addWorkout(){let title=v('wTitle'),min=+v('wMin');if(!title||!min)return toast('Workout and minutes required');d.workouts.push({id:id(),title,minutes:min,date:todayLocal()});save();toast('Workout added');render()}
