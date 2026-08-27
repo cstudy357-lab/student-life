@@ -22,7 +22,8 @@
 .pdf-folder-modal .pdf-dialog{width:min(520px,100%);max-height:90vh;overflow:auto}.folder-create-row{display:flex;gap:8px}.folder-create-row .input{flex:1}
 .pdf-reader-modal{padding:0}.pdf-reader-shell{width:100%;height:100%;background:#07111f;display:flex;flex-direction:column}.pdf-reader-bar{height:76px;flex:0 0 76px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 16px;border-bottom:1px solid #1b2d45}.pdf-reader-bar b{display:block;max-width:60vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media(max-width:700px){.pdf-reader-bar{height:68px;flex-basis:68px;padding:0 9px}.pdf-reader-bar .secondary{padding:8px 9px}}
-</style></style></head>
+.pdf-folder-delete{width:100%;margin-top:8px}
+.pdf-reader-brand{display:flex;align-items:center;gap:10px;min-width:0}.reader-icon,.reader-tool{border:1px solid #29415e;background:#0d1d30;color:#eaf2ff;border-radius:10px;min-width:38px;height:38px;display:inline-grid;place-items:center;font-weight:900}.reader-tool{font-size:16px}.reader-tool.close{color:#ffadb5}.reader-actions{display:flex;align-items:center;gap:6px}.reader-actions span{min-width:48px;text-align:center;color:#9fb1c8;font-size:12px;font-weight:800}.pdf-reader-stage{flex:1;overflow:auto;background:#202a36;padding:18px}.pdf-reader-stage iframe{display:block;width:100%;height:100%;min-height:calc(100vh - 112px);border:0;background:#fff;box-shadow:0 12px 35px #0007;transform-origin:center top}.pdf-reader-bar{background:linear-gradient(180deg,#091525,#07111f)}@media(max-width:700px){.reader-actions{gap:3px}.reader-tool,.reader-icon{min-width:34px;height:34px}.reader-actions span{min-width:40px}.pdf-reader-stage{padding:8px}}</style></head>
 <body>
 <div class="app"><aside class="side"><div class="brand"><div class="brand-icon">🎓</div><div><b>Hello Chitranshu</b><small>Focus · Plan · Achieve</small></div></div><div class="nav"><div class="nav-title">Main</div><button data-page="home" onclick="go('home')">🏠 <span>Dashboard</span></button><button data-page="ai" onclick="go('ai')">▣ <span>Planner</span></button><button data-page="study" onclick="go('study')">◎ <span>Targets</span></button><button data-page="classes" onclick="go('classes')">🎓 <span>Live Classes</span></button><button data-page="focus" onclick="go('focus')">⏱ <span>Focus Timer</span></button><button data-page="notes" onclick="go('notes')">📄 <span>Notes & PDFs</span></button><div class="nav-title">Personal</div><button data-page="routine" onclick="go('routine')">◷ <span>Routine</span></button><button data-page="challenge" onclick="go('challenge')">🎯 <span>Goals</span></button><button data-page="workout" onclick="go('workout')">🏃 <span>Workout</span></button><button data-page="settings" onclick="go('settings')">⚙ <span>Settings</span></button></div><div class="streak"><small>Current streak</small><br><b id="streakSide">0</b> 🔥<br><small>days</small></div></aside>
 <main class="main"><header class="top"><div class="search-wrap"><div class="search"><input id="globalSearch" placeholder="Search targets, classes, goals, notes…" oninput="searchAll(this.value)"></div><div id="searchResults"></div></div><div class="top-actions"><button class="icon-btn" onclick="go('focus')">⏱ Focus</button><button class="icon-btn" onclick="quickTarget()">＋ Add</button></div></header><section class="content" id="app"></section></main></div>
@@ -133,14 +134,14 @@ if(subject!=='All subjects'&&subject!=='All')pdfs=pdfs.filter(n=>(n.subject||'Ge
 if(sort==='az')pdfs.sort((a,b)=>a.title.localeCompare(b.title));else if(sort==='size')pdfs.sort((a,b)=>(b.size||0)-(a.size||0));else pdfs.sort((a,b)=>(b.created_at||b.date||'').localeCompare(a.created_at||a.date||''));
 let subjects=[...new Set(d.notes.filter(n=>n.type==='pdf').map(n=>n.subject).filter(Boolean))];
 let types=['Notes','Question Paper','Practice Sheet','Revision','Book / Module','Reference','Other'];
-let folderButtons=`<button class="pdf-folder-btn ${folder==='All'?'active':''}" onclick="window.noteFolder='All';render()"><span>📚 All PDFs</span><span>${d.notes.filter(n=>n.type==='pdf').length}</span></button>`+d.folders.map(f=>{let c=d.notes.filter(n=>n.type==='pdf'&&n.folder===f).length;return `<button class="pdf-folder-btn ${folder===f?'active':''}" onclick="window.noteFolder='${esc(f).replace(/'/g,"\'")}';render()"><span>📁 ${esc(f)}</span><span>${c}</span></button>`}).join('');
+let folderButtons=`<button class="pdf-folder-btn ${folder==='All'?'active':''}" onclick="selectPdfFolder('All')"><span>📚 All PDFs</span><span>${d.notes.filter(n=>n.type==='pdf').length}</span></button>`+d.folders.map(f=>{let c=d.notes.filter(n=>n.type==='pdf'&&n.folder===f).length;return `<button class="pdf-folder-btn ${folder===f?'active':''}" onclick="selectPdfFolder('${encodeURIComponent(f)}')"><span>📁 ${esc(f)}</span><span>${c}</span></button>`}).join('');
 a.innerHTML=`<div class="hero"><div><div class="eyebrow">Knowledge base</div><h1>Notes & PDFs</h1><p>Your personal study library — folders, smart classification, search and in-app reading.</p></div><button class="primary" onclick="document.getElementById('pdfFile').click()">＋ Add PDF</button></div>
 <div class="pdf-library-shell">
 <aside class="pdf-folder-panel">
 <div class="pdf-folder-head"><b>Library</b><span class="pdf-library-count">${d.folders.length} folders</span></div>
 <div class="pdf-folder-list">${folderButtons}</div>
 <button class="pdf-folder-add" onclick="openFolderModal()">＋ New folder</button>
-
+${folder!=='All'&&folder!=='General'&&d.folders.includes(folder)?`<button class="danger pdf-folder-delete" onclick="deleteFolder('${encodeURIComponent(folder)}')">🗑 Delete selected folder</button>`:''}
 </aside>
 <section class="pdf-library-main"><div class="card"><div class="pdf-library-top"><div><div class="pdf-library-title"><h2 style="margin:0">${folder==='All'?'All PDFs':esc(folder)}</h2><span class="pdf-library-count">${pdfs.length}</span></div><div class="pdf-breadcrumb">📚 Notes & PDFs ${folder==='All'?'':' / 📁 '+esc(folder)}</div></div><div class="actions"><button class="secondary" onclick="document.getElementById('pdfFile').click()">☁ Upload</button></div></div>
 <div class="pdf-filters"><input class="input" placeholder="Search title, subject, chapter, tags…" value="${esc(q)}" oninput="window.noteQ=this.value;render()"><select class="select" onchange="window.pdfTypeFilter=this.value;render()"><option>All</option>${types.map(x=>`<option ${pdfType===x?'selected':''}>${x}</option>`).join('')}</select><select class="select" onchange="window.pdfSubjectFilter=this.value;render()"><option>All subjects</option>${subjects.map(x=>`<option ${subject===x?'selected':''}>${esc(x)}</option>`).join('')}</select><select class="select" onchange="window.pdfSort=this.value;render()"><option value="new" ${sort==='new'?'selected':''}>Newest</option><option value="az" ${sort==='az'?'selected':''}>A–Z</option><option value="size" ${sort==='size'?'selected':''}>Largest</option></select></div>
@@ -151,32 +152,66 @@ a.innerHTML=`<div class="hero"><div><div class="eyebrow">Knowledge base</div><h1
 }
 function pdfCard(n){let tags=Array.isArray(n.tags)?n.tags:(n.tags?String(n.tags).split(',').map(x=>x.trim()).filter(Boolean):[]),mb=n.size?((n.size/1048576).toFixed(1)+' MB'):'Cloud PDF',pages=n.pages?`${n.pages} pages`:'Pages unknown';return `<article class="pdf-card"><div class="pdf-head"><div class="pdf-icon">PDF</div><div style="min-width:0;flex:1"><div class="pdf-name" title="${esc(n.title)}">${esc(n.title)}</div><div class="pdf-meta">${esc(n.subject||'General')} • ${esc(n.chapter||'Unclassified')}<br>${pages} • ${mb} • ${n.date}</div><div class="folder-line">📁 ${esc(n.folder||'General')}</div></div></div><div class="pdf-tags"><span class="pdf-tag type">${esc(n.document_type||'PDF')}</span>${n.subject?`<span class="pdf-tag subject">${esc(n.subject)}</span>`:''}${tags.slice(0,5).map(t=>`<span class="pdf-tag">${esc(t)}</span>`).join('')}</div><div class="actions" style="margin-top:13px"><button class="primary" onclick="openPDF('${n.id}')">📖 Read</button><button class="secondary" onclick="editPDF('${n.id}')">✏️ Edit</button><button class="secondary" onclick="moveNote('${n.id}')">📁 Move</button><button class="danger" onclick="deleteNote('${n.id}')">Delete</button></div></article>`}
 // PDF folders are real Supabase Storage subfolders: <user-id>/<folder>/<file>
+function selectPdfFolder(encoded){
+  const f=encoded==='All'?'All':decodeURIComponent(encoded);
+  if(f!=='All'&&!d.folders.includes(f))return toast('Folder not found');
+  window.noteFolder=f;
+  window.noteQ='';
+  window.pdfTypeFilter='All';
+  window.pdfSubjectFilter='All subjects';
+  render();
+}
 function openFolderModal(){document.getElementById('folderModal').classList.add('show');setTimeout(()=>document.getElementById('newFolderName')?.focus(),50)}
 function closeFolderModal(){document.getElementById('folderModal').classList.remove('show')}
 async function createFolder(){let n=v('newFolderName').trim().replace(/\s+/g,' ');if(!n)return toast('Enter a folder name');if(n.length>40)return toast('Folder name is too long');if(d.folders.some(x=>x.toLowerCase()===n.toLowerCase()))return toast('Folder already exists');d.folders.push(n);await save();window.noteFolder=n;closeFolderModal();toast('Folder created ✓');render()}
 function addFolder(){openFolderModal()}
 async function deleteFolder(selectedName){
-  const selected=String(selectedName||window.noteFolder||'').trim();
+  let selected=String(selectedName||'').trim();
+  if(selected) {
+    try{selected=decodeURIComponent(selected)}catch(_){}
+  }
+  if(!selected) selected=String(window.noteFolder||'').trim();
   if(!selected||selected==='All'||selected==='General')return toast('Select a custom folder first');
   if(!d.folders.includes(selected))return toast('Selected folder not found');
+
   const affected=d.notes.filter(n=>(n.folder||'General')===selected);
-  if(!confirm(`Delete ONLY "${selected}"? ${affected.length} PDF${affected.length===1?'':'s'} will move to General. Other folders will stay unchanged.`))return;
+  const pdfCount=affected.filter(n=>n.type==='pdf').length;
+  const confirmText=pdfCount
+    ? `Delete ONLY the folder "${selected}"? ${pdfCount} PDF${pdfCount===1?'':'s'} will be moved to General. Other folders will NOT be changed.`
+    : `Delete ONLY the empty folder "${selected}"? Other folders will NOT be changed.`;
+  if(!confirm(confirmText))return;
+
   try{
     for(const n of affected.filter(x=>x.type==='pdf'&&x.storage_path)){
       const parts=n.storage_path.split('/');
-      const newPath=`${parts[0]}/General/${parts[parts.length-1]}`;
-      const {error}=await supabaseClient.storage.from('pdfs').move(n.storage_path,newPath);
-      if(error)throw error;
-      n.storage_path=newPath;
+      const userId=parts[0];
+      const fileName=parts[parts.length-1];
+      const newPath=`${userId}/General/${fileName}`;
+
+      if(n.storage_path!==newPath){
+        const {error}=await supabaseClient.storage.from('pdfs').move(n.storage_path,newPath);
+        if(error)throw error;
+        n.storage_path=newPath;
+      }
     }
-    affected.forEach(n=>{if((n.folder||'General')===selected)n.folder='General'});
+
+    affected.forEach(n=>{
+      if((n.folder||'General')===selected)n.folder='General';
+    });
+
     d.folders=d.folders.filter(f=>f!==selected);
     window.noteFolder='All';
-    await save();toast(`Folder "${selected}" deleted ✓`);render();
-  }catch(e){console.error(e);toast('Could not delete selected folder: '+(e.message||'Storage error'))}
+    await save();
+    toast(`Only "${selected}" folder deleted ✓`);
+    render();
+  }catch(e){
+    console.error('Folder delete error:',e);
+    toast('Could not delete selected folder: '+(e.message||'Storage error'));
+  }
 }
 function addTextNote(){let title=v('noteTitle'),text=v('noteText');if(!title||!text)return toast('Title and note are required');d.notes.push({id:id(),type:'text',title,subject:v('noteSubject'),text,folder:v('noteFolder')||'General',date:todayLocal()});save();toast('Note saved');render()}
 function editNote(id){let n=d.notes.find(x=>x.id===id);if(!n)return;let t=prompt('Title:',n.title);if(t===null)return;let tx=prompt('Note:',n.text||'');if(tx===null)return;n.title=t.trim()||n.title;n.text=tx;save();toast('Note updated');render()}
+function editPDF(noteId){const n=d.notes.find(x=>x.id===noteId);if(!n)return;let t=prompt("PDF title:",n.title||"");if(t===null)return;let sub=prompt("Subject:",n.subject||"");if(sub===null)return;let ch=prompt("Chapter / topic:",n.chapter||"");if(ch===null)return;let ty=prompt("Type:",n.document_type||"Other");if(ty===null)return;let tg=prompt("Tags (comma separated):",Array.isArray(n.tags)?n.tags.join(', '):(n.tags||""));if(tg===null)return;n.title=t.trim()||n.title;n.subject=sub.trim();n.chapter=ch.trim();n.document_type=ty.trim()||'Other';n.tags=tg.split(',').map(x=>x.trim()).filter(Boolean);save();toast("PDF details updated ✓");render()}
 async function moveNote(noteId){let n=d.notes.find(x=>x.id===noteId);if(!n)return;let choices=d.folders.join(', ');let f=prompt(`Move to folder:
 ${choices}`,n.folder||'General');if(f===null)return;f=f.trim();if(!d.folders.includes(f))return toast('Folder not found. Create it first.');if(f===(n.folder||'General'))return toast('Already in this folder');try{if(n.type==='pdf'&&n.storage_path){let parts=n.storage_path.split('/');let fileName=parts[parts.length-1];let newPath=`${parts[0]}/${f}/${fileName}`;let {error}=await supabaseClient.storage.from('pdfs').move(n.storage_path,newPath);if(error)throw error;n.storage_path=newPath}n.folder=f;await save();toast('Moved to '+f+' ✓');render()}catch(e){console.error(e);toast('Could not move PDF: '+(e.message||'Storage error'))}}
 function exportData(){let blob=new Blob([JSON.stringify(d,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Student-Life-backup.json';a.click();URL.revokeObjectURL(a.href);toast('Backup exported')}
@@ -213,21 +248,26 @@ try{let meta=await analyzePDF(file);pdfUploadState.meta=meta;document.getElement
 async function confirmPDFUpload(){
 if(!pdfUploadState)return;let {file,user,meta}=pdfUploadState,btn=document.getElementById('pdfSaveBtn');btn.disabled=true;btn.textContent='Uploading…';try{let fileName=safeFileName(file.name),folder=(document.getElementById('pdfFolder').value||'General').trim(),storagePath=`${user.id}/${folder}/${id()}-${fileName}`;let {error}=await supabaseClient.storage.from("pdfs").upload(storagePath,file,{cacheControl:"3600",upsert:false,contentType:"application/pdf"});if(error)throw error;let tags=document.getElementById('pdfTags').value.split(',').map(x=>x.trim()).filter(Boolean);d.notes.push({id:id(),type:"pdf",title:v('pdfTitle')||file.name.replace(/\.pdf$/i,''),subject:v('pdfSubject')||'General',chapter:v('pdfChapter'),document_type:document.getElementById('pdfType').value,tags:[...new Set(tags)],file:file.name,storage_path:storagePath,folder:document.getElementById('pdfFolder').value||'General',date:todayLocal(),size:file.size,pages:meta?.pages||0,created_at:new Date().toISOString()});await save();closePDFMeta();toast("PDF classified & saved to cloud ✓");render()}catch(e){console.error(e);toast("PDF upload failed: "+(e.message||"Check Storage bucket/policies"));btn.disabled=false;btn.textContent='☁ Save PDF'}
 }
+let pdfZoom=1;
 async function openPDF(noteId){
   const n=d.notes.find(x=>x.id===noteId);if(!n)return;
   const user=await getCurrentUser();if(!user)return toast("Please login first");
   if(!n.storage_path)return toast("This PDF needs to be uploaded again for cloud reading.");
   try{
     const {data,error}=await supabaseClient.storage.from("pdfs").createSignedUrl(n.storage_path,1800);
-    if(error)throw error;if(!data?.signedUrl)return toast("Could not create PDF link");
-    document.getElementById("pdfReaderTitle").textContent=n.title||"PDF Reader";
+    if(error)throw error;if(!data?.signedUrl)throw new Error("Could not create secure PDF link");
+    pdfZoom=1;document.getElementById("pdfReaderTitle").textContent=n.title||"PDF Reader";
     document.getElementById("pdfReaderFrame").src=data.signedUrl;
     document.getElementById("pdfReaderDownload").href=data.signedUrl;
-    document.getElementById("pdfReaderDownload").download=n.title||"document.pdf";
-    document.getElementById("pdfReaderModal").classList.add("show");
+    document.getElementById("pdfReaderDownload").download=(n.title||"document.pdf").replace(/[^\w.\- ]+/g,"_");
+    updatePdfZoom();document.getElementById("pdfReaderModal").classList.add("show");document.body.style.overflow="hidden";
   }catch(e){console.error(e);toast("Could not open PDF: "+(e.message||"Storage error"));}
 }
-function closePDFReader(){const f=document.getElementById("pdfReaderFrame");if(f)f.src="about:blank";document.getElementById("pdfReaderModal")?.classList.remove("show");}
+function updatePdfZoom(){const f=document.getElementById("pdfReaderFrame"),l=document.getElementById("pdfZoomLabel");if(l)l.textContent=Math.round(pdfZoom*100)+"%";if(f){f.style.transform=`scale(${pdfZoom})`;f.style.transformOrigin="center top";f.style.width=(100/pdfZoom)+"%";f.style.height=(100/pdfZoom)+"%";}}
+function zoomPdf(dir){pdfZoom=Math.max(.7,Math.min(1.8,pdfZoom+(dir>0?.1:-.1)));updatePdfZoom()}
+function fitPdf(){pdfZoom=1;updatePdfZoom()}
+function closePDFReader(){const f=document.getElementById("pdfReaderFrame");if(f)f.src="about:blank";document.getElementById("pdfReaderModal")?.classList.remove("show");document.body.style.overflow=""}
+
 async function deleteNote(noteId){
   if(!confirm("Delete this note?"))return;
   const n=d.notes.find(x=>x.id===noteId);if(!n)return;
@@ -236,7 +276,6 @@ async function deleteNote(noteId){
     d.notes=d.notes.filter(x=>x.id!==noteId);await save();toast("Deleted");render();
   }catch(e){console.error("PDF delete error:",e);toast("Could not delete PDF: "+(e.message||"Storage error"));}
 }
-go('home');
 
 function workout(a){a.innerHTML=`<div class="hero"><div><div class="eyebrow">Health break</div><h1>Workout</h1><p>Keep movement simple and consistent.</p></div></div><div class="card"><div class="row"><input class="input" id="wTitle" placeholder="Workout / walk"><input class="input" id="wMin" type="number" min="1" placeholder="Minutes"><button class="primary" onclick="addWorkout()">Add</button></div></div><div class="card"><h2>History</h2>${d.workouts.slice().reverse().map(w=>`<div class="item"><div class="item-row"><div class="item-main"><b>${esc(w.title)}</b><div class="item-sub">${w.date} • ${w.minutes} min</div></div><div class="actions"><button class="secondary" onclick="editWorkout('${w.id}')">Edit</button><button class="danger" onclick="delWorkout('${w.id}')">Delete</button></div></div></div>`).join('')||'<div class="empty">No workouts yet.</div>'}</div>`}
 function addWorkout(){let title=v('wTitle'),min=+v('wMin');if(!title||!min)return toast('Workout and minutes required');d.workouts.push({id:id(),title,minutes:min,date:todayLocal()});save();toast('Workout added');render()}
@@ -288,7 +327,6 @@ async function uploadPDF(file){
   try{
     const {error}=await supabaseClient.storage.from("pdfs").upload(storagePath,file,{cacheControl:"3600",upsert:false,contentType:"application/pdf"});
     if(error)throw error;
-    const folder=(typeof window.noteFolder==='string'&&window.noteFolder!=="All"&&window.noteFolder.trim())?window.noteFolder.trim():"General";
     d.notes.push({id:id(),type:"pdf",title:file.name,subject:"",file:file.name,storage_path:storagePath,folder,date:todayLocal()});
     await save();toast("PDF uploaded to cloud ✓");render();
   }catch(e){console.error("PDF upload error:",e);toast("PDF upload failed: "+(e.message||"Check Storage bucket/policies"));}
@@ -331,9 +369,9 @@ console.log("Supabase connected");
 <div class="field" style="margin-top:18px"><label>Folder name</label><div class="folder-create-row"><input class="input" id="newFolderName" maxlength="40" placeholder="Physics, Chemistry, JEE PYQ…"><button class="primary" onclick="createFolder()">Create</button></div></div>
 </div></div>
 <div id="pdfReaderModal" class="modal pdf-reader-modal"><div class="pdf-reader-shell">
-<div class="pdf-reader-bar"><div style="min-width:0"><b id="pdfReaderTitle">PDF Reader</b><div class="muted" style="font-size:11px">Secure cloud reader</div></div>
-<div class="actions"><a id="pdfReaderDownload" class="secondary" href="#" target="_blank" rel="noopener">⬇ Download</a><button class="secondary" onclick="closePDFReader()">✕ Close</button></div></div>
-<iframe id="pdfReaderFrame" title="PDF Reader" style="width:100%;height:calc(100vh - 76px);border:0;background:#fff"></iframe>
+<div class="pdf-reader-bar"><div class="pdf-reader-brand"><button class="reader-icon" onclick="closePDFReader()">←</button><div style="min-width:0"><b id="pdfReaderTitle">PDF Reader</b><div class="muted" style="font-size:11px">Reading inside Hello Chitranshu</div></div></div>
+<div class="reader-actions"><button class="reader-tool" onclick="zoomPdf(-1)" title="Zoom out">−</button><span id="pdfZoomLabel">100%</span><button class="reader-tool" onclick="zoomPdf(1)" title="Zoom in">+</button><button class="reader-tool" onclick="fitPdf()" title="Reset zoom">↺</button><a id="pdfReaderDownload" class="reader-tool" href="#" download rel="noopener">⬇</a><button class="reader-tool close" onclick="closePDFReader()">✕</button></div></div>
+<div class="pdf-reader-stage"><iframe id="pdfReaderFrame" title="PDF Reader"></iframe></div>
 </div></div>
 <!-- SUPABASE LOGIN -->
 <div id="loginBox" style="
@@ -490,6 +528,6 @@ async function checkStudentLogin(){
 checkStudentLogin();
 if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}
 </script>
-</body></html>
+<script>document.addEventListener("keydown",e=>{if(e.key==="Escape")closePDFReader();});</script></body></html>
 
 
