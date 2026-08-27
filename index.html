@@ -62,7 +62,7 @@ body.pdf-reader-open{overflow:hidden}
 <div class="app"><aside class="side"><div class="brand"><div class="brand-icon">🎓</div><div><b>Hello Chitranshu</b><small>Focus · Plan · Achieve</small></div></div><div class="nav"><div class="nav-title">Main</div><button data-page="home" onclick="go('home')">🏠 <span>Dashboard</span></button><button data-page="ai" onclick="go('ai')">▣ <span>Planner</span></button><button data-page="study" onclick="go('study')">◎ <span>Targets</span></button><button data-page="classes" onclick="go('classes')">🎓 <span>Live Classes</span></button><button data-page="focus" onclick="go('focus')">⏱ <span>Focus Timer</span></button><button data-page="notes" onclick="go('notes')">📄 <span>Notes & PDFs</span></button><div class="nav-title">Personal</div><button data-page="routine" onclick="go('routine')">◷ <span>Routine</span></button><button data-page="challenge" onclick="go('challenge')">🎯 <span>Goals</span></button><button data-page="workout" onclick="go('workout')">🏃 <span>Workout</span></button><button data-page="settings" onclick="go('settings')">⚙ <span>Settings</span></button></div><div class="streak"><small>Current streak</small><br><b id="streakSide">0</b> 🔥<br><small>days</small></div></aside>
 <main class="main"><header class="top"><div class="search-wrap"><div class="search"><input id="globalSearch" placeholder="Search targets, classes, goals, notes…" oninput="searchAll(this.value)"></div><div id="searchResults"></div></div><div class="top-actions"><button class="icon-btn" onclick="go('focus')">⏱ Focus</button><button class="icon-btn" onclick="quickTarget()">＋ Add</button></div></header><section class="content" id="app"></section></main></div>
 <nav class="mobile-nav"><button onclick="go('home')"><b>⌂</b>Home</button><button onclick="go('ai')"><b>▣</b>Planner</button><button onclick="quickTarget()"><b>＋</b>Add</button><button onclick="go('focus')"><b>◷</b>Focus</button><button onclick="go('settings')"><b>•••</b>More</button></nav><div id="toast" class="toast" style="display:none"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script><script>if(window.pdfjsLib)window.pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";</script>
 <script>
 const KEY='studentLifeShareV1';
 const defaultData={targets:[],classes:[],routine:[],goals:[],workouts:[],notes:[],folders:['General'],done:{},settings:{focus:25,theme:'dark',name:'Student'},sessions:[],plans:{}};
@@ -290,13 +290,23 @@ async function openPDF(noteId){
 }
 
 async function loadPDFDocument(url,token){
-  if(!window.pdfjsLib)throw new Error('PDF viewer is not loaded');
-  pdfReaderDoc=await window.pdfjsLib.getDocument({url}).promise;
-  if(token!==pdfReaderToken)return;
-  pdfReaderPage=1;pdfReaderScale=1;
-  document.getElementById('pdfPageCount').textContent=pdfReaderDoc.numPages;
-  await buildPDFThumbnails(token);
-  await renderPDFPage();
+  const fallback=document.getElementById('pdfNativeFallback'),canvas=document.getElementById('pdfMainCanvas');
+  try{
+    if(!window.pdfjsLib)throw new Error('PDF engine unavailable');
+    pdfReaderDoc=await window.pdfjsLib.getDocument({url,withCredentials:false}).promise;
+    if(token!==pdfReaderToken)return;
+    if(fallback)fallback.style.display='none';
+    if(canvas)canvas.style.display='block';
+    pdfReaderPage=1;pdfReaderScale=1;
+    document.getElementById('pdfPageCount').textContent=pdfReaderDoc.numPages;
+    await buildPDFThumbnails(token);await renderPDFPage();
+  }catch(err){
+    console.warn('PDF viewer fallback:',err);pdfReaderDoc=null;
+    if(canvas)canvas.style.display='none';
+    const thumbs=document.getElementById('pdfThumbnails');if(thumbs)thumbs.innerHTML='';
+    if(fallback){fallback.src=url;fallback.style.display='block';}
+    document.getElementById('pdfPageCount').textContent='—';
+  }
 }
 
 async function renderPDFPage(){
@@ -467,7 +477,7 @@ console.log("Supabase connected");
     </header>
     <div class="pdf-reader-main">
       <aside class="pdf-thumbnails-panel"><div id="pdfThumbnails" class="pdf-thumbnails"></div></aside>
-      <section class="pdf-page-stage"><div class="pdf-page-scroll"><canvas id="pdfMainCanvas"></canvas></div></section>
+      <section class="pdf-page-stage"><div class="pdf-page-scroll"><canvas id="pdfMainCanvas"></canvas><iframe id="pdfNativeFallback" title="PDF document" style="display:none;width:100%;height:100%;min-height:70vh;border:0;background:#fff"></iframe></div></section>
     </div>
     <footer class="pdf-reader-toolbar">
       <div class="pdf-page-controls"><button id="pdfPrev" onclick="pdfPrevPage()">‹</button><span><b id="pdfCurrentPage">1</b> / <span id="pdfPageCount">1</span></span><button id="pdfNext" onclick="pdfNextPage()">›</button></div>
