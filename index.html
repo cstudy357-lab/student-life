@@ -13,6 +13,15 @@
 .toast{position:fixed;right:22px;bottom:22px;background:#102038;border:1px solid #2a4564;color:#fff;padding:12px 15px;border-radius:12px;box-shadow:var(--shadow);z-index:50}.mobile-nav{display:none}
 @media(max-width:1000px){.app{grid-template-columns:76px 1fr}.side{padding:16px 10px}.brand div:last-child,.nav-title,.nav button span,.streak{display:none}.brand{justify-content:center}.nav button{text-align:center}.nav button b{display:block}.grid4{grid-template-columns:repeat(2,1fr)}.planner-grid,.layout2{grid-template-columns:1fr}}
 @media(max-width:700px){.app{display:block}.side{display:none}.top{padding:0 14px}.content{padding:18px 14px 80px}.hero{align-items:flex-start}.hero h1{font-size:25px}.grid4,.quick,.planner-stats{grid-template-columns:1fr 1fr}.planner-top{padding:18px;align-items:flex-start;flex-direction:column}.planner-body{padding:0 12px 15px}.timeline-row{grid-template-columns:55px 10px minmax(0,1fr) 30px}.timeline-card{padding:10px}.mobile-nav{position:fixed;display:flex;bottom:0;left:0;right:0;background:#071321f5;border-top:1px solid var(--line);z-index:40;padding:7px 8px;justify-content:space-around}.mobile-nav button{border:0;background:transparent;color:#8193aa;padding:7px 9px;font-size:11px}.mobile-nav button b{display:block;font-size:17px}.row{flex-direction:column}.top-actions{display:none}.search-wrap{max-width:none}}
+
+/* Final app-shell polish */
+body{overscroll-behavior-y:none}
+button,input,select,textarea{touch-action:manipulation}
+@media(max-width:700px){
+  .content{padding-bottom:92px}
+  .toast{right:14px;left:14px;bottom:78px;text-align:center}
+  .timer{font-size:58px!important}
+}
 </style></head>
 <body>
 <div class="app"><aside class="side"><div class="brand"><div class="brand-icon">🎓</div><div><b>Student Life</b><small>Focus · Plan · Achieve</small></div></div><div class="nav"><div class="nav-title">Main</div><button data-page="home" onclick="go('home')">🏠 <span>Dashboard</span></button><button data-page="ai" onclick="go('ai')">▣ <span>Planner</span></button><button data-page="study" onclick="go('study')">◎ <span>Targets</span></button><button data-page="classes" onclick="go('classes')">🎓 <span>Live Classes</span></button><button data-page="focus" onclick="go('focus')">⏱ <span>Focus Timer</span></button><button data-page="notes" onclick="go('notes')">📄 <span>Notes & PDFs</span></button><div class="nav-title">Personal</div><button data-page="routine" onclick="go('routine')">◷ <span>Routine</span></button><button data-page="challenge" onclick="go('challenge')">🎯 <span>Goals</span></button><button data-page="workout" onclick="go('workout')">🏃 <span>Workout</span></button><button data-page="settings" onclick="go('settings')">⚙ <span>Settings</span></button></div><div class="streak"><small>Current streak</small><br><b id="streakSide">0</b> 🔥<br><small>days</small></div></aside>
@@ -20,51 +29,24 @@
 <nav class="mobile-nav"><button onclick="go('home')"><b>⌂</b>Home</button><button onclick="go('ai')"><b>▣</b>Planner</button><button onclick="quickTarget()"><b>＋</b>Add</button><button onclick="go('focus')"><b>◷</b>Focus</button><button onclick="go('settings')"><b>•••</b>More</button></nav><div id="toast" class="toast" style="display:none"></div>
 <script>
 const KEY='studentLifeShareV1';
-const defaultData={targets:[],classes:[],routine:[],goals:[],workouts:[],notes:[],folders:['General'],done:{},settings:{focus:25,theme:'dark',name:'Student'},sessions:[],plans:{}};
+const defaultData={targets:[],classes:[],routine:[],goals:[],workouts:[],notes:[],folders:['General'],done:{},settings:{focus:25,theme:'dark',name:'Chitranshu'},sessions:[],plans:{}};
 let d=load(); let current='home', plannerDate=todayLocal(), timer=null, timerLeft=0, timerRunning=false, pdfDB=null;
-function load(){try{let raw=localStorage.getItem(KEY);if(!raw){let legacy=JSON.parse(localStorage.getItem('studyLifeV3')||'null');if(legacy){let migrated=structuredClone(defaultData);migrated.targets=(legacy.study||[]).map((t,i)=>({id:t.id||'t-'+Date.now()+i,title:t.t||'Study task',subject:t.s||'Study',date:t.date||todayLocal(),time:t.time||'',minutes:+t.m||0,priority:'Normal'}));migrated.classes=legacy.classes||[];migrated.routine=legacy.routine||[];migrated.goals=(legacy.goals||[]).map((g,i)=>({id:g.id||'g-'+Date.now()+i,title:g.t||g.title||'Goal',date:g.date||todayLocal(),cat:g.p||g.cat||'Study',progress:g.progress||0,note:g.m||g.note||''}));migrated.workouts=legacy.workout||legacy.workouts||[];migrated.notes=legacy.notes||[];migrated.folders=legacy.noteFolders||['General'];migrated.done={};Object.keys(legacy.done||{}).forEach(k=>{if(k.startsWith('study-'))migrated.done['t-'+k.slice(6)]=legacy.done[k];else if(k.startsWith('goal-'))migrated.done['g-'+k.slice(5)]=legacy.done[k]});migrated.settings.focusMinutes=legacy.settings?.focusMinutes||25;raw=JSON.stringify(migrated);localStorage.setItem(KEY,raw)}}let x=JSON.parse(raw||'null')||structuredClone(defaultData);x=Object.assign(structuredClone(defaultData),x);x.targets=x.targets||x.study||[];x.classes=x.classes||[];x.routine=x.routine||[];x.goals=x.goals||[];x.workouts=x.workouts||x.workout||[];x.notes=x.notes||[];x.folders=x.folders||x.noteFolders||['General'];x.done=x.done||{};x.sessions=x.sessions||[];x.settings=Object.assign({},defaultData.settings,x.settings||{});x.settings.name=(x.settings.name||'Student').trim()||'Student';x.targets.forEach((t,i)=>{if(!t.id)t.id='t-'+Date.now()+i;t.start=t.start||t.time||'';t.end=t.end||((t.start&&t.minutes)?addMin(t.start,+t.minutes):'');t.time=t.start||t.time||''});x.classes.forEach((c,i)=>{if(!c.id)c.id='c-'+Date.now()+i;c.days=Array.isArray(c.days)?c.days:(c.day!=null?[+c.day]:[1,2,3,4,5]);c.start=c.start||c.time||'16:00';c.end=c.end||addMin(c.start,60)});x.routine.forEach((r,i)=>{if(!r.id)r.id='r-'+Date.now()+i;r.days=Array.isArray(r.days)?r.days:[0,1,2,3,4,5,6];r.start=r.start||r.time||'06:00';r.end=r.end||addMin(r.start,60)});x.folders=(Array.isArray(x.folders)?x.folders:[]).map(f=>typeof f==='string'?f:(f?.name||f?.title||'General')).filter(Boolean);if(!x.folders.some(f=>f.toLowerCase()==='general'))x.folders.unshift('General');x.folders=[...new Set(x.folders)];x.notes=(Array.isArray(x.notes)?x.notes:[]).map(n=>{n=n||{};if(typeof n.folder!=='string')n.folder=n.folder?.name||n.folder?.title||'General';if(typeof n.title!=='string')n.title=n.title?.name||n.title?.title||'Untitled';if(typeof n.subject!=='string')n.subject=n.subject?.name||n.subject?.title||'';if(typeof n.file!=='string'&&n.file!=null)n.file=n.file?.name||n.file?.title||'';if(!n.id)n.id='n-'+Date.now()+Math.random();return n});x.notes.forEach(n=>{n.folder=n.folder||'General'});return x}catch(e){return structuredClone(defaultData)}}
+function load(){try{let raw=localStorage.getItem(KEY);if(!raw){let legacy=JSON.parse(localStorage.getItem('studyLifeV3')||'null');if(legacy){let migrated=structuredClone(defaultData);migrated.targets=(legacy.study||[]).map((t,i)=>({id:t.id||'t-'+Date.now()+i,title:t.t||'Study task',subject:t.s||'Study',date:t.date||todayLocal(),time:t.time||'',minutes:+t.m||0,priority:'Normal'}));migrated.classes=legacy.classes||[];migrated.routine=legacy.routine||[];migrated.goals=(legacy.goals||[]).map((g,i)=>({id:g.id||'g-'+Date.now()+i,title:g.t||g.title||'Goal',date:g.date||todayLocal(),cat:g.p||g.cat||'Study',progress:g.progress||0,note:g.m||g.note||''}));migrated.workouts=legacy.workout||legacy.workouts||[];migrated.notes=legacy.notes||[];migrated.folders=legacy.noteFolders||['General'];migrated.done={};Object.keys(legacy.done||{}).forEach(k=>{if(k.startsWith('study-'))migrated.done['t-'+k.slice(6)]=legacy.done[k];else if(k.startsWith('goal-'))migrated.done['g-'+k.slice(5)]=legacy.done[k]});migrated.settings.focusMinutes=legacy.settings?.focusMinutes||25;raw=JSON.stringify(migrated);localStorage.setItem(KEY,raw)}}let x=JSON.parse(raw||'null')||structuredClone(defaultData);x=Object.assign(structuredClone(defaultData),x);x.targets=x.targets||x.study||[];x.classes=x.classes||[];x.routine=x.routine||[];x.goals=x.goals||[];x.workouts=x.workouts||x.workout||[];x.notes=x.notes||[];x.folders=x.folders||x.noteFolders||['General'];x.done=x.done||{};x.sessions=x.sessions||[];x.settings=Object.assign({},defaultData.settings,x.settings||{});x.settings.name=(x.settings.name||'Chitranshu').trim()||'Chitranshu';x.targets.forEach((t,i)=>{if(!t.id)t.id='t-'+Date.now()+i;t.start=t.start||t.time||'';t.end=t.end||((t.start&&t.minutes)?addMin(t.start,+t.minutes):'');t.time=t.start||t.time||''});x.classes.forEach((c,i)=>{if(!c.id)c.id='c-'+Date.now()+i;c.days=Array.isArray(c.days)?c.days:(c.day!=null?[+c.day]:[1,2,3,4,5]);c.start=c.start||c.time||'16:00';c.end=c.end||addMin(c.start,60)});x.routine.forEach((r,i)=>{if(!r.id)r.id='r-'+Date.now()+i;r.days=Array.isArray(r.days)?r.days:[0,1,2,3,4,5,6];r.start=r.start||r.time||'06:00';r.end=r.end||addMin(r.start,60)});x.folders=(Array.isArray(x.folders)?x.folders:[]).map(f=>typeof f==='string'?f:(f?.name||f?.title||'General')).filter(Boolean);if(!x.folders.some(f=>f.toLowerCase()==='general'))x.folders.unshift('General');x.folders=[...new Set(x.folders)];x.notes=(Array.isArray(x.notes)?x.notes:[]).map(n=>{n=n||{};if(typeof n.folder!=='string')n.folder=n.folder?.name||n.folder?.title||'General';if(typeof n.title!=='string')n.title=n.title?.name||n.title?.title||'Untitled';if(typeof n.subject!=='string')n.subject=n.subject?.name||n.subject?.title||'';if(typeof n.file!=='string'&&n.file!=null)n.file=n.file?.name||n.file?.title||'';if(!n.id)n.id='n-'+Date.now()+Math.random();return n});x.notes.forEach(n=>{n.folder=n.folder||'General'});return x}catch(e){return structuredClone(defaultData)}}
 async function save(){
-
-  // Local storage me save
   localStorage.setItem(KEY, JSON.stringify(d));
-
-  // Supabase me save
-  try {
-
-    const { data: sessionData } =
-      await supabaseClient.auth.getSession();
-
-    const user = sessionData?.session?.user;
-
-    // Login nahi hai to sirf local save rahega
-    if (!user) {
-      console.log("Supabase: user not logged in");
-      return;
-    }
-
-    const { error } = await supabaseClient
-      .from("study_data")
-      .upsert(
-        {
-          user_id: user.id,
-          data: d,
-          updated_at: new Date().toISOString()
-        },
-        {
-          onConflict: "user_id"
-        }
-      );
-
-    if (error) {
-      console.error("Supabase save error:", error);
-      toast("Supabase save failed");
-      return;
-    }
-
-    console.log("✅ Data saved to Supabase");
-
-  } catch (error) {
-    console.error("Supabase error:", error);
+  if(typeof supabaseClient === "undefined") return;
+  try{
+    const {data:sessionData,error:sessionError}=await supabaseClient.auth.getSession();
+    if(sessionError) throw sessionError;
+    const user=sessionData?.session?.user;
+    if(!user) return;
+    const {error}=await supabaseClient.from("study_data").upsert(
+      {user_id:user.id,data:d,updated_at:new Date().toISOString()},
+      {onConflict:"user_id"}
+    );
+    if(error) throw error;
+  }catch(error){
+    console.error("Supabase save error:",error);
   }
 }
 function todayLocal(){let z=new Date();return z.getFullYear()+'-'+String(z.getMonth()+1).padStart(2,'0')+'-'+String(z.getDate()).padStart(2,'0')}
@@ -78,7 +60,7 @@ function streak(){let dates=new Set(d.sessions.map(s=>s.date));d.targets.filter(
 function updateSide(){let e=document.getElementById('streakSide');if(e)e.textContent=streak()}
 function go(p){current=p;window.scrollTo({top:0,behavior:'smooth'});render();document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===p));}
 function render(){updateSide();let a=document.getElementById('app');if(current==='home')return home(a);if(current==='ai')return planner(a);if(current==='study')return targets(a);if(current==='classes')return classes(a);if(current==='focus')return focus(a);if(current==='notes')return notes(a);if(current==='routine')return routine(a);if(current==='challenge')return goals(a);if(current==='workout')return workout(a);if(current==='settings')return settings(a)}
-function home(a){let t=todayLocal(),dn=dayOf(t),ts=d.targets.filter(x=>x.date===t),cs=d.classes.filter(x=>x.days.includes(dn)).sort((a,b)=>a.start.localeCompare(b.start)),rs=d.routine.filter(x=>x.days.includes(dn)).sort((a,b)=>a.start.localeCompare(b.start)),done=ts.filter(x=>isDone('t-',x.id)).length,focus=d.sessions.filter(x=>x.date===t).reduce((n,x)=>n+x.minutes,0),pct=ts.length?Math.round(done/ts.length*100):0;let hr=new Date().getHours(),g=hr<12?'Good morning':hr<18?'Good afternoon':'Good evening';a.innerHTML=`<div class="hero"><div><div class="eyebrow">${g} 👋</div><h1>Student Life</h1><p>Everything you need for a focused study day.</p></div><div class="date-pill">${fmtDate(t)}</div></div><div class="grid4"><div class="stat"><div class="num">${ts.length}</div><small>Today's targets</small></div><div class="stat"><div class="num">${done}</div><small>Targets completed</small></div><div class="stat"><div class="num">${Math.floor(focus/60)}h ${focus%60}m</div><small>Focus today</small></div><div class="stat"><div class="num">${cs.length}</div><small>Live classes</small></div></div><div class="card" style="margin-top:16px"><div class="section-head" style="display:flex;justify-content:space-between"><div><h2>Quick actions</h2><div class="muted">Jump straight into what you need.</div></div></div><div class="quick"><button class="q1" onclick="quickTarget()">◎ Add Target<small>Plan a study task</small></button><button class="q2" onclick="go('classes')">🎓 Live Classes<small>${cs.length} today</small></button><button class="q3" onclick="go('notes')">📄 Notes & PDFs<small>${d.notes.length} saved</small></button><button class="q4" onclick="go('focus')">⏱ Focus Timer<small>Start ${d.settings.focus} min</small></button></div></div><div class="layout2"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><h2>Today's Plan</h2><button class="secondary" onclick="go('ai')">Open Planner</button></div>${ts.slice().sort(sortTarget).map(t=>targetRow(t,true)).join('')||'<div class="empty">No targets for today. Add one and get started.</div>'}</div><div><div class="card"><h3>Daily Progress</h3><div class="progress-ring" style="--progress:${pct*3.6}deg"><span>${pct}%</span></div><div class="side-stat"><span>Done</span><b>${done}</b></div><div class="side-stat"><span>Pending</span><b>${Math.max(0,ts.length-done)}</b></div></div><div class="card"><h3>Next up</h3>${[...rs.map(x=>({kind:'routine',x})),...cs.map(x=>({kind:'class',x}))].sort((a,b)=>a.x.start.localeCompare(b.x.start)).slice(0,4).map(z=>`<div class="item"><b>${fmtTime(z.x.start)}</b> <span class="tag ${z.kind==='class'?'purple':'green'}">${z.kind==='class'?'Live Class':z.x.c||'Routine'}</span><div class="item-sub">${esc(z.kind==='class'?z.x.subject:z.x.t)}</div></div>`).join('')||'<div class="empty">Nothing scheduled.</div>'}</div></div></div>`}
+function home(a){let t=todayLocal(),dn=dayOf(t),ts=d.targets.filter(x=>x.date===t),cs=d.classes.filter(x=>x.days.includes(dn)).sort((a,b)=>a.start.localeCompare(b.start)),rs=d.routine.filter(x=>x.days.includes(dn)).sort((a,b)=>a.start.localeCompare(b.start)),done=ts.filter(x=>isDone('t-',x.id)).length,focus=d.sessions.filter(x=>x.date===t).reduce((n,x)=>n+x.minutes,0),pct=ts.length?Math.round(done/ts.length*100):0;let g='Hello Chitranshu';a.innerHTML=`<div class="hero"><div><div class="eyebrow">${g} 👋</div><h1>Student Life</h1><p>Everything you need for a focused study day.</p></div><div class="date-pill">${fmtDate(t)}</div></div><div class="grid4"><div class="stat"><div class="num">${ts.length}</div><small>Today's targets</small></div><div class="stat"><div class="num">${done}</div><small>Targets completed</small></div><div class="stat"><div class="num">${Math.floor(focus/60)}h ${focus%60}m</div><small>Focus today</small></div><div class="stat"><div class="num">${cs.length}</div><small>Live classes</small></div></div><div class="card" style="margin-top:16px"><div class="section-head" style="display:flex;justify-content:space-between"><div><h2>Quick actions</h2><div class="muted">Jump straight into what you need.</div></div></div><div class="quick"><button class="q1" onclick="quickTarget()">◎ Add Target<small>Plan a study task</small></button><button class="q2" onclick="go('classes')">🎓 Live Classes<small>${cs.length} today</small></button><button class="q3" onclick="go('notes')">📄 Notes & PDFs<small>${d.notes.length} saved</small></button><button class="q4" onclick="go('focus')">⏱ Focus Timer<small>Start ${d.settings.focus} min</small></button></div></div><div class="layout2"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><h2>Today's Plan</h2><button class="secondary" onclick="go('ai')">Open Planner</button></div>${ts.slice().sort(sortTarget).map(t=>targetRow(t,true)).join('')||'<div class="empty">No targets for today. Add one and get started.</div>'}</div><div><div class="card"><h3>Daily Progress</h3><div class="progress-ring" style="--progress:${pct*3.6}deg"><span>${pct}%</span></div><div class="side-stat"><span>Done</span><b>${done}</b></div><div class="side-stat"><span>Pending</span><b>${Math.max(0,ts.length-done)}</b></div></div><div class="card"><h3>Next up</h3>${[...rs.map(x=>({kind:'routine',x})),...cs.map(x=>({kind:'class',x}))].sort((a,b)=>a.x.start.localeCompare(b.x.start)).slice(0,4).map(z=>`<div class="item"><b>${fmtTime(z.x.start)}</b> <span class="tag ${z.kind==='class'?'purple':'green'}">${z.kind==='class'?'Live Class':z.x.c||'Routine'}</span><div class="item-sub">${esc(z.kind==='class'?z.x.subject:z.x.t)}</div></div>`).join('')||'<div class="empty">Nothing scheduled.</div>'}</div></div></div>`}
 function timeParts(t){if(!t)return {h:'12',m:'00',p:'AM'};let [hh,mm]=t.split(':').map(Number),p=hh>=12?'PM':'AM',h=hh%12||12;return {h:String(h),m:String(mm).padStart(2,'0'),p}}
 function timeField(prefix,label,value=''){let q=timeParts(value);let mins=Array.from({length:60},(_,i)=>String(i).padStart(2,'0')).map(m=>`<option value="${m}" ${q.m===m?'selected':''}>${m}</option>`).join('');let hrs=Array.from({length:12},(_,i)=>String(i+1)).map(h=>`<option value="${h}" ${q.h===h?'selected':''}>${h}</option>`).join('');return `<div class="field"><label>${label}</label><div class="time-picker"><select class="select tp-hour" id="${prefix}H">${hrs}</select><span class="time-sep">:</span><select class="select tp-minute" id="${prefix}M">${mins}</select><select class="select tp-period" id="${prefix}P"><option ${q.p==='AM'?'selected':''}>AM</option><option ${q.p==='PM'?'selected':''}>PM</option></select></div></div>`}
 function readTime(prefix){let h=+(document.getElementById(prefix+'H')?.value||12),m=+(document.getElementById(prefix+'M')?.value||0),p=document.getElementById(prefix+'P')?.value||'AM';if(h===12)h=0;if(p==='PM')h+=12;return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')}
@@ -135,14 +117,14 @@ async function logout(){
   const ok = confirm("Are you sure you want to logout?");
   if(!ok) return;
 
-  const { error } = await supabaseClient.auth.signOut();
-
-  if(error){
-    console.error("Logout error:", error);
-    toast("Logout failed");
-    return;
+  if(typeof supabaseClient!=="undefined"){
+    const { error } = await supabaseClient.auth.signOut();
+    if(error){
+      console.error("Logout error:", error);
+      toast("Logout failed");
+      return;
+    }
   }
-
   location.reload();
 }
 function exportData(){let blob=new Blob([JSON.stringify(d,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Student-Life-backup.json';a.click();URL.revokeObjectURL(a.href);toast('Backup exported')}
@@ -345,14 +327,27 @@ async function loadStudyDataFromSupabase(){
 }
 
 async function checkStudentLogin(){
-  const {data}=await supabaseClient.auth.getSession();
-
-  if(data.session){
-    document.getElementById("loginBox").style.display="none";
-    await loadStudyDataFromSupabase();
+  try{
+    const {data,error}=await supabaseClient.auth.getSession();
+    if(error) throw error;
+    if(data?.session){
+      document.getElementById("loginBox").style.display="none";
+      await loadStudyDataFromSupabase();
+      go("home");
+    }else{
+      document.getElementById("loginBox").style.display="flex";
+      go("home");
+    }
+  }catch(error){
+    console.error("Startup error:",error);
+    document.getElementById("loginBox").style.display="flex";
+    go("home");
   }
 }
 
+if("serviceWorker" in navigator){
+  window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+}
 checkStudentLogin();
 </script>
 </body></html>
