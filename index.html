@@ -20,26 +20,43 @@
 <style>
 .modal{display:none;position:fixed;inset:0;z-index:90000;background:rgba(2,8,18,.82);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}
 .pdf-folder-modal .pdf-dialog{width:min(520px,100%);max-height:90vh;overflow:auto}.folder-create-row{display:flex;gap:8px}.folder-create-row .input{flex:1}
-
-@media(max-width:700px){}
+.pdf-reader-modal{padding:0}.pdf-reader-shell{width:100%;height:100%;background:#07111f;display:flex;flex-direction:column}.pdf-reader-bar{height:76px;flex:0 0 76px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 16px;border-bottom:1px solid #1b2d45}.pdf-reader-bar b{display:block;max-width:60vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:700px){.pdf-reader-bar{height:68px;flex-basis:68px;padding:0 9px}.pdf-reader-bar .secondary{padding:8px 9px}}
 </style><style>
 .timer-fullscreen-btn{margin:8px 0}
-
-
+.pdf-reader-shell:fullscreen{width:100vw;height:100vh;border-radius:0}
+.pdf-reader-modal:has(.pdf-reader-shell:fullscreen){background:#000}
 @media(max-width:700px){
-  
+  .pdf-reader-shell:fullscreen .pdf-reader-bar{height:54px}
 }
 </style><style>
-
-
-
-
-
-
-
+.pdf-reader-modal{padding:0;background:#000;z-index:99999}
+.pdf-reader-fullscreen{width:100vw;height:100vh;background:#050b14;display:flex;flex-direction:column}
+.pdf-reader-topbar{height:58px;min-height:58px;display:flex;align-items:center;gap:12px;padding:0 12px;background:#071321;border-bottom:1px solid #20364f}
+.reader-close{width:38px;height:38px;border:1px solid #2a405a;border-radius:10px;background:#0c1b2d;color:#fff;font-size:20px;cursor:pointer}
+.reader-title{flex:1;min-width:0;color:#fff;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.reader-download{width:38px;height:38px;display:grid;place-items:center;border:1px solid #2a405a;border-radius:10px;color:#fff;text-decoration:none;background:#0c1b2d}
+.pdf-reader-fullscreen iframe{flex:1;width:100%;height:calc(100vh - 58px);border:0;background:#fff}
 .timer-fullscreen-btn{margin-left:8px}
 :fullscreen{overflow:auto}
-@media(max-width:700px){}
+@media(max-width:700px){.pdf-reader-topbar{height:52px;min-height:52px;padding:0 8px}.pdf-reader-fullscreen iframe{height:calc(100vh - 52px)}}
+</style><style>
+body.pdf-reader-open{overflow:hidden}
+.pdf-reader-modal{padding:0!important;background:#000!important;z-index:100000}
+.pdf-reader-app{width:100vw;height:100vh;background:#07111c;color:#eef4ff;display:flex;flex-direction:column}
+.pdf-reader-header{height:64px;flex:0 0 64px;display:flex;align-items:center;gap:12px;padding:0 16px;background:#091522;border-bottom:1px solid #213248}
+.pdf-reader-back,.pdf-reader-menu{width:40px;height:40px;border:1px solid #29415c;border-radius:10px;background:#0d1d2e;color:#fff;font-size:20px;cursor:pointer}
+.pdf-reader-file{display:flex;align-items:center;gap:10px;flex:1;min-width:0}.pdf-reader-file b{display:block;max-width:72vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pdf-reader-file small{display:block;color:#8295ad;font-size:11px;margin-top:2px}
+.pdf-file-icon{display:grid;place-items:center;width:34px;height:38px;border-radius:7px;background:#b52d2d;color:#fff;font-size:9px;font-weight:800}
+.pdf-reader-main{flex:1;min-height:0;display:flex;overflow:hidden}.pdf-thumbnails-panel{width:132px;flex:0 0 132px;background:#08121e;border-right:1px solid #1d3045;overflow:auto;padding:12px 9px}
+.pdf-thumbnails{display:flex;flex-direction:column;gap:10px}.pdf-thumb{position:relative;border:1px solid #24384f;border-radius:7px;background:#101d2c;padding:5px;cursor:pointer}.pdf-thumb.active{border:2px solid #8b5cf6}.pdf-thumb canvas{display:block;width:100%;height:auto;background:#fff;border-radius:3px}
+.pdf-thumb-number{position:absolute;left:5px;bottom:5px;background:#0b1420e6;color:#fff;border-radius:4px;padding:2px 5px;font-size:10px}
+.pdf-page-stage{flex:1;min-width:0;min-height:0;background:#202a35;overflow:hidden;display:flex;justify-content:center}.pdf-page-scroll{width:100%;height:100%;overflow:auto;display:flex;justify-content:center;align-items:flex-start;padding:28px}
+#pdfMainCanvas{background:#fff;box-shadow:0 8px 30px #0008;max-width:none}
+.pdf-reader-toolbar{height:62px;flex:0 0 62px;background:#091522;border-top:1px solid #213248;display:flex;align-items:center;justify-content:center;gap:20px}
+.pdf-page-controls,.pdf-zoom-controls{display:flex;align-items:center;gap:8px}.pdf-page-controls button,.pdf-zoom-controls button,.pdf-reader-fullscreen{min-width:36px;height:36px;border:1px solid #29415c;border-radius:9px;background:#0d1d2e;color:#fff;cursor:pointer}.pdf-page-controls button:disabled{opacity:.35}.pdf-page-controls span,.pdf-zoom-controls span{min-width:64px;text-align:center;font-size:13px}
+@media(max-width:700px){.pdf-reader-header{height:54px;flex-basis:54px;padding:0 8px}.pdf-thumbnails-panel{width:76px;flex-basis:76px;padding:8px 5px}.pdf-page-scroll{padding:10px}.pdf-reader-toolbar{height:56px;flex-basis:56px;gap:6px}.pdf-zoom-controls button:last-child{display:none}}
+.pdf-reader-app:fullscreen{width:100vw;height:100vh}
 </style></style></head>
 <body>
 <div class="app"><aside class="side"><div class="brand"><div class="brand-icon">🎓</div><div><b>Hello Chitranshu</b><small>Focus · Plan · Achieve</small></div></div><div class="nav"><div class="nav-title">Main</div><button data-page="home" onclick="go('home')">🏠 <span>Dashboard</span></button><button data-page="ai" onclick="go('ai')">▣ <span>Planner</span></button><button data-page="study" onclick="go('study')">◎ <span>Targets</span></button><button data-page="classes" onclick="go('classes')">🎓 <span>Live Classes</span></button><button data-page="focus" onclick="go('focus')">⏱ <span>Focus Timer</span></button><button data-page="notes" onclick="go('notes')">📄 <span>Notes & PDFs</span></button><div class="nav-title">Personal</div><button data-page="routine" onclick="go('routine')">◷ <span>Routine</span></button><button data-page="challenge" onclick="go('challenge')">🎯 <span>Goals</span></button><button data-page="workout" onclick="go('workout')">🏃 <span>Workout</span></button><button data-page="settings" onclick="go('settings')">⚙ <span>Settings</span></button></div><div class="streak"><small>Current streak</small><br><b id="streakSide">0</b> 🔥<br><small>days</small></div></aside>
@@ -168,7 +185,7 @@ a.innerHTML=`<div class="hero"><div><div class="eyebrow">Knowledge base</div><h1
 <div class="pdf-grid">${pdfs.map(n=>pdfCard(n)).join('')||'<div class="pdf-empty">📂 No PDFs in this folder yet.<br><small>Upload a PDF or create another folder.</small></div>'}</div></div>
 <div class="card" style="margin-top:14px"><div style="display:flex;justify-content:space-between;align-items:center"><h2>Text Notes</h2><span class="pdf-library-count">${texts.length}</span></div>${texts.map(n=>`<div class="item"><div class="item-row"><div class="item-main"><div class="item-title">${esc(n.title)} <span class="tag">${esc(n.subject||'General')}</span><span class="tag orange">Note</span></div><div class="item-sub">${n.date} • 📁 ${esc(n.folder||'General')}</div><div class="item-sub">${esc(n.text||'').slice(0,220)}</div></div><div class="actions"><button class="secondary" onclick="editNote('${n.id}')">Edit</button><button class="secondary" onclick="moveNote('${n.id}')">Move</button><button class="danger" onclick="deleteNote('${n.id}')">Delete</button></div></div></div>`).join('')||'<div class="empty">No text notes.</div>'}</div></section></div>`;
 }
-function pdfCard(n){let tags=Array.isArray(n.tags)?n.tags:(n.tags?String(n.tags).split(',').map(x=>x.trim()).filter(Boolean):[]),mb=n.size?((n.size/1048576).toFixed(1)+' MB'):'Cloud PDF',pages=n.pages?`${n.pages} pages`:'Pages unknown';return `<article class="pdf-card"><div class="pdf-head"><div class="pdf-icon">PDF</div><div style="min-width:0;flex:1"><div class="pdf-name" title="${esc(n.title)}">${esc(n.title)}</div><div class="pdf-meta">${esc(n.subject||'General')} • ${esc(n.chapter||'Unclassified')}<br>${pages} • ${mb} • ${n.date}</div><div class="folder-line">📁 ${esc(n.folder||'General')}</div></div></div><div class="pdf-tags"><span class="pdf-tag type">${esc(n.document_type||'PDF')}</span>${n.subject?`<span class="pdf-tag subject">${esc(n.subject)}</span>`:''}${tags.slice(0,5).map(t=>`<span class="pdf-tag">${esc(t)}</span>`).join('')}</div><div class="actions" style="margin-top:13px"><button class="primary" onclick="downloadPDF('${n.id}')">⬇ Download</button><button class="secondary" onclick="editPDF('${n.id}')">✏️ Edit</button><button class="secondary" onclick="moveNote('${n.id}')">📁 Move</button><button class="danger" onclick="deleteNote('${n.id}')">Delete</button></div></article>`}
+function pdfCard(n){let tags=Array.isArray(n.tags)?n.tags:(n.tags?String(n.tags).split(',').map(x=>x.trim()).filter(Boolean):[]),mb=n.size?((n.size/1048576).toFixed(1)+' MB'):'Cloud PDF',pages=n.pages?`${n.pages} pages`:'Pages unknown';return `<article class="pdf-card"><div class="pdf-head"><div class="pdf-icon">PDF</div><div style="min-width:0;flex:1"><div class="pdf-name" title="${esc(n.title)}">${esc(n.title)}</div><div class="pdf-meta">${esc(n.subject||'General')} • ${esc(n.chapter||'Unclassified')}<br>${pages} • ${mb} • ${n.date}</div><div class="folder-line">📁 ${esc(n.folder||'General')}</div></div></div><div class="pdf-tags"><span class="pdf-tag type">${esc(n.document_type||'PDF')}</span>${n.subject?`<span class="pdf-tag subject">${esc(n.subject)}</span>`:''}${tags.slice(0,5).map(t=>`<span class="pdf-tag">${esc(t)}</span>`).join('')}</div><div class="actions" style="margin-top:13px"><button class="primary" onclick="openPDF('${n.id}')">📖 Read</button><button class="secondary" onclick="editPDF('${n.id}')">✏️ Edit</button><button class="secondary" onclick="moveNote('${n.id}')">📁 Move</button><button class="danger" onclick="deleteNote('${n.id}')">Delete</button></div></article>`}
 // PDF folders are real Supabase Storage subfolders: <user-id>/<folder>/<file>
 function selectPdfFolder(encoded){
   const f=encoded==='All'?'All':decodeURIComponent(encoded);
@@ -253,18 +270,99 @@ if(!pdfUploadState)return;let {file,user,meta}=pdfUploadState,btn=document.getEl
 }
 
 function closePDFReader(){const f=document.getElementById("pdfReaderFrame");if(f)f.src="about:blank";document.getElementById("pdfReaderModal")?.classList.remove("show");}
+let pdfReaderDoc=null,pdfReaderPage=1,pdfReaderScale=1,pdfReaderRendering=false,pdfReaderToken=0;
 
-async function downloadPDF(noteId){
+async function openPDF(noteId){
   const n=d.notes.find(x=>x.id===noteId);if(!n)return;
   const user=await getCurrentUser();if(!user)return toast("Please login first");
   if(!n.storage_path)return toast("Please upload this PDF again.");
   try{
-    const {data,error}=await supabaseClient.storage.from('pdfs').createSignedUrl(n.storage_path,1800,{download:true});
+    const {data,error}=await supabaseClient.storage.from('pdfs').createSignedUrl(n.storage_path,1800);
     if(error)throw error;
-    if(!data?.signedUrl)throw new Error('Could not create download link');
-    const a=document.createElement('a');a.href=data.signedUrl;a.download=(n.title||'document')+'.pdf';a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();
-  }catch(e){console.error(e);toast('Could not download PDF: '+(e.message||'Storage error'))}
+    if(!data?.signedUrl)throw new Error('Could not create PDF link');
+    window.__pdfReturnFolder=window.noteFolder||'All';
+    const token=++pdfReaderToken;
+    document.getElementById('pdfReaderTitle').textContent=n.title||'PDF';
+    document.getElementById('pdfReaderModal').classList.add('show');
+    document.body.classList.add('pdf-reader-open');
+    await loadPDFDocument(data.signedUrl,token);
+  }catch(e){console.error(e);toast('Could not open PDF: '+(e.message||'Storage error'))}
 }
+
+async function loadPDFDocument(url,token){
+  if(!window.pdfjsLib)throw new Error('PDF viewer is not loaded');
+  pdfReaderDoc=await window.pdfjsLib.getDocument({url}).promise;
+  if(token!==pdfReaderToken)return;
+  pdfReaderPage=1;pdfReaderScale=1;
+  document.getElementById('pdfPageCount').textContent=pdfReaderDoc.numPages;
+  await buildPDFThumbnails(token);
+  await renderPDFPage();
+}
+
+async function renderPDFPage(){
+  if(!pdfReaderDoc||pdfReaderRendering)return;
+  pdfReaderRendering=true;
+  try{
+    const page=await pdfReaderDoc.getPage(pdfReaderPage);
+    const viewport=page.getViewport({scale:pdfReaderScale});
+    const canvas=document.getElementById('pdfMainCanvas');
+    const dpr=Math.min(window.devicePixelRatio||1,2);
+    canvas.width=Math.ceil(viewport.width*dpr);
+    canvas.height=Math.ceil(viewport.height*dpr);
+    canvas.style.width=Math.ceil(viewport.width)+'px';
+    canvas.style.height=Math.ceil(viewport.height)+'px';
+    await page.render({canvasContext:canvas.getContext('2d'),viewport,transform:[dpr,0,0,dpr,0,0]}).promise;
+    document.getElementById('pdfCurrentPage').textContent=pdfReaderPage;
+    document.getElementById('pdfZoomValue').textContent=Math.round(pdfReaderScale*100)+'%';
+    document.getElementById('pdfPrev').disabled=pdfReaderPage<=1;
+    document.getElementById('pdfNext').disabled=pdfReaderPage>=pdfReaderDoc.numPages;
+    document.querySelectorAll('.pdf-thumb').forEach(x=>x.classList.toggle('active',Number(x.dataset.page)===pdfReaderPage));
+  }finally{pdfReaderRendering=false}
+}
+
+async function buildPDFThumbnails(token){
+  const box=document.getElementById('pdfThumbnails');if(!box)return;
+  box.innerHTML='';
+  for(let i=1;i<=pdfReaderDoc.numPages;i++){
+    if(token!==pdfReaderToken)return;
+    const item=document.createElement('button');
+    item.type='button';item.className='pdf-thumb';item.dataset.page=i;
+    item.innerHTML='<span class="pdf-thumb-number">'+i+'</span><canvas></canvas>';
+    item.onclick=()=>{pdfReaderPage=i;renderPDFPage();};
+    box.appendChild(item);
+    try{
+      const page=await pdfReaderDoc.getPage(i);
+      const vp=page.getViewport({scale:.18});
+      const c=item.querySelector('canvas'),dpr=1.5;
+      c.width=Math.ceil(vp.width*dpr);c.height=Math.ceil(vp.height*dpr);
+      await page.render({canvasContext:c.getContext('2d'),viewport:page.getViewport({scale:.18*dpr})}).promise;
+    }catch(_){}
+  }
+}
+
+function pdfZoom(delta){pdfReaderScale=Math.max(.5,Math.min(2.5,pdfReaderScale+delta));renderPDFPage()}
+function pdfResetZoom(){pdfReaderScale=1;renderPDFPage()}
+function pdfPrevPage(){if(pdfReaderPage>1){pdfReaderPage--;renderPDFPage()}}
+function pdfNextPage(){if(pdfReaderDoc&&pdfReaderPage<pdfReaderDoc.numPages){pdfReaderPage++;renderPDFPage()}}
+
+function closePDFReader(){
+  ++pdfReaderToken;pdfReaderDoc=null;
+  document.getElementById('pdfReaderModal')?.classList.remove('show');
+  document.body.classList.remove('pdf-reader-open');
+  const box=document.getElementById('pdfThumbnails');if(box)box.innerHTML='';
+  window.noteFolder=window.__pdfReturnFolder||'All';
+  render();
+}
+
+async function togglePDFNativeFullscreen(){
+  const el=document.querySelector('.pdf-reader-app');
+  if(!el)return;
+  try{
+    if(document.fullscreenElement)await document.exitFullscreen();
+    else if(el.requestFullscreen)await el.requestFullscreen();
+  }catch(e){toast('Full screen is not supported')}
+}
+
 async function deleteNote(noteId){
   if(!confirm("Delete this note?"))return;
   const n=d.notes.find(x=>x.id===noteId);if(!n)return;
@@ -357,7 +455,27 @@ console.log("Supabase connected");
 <div style="display:flex;justify-content:space-between;align-items:center"><div><h2 style="margin:0">Create Folder</h2><div class="muted">Organise your PDFs.</div></div><button class="secondary" onclick="closeFolderModal()">✕</button></div>
 <div class="field" style="margin-top:18px"><label>Folder name</label><div class="folder-create-row"><input class="input" id="newFolderName" maxlength="40" placeholder="Physics, Chemistry, JEE PYQ…"><button class="primary" onclick="createFolder()">Create</button></div></div>
 </div></div>
-<!-- SUPABASE LOGIN -->
+<div id="pdfReaderModal" class="modal pdf-reader-modal">
+  <div class="pdf-reader-app">
+    <header class="pdf-reader-header">
+      <button class="pdf-reader-back" onclick="closePDFReader()">←</button>
+      <div class="pdf-reader-file">
+        <span class="pdf-file-icon">PDF</span>
+        <div><b id="pdfReaderTitle">PDF</b><small>Document Reader</small></div>
+      </div>
+      <button class="pdf-reader-menu" onclick="closePDFReader()">✕</button>
+    </header>
+    <div class="pdf-reader-main">
+      <aside class="pdf-thumbnails-panel"><div id="pdfThumbnails" class="pdf-thumbnails"></div></aside>
+      <section class="pdf-page-stage"><div class="pdf-page-scroll"><canvas id="pdfMainCanvas"></canvas></div></section>
+    </div>
+    <footer class="pdf-reader-toolbar">
+      <div class="pdf-page-controls"><button id="pdfPrev" onclick="pdfPrevPage()">‹</button><span><b id="pdfCurrentPage">1</b> / <span id="pdfPageCount">1</span></span><button id="pdfNext" onclick="pdfNextPage()">›</button></div>
+      <div class="pdf-zoom-controls"><button onclick="pdfZoom(-.1)">−</button><span id="pdfZoomValue">100%</span><button onclick="pdfZoom(.1)">+</button><button onclick="pdfResetZoom()">Reset</button></div>
+      <button class="pdf-reader-fullscreen" onclick="togglePDFNativeFullscreen()">⛶</button>
+    </footer>
+  </div>
+</div>
 <div id="loginBox" style="
 position:fixed;inset:0;z-index:99999;
 display:flex;align-items:center;justify-content:center;
