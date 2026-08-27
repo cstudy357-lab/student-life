@@ -20,26 +20,26 @@
 <style>
 .modal{display:none;position:fixed;inset:0;z-index:90000;background:rgba(2,8,18,.82);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}
 .pdf-folder-modal .pdf-dialog{width:min(520px,100%);max-height:90vh;overflow:auto}.folder-create-row{display:flex;gap:8px}.folder-create-row .input{flex:1}
-.pdf-reader-modal{padding:0}.pdf-reader-shell{width:100%;height:100%;background:#07111f;display:flex;flex-direction:column}.pdf-reader-bar{height:76px;flex:0 0 76px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 16px;border-bottom:1px solid #1b2d45}.pdf-reader-bar b{display:block;max-width:60vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-@media(max-width:700px){.pdf-reader-bar{height:68px;flex-basis:68px;padding:0 9px}.pdf-reader-bar .secondary{padding:8px 9px}}
+
+@media(max-width:700px){}
 </style><style>
 .timer-fullscreen-btn{margin:8px 0}
-.pdf-reader-shell:fullscreen{width:100vw;height:100vh;border-radius:0}
-.pdf-reader-modal:has(.pdf-reader-shell:fullscreen){background:#000}
+
+
 @media(max-width:700px){
-  .pdf-reader-shell:fullscreen .pdf-reader-bar{height:54px}
+  
 }
 </style><style>
-.pdf-reader-modal{padding:0;background:#000;z-index:99999}
-.pdf-reader-fullscreen{width:100vw;height:100vh;background:#050b14;display:flex;flex-direction:column}
-.pdf-reader-topbar{height:58px;min-height:58px;display:flex;align-items:center;gap:12px;padding:0 12px;background:#071321;border-bottom:1px solid #20364f}
-.reader-close{width:38px;height:38px;border:1px solid #2a405a;border-radius:10px;background:#0c1b2d;color:#fff;font-size:20px;cursor:pointer}
-.reader-title{flex:1;min-width:0;color:#fff;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.reader-download{width:38px;height:38px;display:grid;place-items:center;border:1px solid #2a405a;border-radius:10px;color:#fff;text-decoration:none;background:#0c1b2d}
-.pdf-reader-fullscreen iframe{flex:1;width:100%;height:calc(100vh - 58px);border:0;background:#fff}
+
+
+
+
+
+
+
 .timer-fullscreen-btn{margin-left:8px}
 :fullscreen{overflow:auto}
-@media(max-width:700px){.pdf-reader-topbar{height:52px;min-height:52px;padding:0 8px}.pdf-reader-fullscreen iframe{height:calc(100vh - 52px)}}
+@media(max-width:700px){}
 </style></style></head>
 <body>
 <div class="app"><aside class="side"><div class="brand"><div class="brand-icon">🎓</div><div><b>Hello Chitranshu</b><small>Focus · Plan · Achieve</small></div></div><div class="nav"><div class="nav-title">Main</div><button data-page="home" onclick="go('home')">🏠 <span>Dashboard</span></button><button data-page="ai" onclick="go('ai')">▣ <span>Planner</span></button><button data-page="study" onclick="go('study')">◎ <span>Targets</span></button><button data-page="classes" onclick="go('classes')">🎓 <span>Live Classes</span></button><button data-page="focus" onclick="go('focus')">⏱ <span>Focus Timer</span></button><button data-page="notes" onclick="go('notes')">📄 <span>Notes & PDFs</span></button><div class="nav-title">Personal</div><button data-page="routine" onclick="go('routine')">◷ <span>Routine</span></button><button data-page="challenge" onclick="go('challenge')">🎯 <span>Goals</span></button><button data-page="workout" onclick="go('workout')">🏃 <span>Workout</span></button><button data-page="settings" onclick="go('settings')">⚙ <span>Settings</span></button></div><div class="streak"><small>Current streak</small><br><b id="streakSide">0</b> 🔥<br><small>days</small></div></aside>
@@ -168,7 +168,7 @@ a.innerHTML=`<div class="hero"><div><div class="eyebrow">Knowledge base</div><h1
 <div class="pdf-grid">${pdfs.map(n=>pdfCard(n)).join('')||'<div class="pdf-empty">📂 No PDFs in this folder yet.<br><small>Upload a PDF or create another folder.</small></div>'}</div></div>
 <div class="card" style="margin-top:14px"><div style="display:flex;justify-content:space-between;align-items:center"><h2>Text Notes</h2><span class="pdf-library-count">${texts.length}</span></div>${texts.map(n=>`<div class="item"><div class="item-row"><div class="item-main"><div class="item-title">${esc(n.title)} <span class="tag">${esc(n.subject||'General')}</span><span class="tag orange">Note</span></div><div class="item-sub">${n.date} • 📁 ${esc(n.folder||'General')}</div><div class="item-sub">${esc(n.text||'').slice(0,220)}</div></div><div class="actions"><button class="secondary" onclick="editNote('${n.id}')">Edit</button><button class="secondary" onclick="moveNote('${n.id}')">Move</button><button class="danger" onclick="deleteNote('${n.id}')">Delete</button></div></div></div>`).join('')||'<div class="empty">No text notes.</div>'}</div></section></div>`;
 }
-function pdfCard(n){let tags=Array.isArray(n.tags)?n.tags:(n.tags?String(n.tags).split(',').map(x=>x.trim()).filter(Boolean):[]),mb=n.size?((n.size/1048576).toFixed(1)+' MB'):'Cloud PDF',pages=n.pages?`${n.pages} pages`:'Pages unknown';return `<article class="pdf-card"><div class="pdf-head"><div class="pdf-icon">PDF</div><div style="min-width:0;flex:1"><div class="pdf-name" title="${esc(n.title)}">${esc(n.title)}</div><div class="pdf-meta">${esc(n.subject||'General')} • ${esc(n.chapter||'Unclassified')}<br>${pages} • ${mb} • ${n.date}</div><div class="folder-line">📁 ${esc(n.folder||'General')}</div></div></div><div class="pdf-tags"><span class="pdf-tag type">${esc(n.document_type||'PDF')}</span>${n.subject?`<span class="pdf-tag subject">${esc(n.subject)}</span>`:''}${tags.slice(0,5).map(t=>`<span class="pdf-tag">${esc(t)}</span>`).join('')}</div><div class="actions" style="margin-top:13px"><button class="primary" onclick="openPDF('${n.id}')">📖 Read</button><button class="secondary" onclick="editPDF('${n.id}')">✏️ Edit</button><button class="secondary" onclick="moveNote('${n.id}')">📁 Move</button><button class="danger" onclick="deleteNote('${n.id}')">Delete</button></div></article>`}
+function pdfCard(n){let tags=Array.isArray(n.tags)?n.tags:(n.tags?String(n.tags).split(',').map(x=>x.trim()).filter(Boolean):[]),mb=n.size?((n.size/1048576).toFixed(1)+' MB'):'Cloud PDF',pages=n.pages?`${n.pages} pages`:'Pages unknown';return `<article class="pdf-card"><div class="pdf-head"><div class="pdf-icon">PDF</div><div style="min-width:0;flex:1"><div class="pdf-name" title="${esc(n.title)}">${esc(n.title)}</div><div class="pdf-meta">${esc(n.subject||'General')} • ${esc(n.chapter||'Unclassified')}<br>${pages} • ${mb} • ${n.date}</div><div class="folder-line">📁 ${esc(n.folder||'General')}</div></div></div><div class="pdf-tags"><span class="pdf-tag type">${esc(n.document_type||'PDF')}</span>${n.subject?`<span class="pdf-tag subject">${esc(n.subject)}</span>`:''}${tags.slice(0,5).map(t=>`<span class="pdf-tag">${esc(t)}</span>`).join('')}</div><div class="actions" style="margin-top:13px"><button class="primary" onclick="downloadPDF('${n.id}')">⬇ Download</button><button class="secondary" onclick="editPDF('${n.id}')">✏️ Edit</button><button class="secondary" onclick="moveNote('${n.id}')">📁 Move</button><button class="danger" onclick="deleteNote('${n.id}')">Delete</button></div></article>`}
 // PDF folders are real Supabase Storage subfolders: <user-id>/<folder>/<file>
 function selectPdfFolder(encoded){
   const f=encoded==='All'?'All':decodeURIComponent(encoded);
@@ -253,28 +253,17 @@ if(!pdfUploadState)return;let {file,user,meta}=pdfUploadState,btn=document.getEl
 }
 
 function closePDFReader(){const f=document.getElementById("pdfReaderFrame");if(f)f.src="about:blank";document.getElementById("pdfReaderModal")?.classList.remove("show");}
-async function openPDF(noteId){
+
+async function downloadPDF(noteId){
   const n=d.notes.find(x=>x.id===noteId);if(!n)return;
   const user=await getCurrentUser();if(!user)return toast("Please login first");
   if(!n.storage_path)return toast("Please upload this PDF again.");
   try{
-    const {data,error}=await supabaseClient.storage.from('pdfs').createSignedUrl(n.storage_path,1800);
+    const {data,error}=await supabaseClient.storage.from('pdfs').createSignedUrl(n.storage_path,1800,{download:true});
     if(error)throw error;
-    if(!data?.signedUrl)throw new Error('Could not create PDF link');
-    window.__pdfReturnFolder=window.noteFolder||'All';
-    const modal=document.getElementById('pdfReaderModal');
-    document.getElementById('pdfReaderTitle').textContent=n.title||'PDF';
-    document.getElementById('pdfReaderFrame').src=data.signedUrl;
-    document.getElementById('pdfReaderDownload').href=data.signedUrl;
-    modal.classList.add('show');
-  }catch(e){console.error(e);toast('Could not open PDF: '+(e.message||'Storage error'))}
-}
-function closePDFReader(){
-  const f=document.getElementById('pdfReaderFrame');
-  if(f)f.src='about:blank';
-  document.getElementById('pdfReaderModal')?.classList.remove('show');
-  window.noteFolder=window.__pdfReturnFolder||'All';
-  render();
+    if(!data?.signedUrl)throw new Error('Could not create download link');
+    const a=document.createElement('a');a.href=data.signedUrl;a.download=(n.title||'document')+'.pdf';a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove();
+  }catch(e){console.error(e);toast('Could not download PDF: '+(e.message||'Storage error'))}
 }
 async function deleteNote(noteId){
   if(!confirm("Delete this note?"))return;
@@ -368,16 +357,6 @@ console.log("Supabase connected");
 <div style="display:flex;justify-content:space-between;align-items:center"><div><h2 style="margin:0">Create Folder</h2><div class="muted">Organise your PDFs.</div></div><button class="secondary" onclick="closeFolderModal()">✕</button></div>
 <div class="field" style="margin-top:18px"><label>Folder name</label><div class="folder-create-row"><input class="input" id="newFolderName" maxlength="40" placeholder="Physics, Chemistry, JEE PYQ…"><button class="primary" onclick="createFolder()">Create</button></div></div>
 </div></div>
-<div id="pdfReaderModal" class="modal pdf-reader-modal">
-  <div class="pdf-reader-shell">
-    <div class="pdf-reader-bar">
-      <button class="reader-back" onclick="closePDFReader()">←</button>
-      <div class="pdf-reader-title"><b id="pdfReaderTitle">PDF</b><small>Notes & PDFs</small></div>
-      <a id="pdfReaderDownload" class="secondary" href="#" download>⬇</a>
-    </div>
-    <div class="pdf-reader-body"><iframe id="pdfReaderFrame" title="PDF Reader"></iframe></div>
-  </div>
-</div>
 <!-- SUPABASE LOGIN -->
 <div id="loginBox" style="
 position:fixed;inset:0;z-index:99999;
