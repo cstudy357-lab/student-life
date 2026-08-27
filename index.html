@@ -113,7 +113,12 @@ let types=['Notes','Question Paper','Practice Sheet','Revision','Book / Module',
 let folderButtons=`<button class="pdf-folder-btn ${folder==='All'?'active':''}" onclick="window.noteFolder='All';render()"><span>📚 All PDFs</span><span>${d.notes.filter(n=>n.type==='pdf').length}</span></button>`+d.folders.map(f=>{let c=d.notes.filter(n=>n.type==='pdf'&&n.folder===f).length;return `<button class="pdf-folder-btn ${folder===f?'active':''}" onclick="window.noteFolder='${esc(f).replace(/'/g,"\'")}';render()"><span>📁 ${esc(f)}</span><span>${c}</span></button>`}).join('');
 a.innerHTML=`<div class="hero"><div><div class="eyebrow">Knowledge base</div><h1>Notes & PDFs</h1><p>Your personal study library — folders, smart classification, search and in-app reading.</p></div><button class="primary" onclick="document.getElementById('pdfFile').click()">＋ Add PDF</button></div>
 <div class="pdf-library-shell">
-<aside class="pdf-folder-panel"><div class="pdf-folder-head"><b>Library</b><span class="pdf-library-count">${d.folders.length} folders</span></div><div class="pdf-folder-list">${folderButtons}</div><button class="pdf-folder-add" onclick="openFolderModal()">＋ New folder</button></aside>
+<aside class="pdf-folder-panel">
+<div class="pdf-folder-head"><b>Library</b><span class="pdf-library-count">${d.folders.length} folders</span></div>
+<div class="pdf-folder-list">${folderButtons}</div>
+<button class="pdf-folder-add" onclick="openFolderModal()">＋ New folder</button>
+${folder!=='All'&&folder!=='General'&&d.folders.includes(folder)?`<button class="danger" style="width:100%;margin-top:8px" onclick="deleteFolder()">🗑 Delete folder</button>`:''}
+</aside>
 <section class="pdf-library-main"><div class="card"><div class="pdf-library-top"><div><div class="pdf-library-title"><h2 style="margin:0">${folder==='All'?'All PDFs':esc(folder)}</h2><span class="pdf-library-count">${pdfs.length}</span></div><div class="pdf-breadcrumb">📚 Notes & PDFs ${folder==='All'?'':' / 📁 '+esc(folder)}</div></div><div class="actions"><button class="secondary" onclick="document.getElementById('pdfFile').click()">☁ Upload</button></div></div>
 <div class="pdf-filters"><input class="input" placeholder="Search title, subject, chapter, tags…" value="${esc(q)}" oninput="window.noteQ=this.value;render()"><select class="select" onchange="window.pdfTypeFilter=this.value;render()"><option>All</option>${types.map(x=>`<option ${pdfType===x?'selected':''}>${x}</option>`).join('')}</select><select class="select" onchange="window.pdfSubjectFilter=this.value;render()"><option>All subjects</option>${subjects.map(x=>`<option ${subject===x?'selected':''}>${esc(x)}</option>`).join('')}</select><select class="select" onchange="window.pdfSort=this.value;render()"><option value="new" ${sort==='new'?'selected':''}>Newest</option><option value="az" ${sort==='az'?'selected':''}>A–Z</option><option value="size" ${sort==='size'?'selected':''}>Largest</option></select></div>
 <div class="pdf-upload-drop">💡 <b>Organise faster:</b> create folders like <b>Physics</b>, <b>Chemistry</b>, <b>JEE PYQ</b>, <b>Revision</b>. Every uploaded PDF is saved inside the selected folder.</div>
@@ -127,7 +132,35 @@ function openFolderModal(){document.getElementById('folderModal').classList.add(
 function closeFolderModal(){document.getElementById('folderModal').classList.remove('show')}
 function createFolder(){let n=v('newFolderName').trim().replace(/\s+/g,' ');if(!n)return toast('Enter a folder name');if(n.length>40)return toast('Folder name is too long');if(d.folders.some(x=>x.toLowerCase()===n.toLowerCase()))return toast('Folder already exists');d.folders.push(n);save();window.noteFolder=n;closeFolderModal();toast('Folder created ✓');render()}
 function addFolder(){openFolderModal()}
-async function deleteFolder(){let f=window.noteFolder||'All';if(f==='All'||f==='General')return toast('General folder cannot be deleted');if(!confirm(`Delete folder "${f}"? PDFs will be moved to General.`))return;try{for(const n of d.notes.filter(x=>x.type==='pdf'&&x.folder===f&&x.storage_path)){let parts=n.storage_path.split('/'),fileName=parts[parts.length-1];let newPath=`${parts[0]}/General/${fileName}`;let {error}=await supabaseClient.storage.from('pdfs').move(n.storage_path,newPath);if(error)throw error;n.storage_path=newPath}d.notes.forEach(n=>{if(n.folder===f)n.folder='General'});d.folders=d.folders.filter(x=>x!==f);window.noteFolder='All';await save();toast('Folder deleted • PDFs moved to General ✓');render()}catch(e){console.error(e);toast('Could not delete folder: '+(e.message||'Storage error'))}}
+async function deleteFolder(){
+  let f=window.noteFolder||'All';
+  if(f==='All'||f==='General')return toast('General folder cannot be deleted');
+  if(!d.folders.includes(f))return toast('Folder not found');
+  const count=d.notes.filter(x=>x.type==='pdf'&&x.folder===f).length;
+  const message=count
+    ? `Delete folder "${f}"? ${count} PDF${count===1?'':'s'} will be moved to General.`
+    : `Delete empty folder "${f}"?`;
+  if(!confirm(message))return;
+  try{
+    for(const n of d.notes.filter(x=>x.type==='pdf'&&x.folder===f&&x.storage_path)){
+      let parts=n.storage_path.split('/');
+      let fileName=parts[parts.length-1];
+      let newPath=`${parts[0]}/General/${fileName}`;
+      let {error}=await supabaseClient.storage.from('pdfs').move(n.storage_path,newPath);
+      if(error)throw error;
+      n.storage_path=newPath;
+    }
+    d.notes.forEach(n=>{if(n.folder===f)n.folder='General'});
+    d.folders=d.folders.filter(x=>x!==f);
+    window.noteFolder='All';
+    await save();
+    toast('Folder deleted • PDFs moved to General ✓');
+    render();
+  }catch(e){
+    console.error('Folder delete error:',e);
+    toast('Could not delete folder: '+(e.message||'Storage error'));
+  }
+}
 function addTextNote(){let title=v('noteTitle'),text=v('noteText');if(!title||!text)return toast('Title and note are required');d.notes.push({id:id(),type:'text',title,subject:v('noteSubject'),text,folder:v('noteFolder')||'General',date:todayLocal()});save();toast('Note saved');render()}
 function editNote(id){let n=d.notes.find(x=>x.id===id);if(!n)return;let t=prompt('Title:',n.title);if(t===null)return;let tx=prompt('Note:',n.text||'');if(tx===null)return;n.title=t.trim()||n.title;n.text=tx;save();toast('Note updated');render()}
 async function moveNote(noteId){let n=d.notes.find(x=>x.id===noteId);if(!n)return;let choices=d.folders.join(', ');let f=prompt(`Move to folder:
