@@ -22,6 +22,13 @@
 .pdf-folder-modal .pdf-dialog{width:min(520px,100%);max-height:90vh;overflow:auto}.folder-create-row{display:flex;gap:8px}.folder-create-row .input{flex:1}
 .pdf-reader-modal{padding:0}.pdf-reader-shell{width:100%;height:100%;background:#07111f;display:flex;flex-direction:column}.pdf-reader-bar{height:76px;flex:0 0 76px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 16px;border-bottom:1px solid #1b2d45}.pdf-reader-bar b{display:block;max-width:60vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media(max-width:700px){.pdf-reader-bar{height:68px;flex-basis:68px;padding:0 9px}.pdf-reader-bar .secondary{padding:8px 9px}}
+</style><style>
+.timer-fullscreen-btn{margin:8px 0}
+.pdf-reader-shell:fullscreen{width:100vw;height:100vh;border-radius:0}
+.pdf-reader-modal:has(.pdf-reader-shell:fullscreen){background:#000}
+@media(max-width:700px){
+  .pdf-reader-shell:fullscreen .pdf-reader-bar{height:54px}
+}
 </style></style></head>
 <body>
 <div class="app"><aside class="side"><div class="brand"><div class="brand-icon">🎓</div><div><b>Hello Chitranshu</b><small>Focus · Plan · Achieve</small></div></div><div class="nav"><div class="nav-title">Main</div><button data-page="home" onclick="go('home')">🏠 <span>Dashboard</span></button><button data-page="ai" onclick="go('ai')">▣ <span>Planner</span></button><button data-page="study" onclick="go('study')">◎ <span>Targets</span></button><button data-page="classes" onclick="go('classes')">🎓 <span>Live Classes</span></button><button data-page="focus" onclick="go('focus')">⏱ <span>Focus Timer</span></button><button data-page="notes" onclick="go('notes')">📄 <span>Notes & PDFs</span></button><div class="nav-title">Personal</div><button data-page="routine" onclick="go('routine')">◷ <span>Routine</span></button><button data-page="challenge" onclick="go('challenge')">🎯 <span>Goals</span></button><button data-page="workout" onclick="go('workout')">🏃 <span>Workout</span></button><button data-page="settings" onclick="go('settings')">⚙ <span>Settings</span></button></div><div class="streak"><small>Current streak</small><br><b id="streakSide">0</b> 🔥<br><small>days</small></div></aside>
@@ -117,7 +124,7 @@ function plannerWeek(){let base=new Date(plannerDate+'T12:00:00'),sun=new Date(b
 function plannerMonth(){let base=new Date(plannerDate+'T12:00:00'),y=base.getFullYear(),m=base.getMonth(),daysIn=new Date(y,m+1,0).getDate(),html='';for(let i=1;i<=daysIn;i++){let s=y+'-'+String(m+1).padStart(2,'0')+'-'+String(i).padStart(2,'0');let c=d.targets.filter(t=>t.date===s).length;if(c)html+=`<div class="item"><b>${fmtDate(s)}</b><div class="item-sub">${c} target${c>1?'s':''}</div><button class="secondary" onclick="plannerDate='${s}';render()">Open day</button></div>`}document.getElementById('app').innerHTML=`<div class="planner"><div class="planner-top"><div class="planner-title"><h2>Planner · Month</h2><p>${base.toLocaleDateString('en-IN',{month:'long',year:'numeric'})}</p></div><button class="secondary" onclick="render()">Day view</button></div><div class="planner-body"><div class="card" style="background:#0a1727">${html||'<div class="empty">No targets this month.</div>'}</div></div></div>`}
 function addBreak(){let t=prompt('Break time:', '10:00');if(!t)return;let m=prompt('Minutes:','15')||15;d.targets.push({id:id(),title:'Break',subject:'Break',date:plannerDate,time:t,minutes:+m||15,priority:'Low'});save();toast('Break added');render()}
 function addPlannerClass(){let s=prompt('Subject:','Physics');if(!s)return;let st=prompt('Start:','16:00')||'16:00',en=prompt('End:','17:00')||'17:00';d.classes.push({id:id(),subject:s,name:'Live Class',start:st,end:en,days:[dayOf(plannerDate)]});save();toast('Class added for this day');render()}
-function focus(a){let f=d.settings.focus;a.innerHTML=`<div class="hero"><div><div class="eyebrow">Deep work</div><h1>Focus Timer</h1><p>Choose your session length. Pause and resume whenever you need.</p></div></div><div class="layout2"><div class="card" style="text-align:center"><div class="row"><button class="secondary" onclick="setFocus(15)">15m</button><button class="secondary" onclick="setFocus(25)">25m</button><button class="secondary" onclick="setFocus(30)">30m</button><button class="secondary" onclick="setFocus(45)">45m</button><button class="secondary" onclick="setFocus(60)">60m</button></div><div class="row" style="margin-top:10px"><input class="input" id="customFocus" type="number" min="1" max="180" value="${f}" onchange="setFocus(this.value)"><input class="input" id="focusSubject" placeholder="What are you studying?"></div><div class="timer" id="timer" style="font-size:78px;font-weight:900;text-align:center;padding:20px">${fmtTimer(f*60)}</div><div class="actions" style="justify-content:center"><button class="primary" onclick="startTimer()">${timerRunning?'Resume':'Start'}</button><button class="secondary" onclick="pauseTimer()">Pause</button><button class="danger" onclick="resetTimer()">Reset</button></div></div><div class="card"><h3>Today</h3><div class="stat"><div class="num">${d.sessions.filter(s=>s.date===todayLocal()).reduce((n,s)=>n+s.minutes,0)} min</div><small>Focused time</small></div><h3 style="margin-top:16px">Recent sessions</h3>${d.sessions.slice(-6).reverse().map(s=>`<div class="item"><b>${s.minutes} min</b><div class="item-sub">${esc(s.subject||'Focus')} • ${s.date}</div></div>`).join('')||'<div class="empty">No sessions yet.</div>'}</div></div>`}
+function focus(a){let f=d.settings.focus;a.innerHTML=`<div class="hero"><div><div class="eyebrow">Deep work</div><h1>Focus Timer</h1><p>Choose your session length. Pause and resume whenever you need.</p></div></div><div class="layout2"><div class="card" style="text-align:center"><div class="row"><button class="secondary" onclick="setFocus(15)">15m</button><button class="secondary" onclick="setFocus(25)">25m</button><button class="secondary" onclick="setFocus(30)">30m</button><button class="secondary" onclick="setFocus(45)">45m</button><button class="secondary" onclick="setFocus(60)">60m</button></div><div class="row" style="margin-top:10px"><input class="input" id="customFocus" type="number" min="1" max="180" value="${f}" onchange="setFocus(this.value)"><button class="secondary timer-fullscreen-btn" onclick="toggleTimerFullscreen()">⛶ Full Screen Timer</button><input class="input" id="focusSubject" placeholder="What are you studying?"></div><div class="timer" id="timer" style="font-size:78px;font-weight:900;text-align:center;padding:20px">${fmtTimer(f*60)}</div><div class="actions" style="justify-content:center"><button class="primary" onclick="startTimer()">${timerRunning?'Resume':'Start'}</button><button class="secondary" onclick="pauseTimer()">Pause</button><button class="danger" onclick="resetTimer()">Reset</button></div></div><div class="card"><h3>Today</h3><div class="stat"><div class="num">${d.sessions.filter(s=>s.date===todayLocal()).reduce((n,s)=>n+s.minutes,0)} min</div><small>Focused time</small></div><h3 style="margin-top:16px">Recent sessions</h3>${d.sessions.slice(-6).reverse().map(s=>`<div class="item"><b>${s.minutes} min</b><div class="item-sub">${esc(s.subject||'Focus')} • ${s.date}</div></div>`).join('')||'<div class="empty">No sessions yet.</div>'}</div></div>`}
 function setFocus(n){n=Math.max(1,Math.min(180,+n||25));d.settings.focus=n;save();if(!timerRunning){timerLeft=n*60;let e=document.getElementById('timer');if(e)e.textContent=fmtTimer(timerLeft)}render()}
 function fmtTimer(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
 function startTimer(){if(timerRunning)return;if(!timerLeft)timerLeft=d.settings.focus*60;timerRunning=true;clearInterval(timer);timer=setInterval(()=>{timerLeft--;let e=document.getElementById('timer');if(e)e.textContent=fmtTimer(timerLeft);if(timerLeft<=0){finishTimer()}},1000);render()}
@@ -150,7 +157,7 @@ a.innerHTML=`<div class="hero"><div><div class="eyebrow">Knowledge base</div><h1
 <div class="pdf-grid">${pdfs.map(n=>pdfCard(n)).join('')||'<div class="pdf-empty">📂 No PDFs in this folder yet.<br><small>Upload a PDF or create another folder.</small></div>'}</div></div>
 <div class="card" style="margin-top:14px"><div style="display:flex;justify-content:space-between;align-items:center"><h2>Text Notes</h2><span class="pdf-library-count">${texts.length}</span></div>${texts.map(n=>`<div class="item"><div class="item-row"><div class="item-main"><div class="item-title">${esc(n.title)} <span class="tag">${esc(n.subject||'General')}</span><span class="tag orange">Note</span></div><div class="item-sub">${n.date} • 📁 ${esc(n.folder||'General')}</div><div class="item-sub">${esc(n.text||'').slice(0,220)}</div></div><div class="actions"><button class="secondary" onclick="editNote('${n.id}')">Edit</button><button class="secondary" onclick="moveNote('${n.id}')">Move</button><button class="danger" onclick="deleteNote('${n.id}')">Delete</button></div></div></div>`).join('')||'<div class="empty">No text notes.</div>'}</div></section></div>`;
 }
-function pdfCard(n){let tags=Array.isArray(n.tags)?n.tags:(n.tags?String(n.tags).split(',').map(x=>x.trim()).filter(Boolean):[]),mb=n.size?((n.size/1048576).toFixed(1)+' MB'):'Cloud PDF',pages=n.pages?`${n.pages} pages`:'Pages unknown';return `<article class="pdf-card"><div class="pdf-head"><div class="pdf-icon">PDF</div><div style="min-width:0;flex:1"><div class="pdf-name" title="${esc(n.title)}">${esc(n.title)}</div><div class="pdf-meta">${esc(n.subject||'General')} • ${esc(n.chapter||'Unclassified')}<br>${pages} • ${mb} • ${n.date}</div><div class="folder-line">📁 ${esc(n.folder||'General')}</div></div></div><div class="pdf-tags"><span class="pdf-tag type">${esc(n.document_type||'PDF')}</span>${n.subject?`<span class="pdf-tag subject">${esc(n.subject)}</span>`:''}${tags.slice(0,5).map(t=>`<span class="pdf-tag">${esc(t)}</span>`).join('')}</div><div class="actions" style="margin-top:13px"><button class="primary" onclick="openPDF('${n.id}')">📖 Read</button><button class="secondary" onclick="editPDF('${n.id}')">✏️ Edit</button><button class="secondary" onclick="moveNote('${n.id}')">📁 Move</button><button class="danger" onclick="deleteNote('${n.id}')">Delete</button></div></article>`}
+function pdfCard(n){let tags=Array.isArray(n.tags)?n.tags:(n.tags?String(n.tags).split(',').map(x=>x.trim()).filter(Boolean):[]),mb=n.size?((n.size/1048576).toFixed(1)+' MB'):'Cloud PDF',pages=n.pages?`${n.pages} pages`:'Pages unknown';return `<article class="pdf-card"><div class="pdf-head"><div class="pdf-icon">PDF</div><div style="min-width:0;flex:1"><div class="pdf-name" title="${esc(n.title)}">${esc(n.title)}</div><div class="pdf-meta">${esc(n.subject||'General')} • ${esc(n.chapter||'Unclassified')}<br>${pages} • ${mb} • ${n.date}</div><div class="folder-line">📁 ${esc(n.folder||'General')}</div></div></div><div class="pdf-tags"><span class="pdf-tag type">${esc(n.document_type||'PDF')}</span>${n.subject?`<span class="pdf-tag subject">${esc(n.subject)}</span>`:''}${tags.slice(0,5).map(t=>`<span class="pdf-tag">${esc(t)}</span>`).join('')}</div><div class="actions" style="margin-top:13px"><button class="primary" onclick="openPDF('${n.id}')">📖 Read</button><button class="secondary" onclick="openPDFFullscreen('${n.id}')">⛶ Full Screen</button><button class="secondary" onclick="editPDF('${n.id}')">✏️ Edit</button><button class="secondary" onclick="moveNote('${n.id}')">📁 Move</button><button class="danger" onclick="deleteNote('${n.id}')">Delete</button></div></article>`}
 // PDF folders are real Supabase Storage subfolders: <user-id>/<folder>/<file>
 function selectPdfFolder(encoded){
   const f=encoded==='All'?'All':decodeURIComponent(encoded);
@@ -234,6 +241,26 @@ async function confirmPDFUpload(){
 if(!pdfUploadState)return;let {file,user,meta}=pdfUploadState,btn=document.getElementById('pdfSaveBtn');btn.disabled=true;btn.textContent='Uploading…';try{let fileName=safeFileName(file.name),folder=(document.getElementById('pdfFolder').value||'General').trim(),storagePath=`${user.id}/${folder}/${id()}-${fileName}`;let {error}=await supabaseClient.storage.from("pdfs").upload(storagePath,file,{cacheControl:"3600",upsert:false,contentType:"application/pdf"});if(error)throw error;let tags=document.getElementById('pdfTags').value.split(',').map(x=>x.trim()).filter(Boolean);d.notes.push({id:id(),type:"pdf",title:v('pdfTitle')||file.name.replace(/\.pdf$/i,''),subject:v('pdfSubject')||'General',chapter:v('pdfChapter'),document_type:document.getElementById('pdfType').value,tags:[...new Set(tags)],file:file.name,storage_path:storagePath,folder:document.getElementById('pdfFolder').value||'General',date:todayLocal(),size:file.size,pages:meta?.pages||0,created_at:new Date().toISOString()});await save();closePDFMeta();toast("PDF classified & saved to cloud ✓");render()}catch(e){console.error(e);toast("PDF upload failed: "+(e.message||"Check Storage bucket/policies"));btn.disabled=false;btn.textContent='☁ Save PDF'}
 }
 
+async function openPDFFullscreen(noteId){
+  const n=d.notes.find(x=>x.id===noteId);if(!n)return;
+  const user=await getCurrentUser();if(!user)return toast("Please login first");
+  if(!n.storage_path)return toast("Please upload this PDF again.");
+  try{
+    const {data,error}=await supabaseClient.storage.from('pdfs').createSignedUrl(n.storage_path,1800);
+    if(error)throw error;
+    if(!data?.signedUrl)throw new Error('Could not create PDF link');
+    window.__pdfReturnFolder=window.noteFolder||'All';
+    const modal=document.getElementById('pdfReaderModal');
+    document.getElementById('pdfReaderTitle').textContent=n.title||'PDF';
+    document.getElementById('pdfReaderFrame').src=data.signedUrl;
+    document.getElementById('pdfReaderDownload').href=data.signedUrl;
+    modal.classList.add('show');
+    const shell=modal.querySelector('.pdf-reader-shell');
+    if(shell?.requestFullscreen){
+      await shell.requestFullscreen().catch(()=>{});
+    }
+  }catch(e){console.error(e);toast('Could not open PDF: '+(e.message||'Storage error'))}
+}
 function closePDFReader(){const f=document.getElementById("pdfReaderFrame");if(f)f.src="about:blank";document.getElementById("pdfReaderModal")?.classList.remove("show");}
 async function deleteNote(noteId){
   if(!confirm("Delete this note?"))return;
@@ -318,6 +345,7 @@ async function openPDF(noteId){
 function closePDFReader(){
   const f=document.getElementById('pdfReaderFrame');
   if(f)f.src='about:blank';
+  if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});
   document.getElementById('pdfReaderModal')?.classList.remove('show');
   window.noteFolder=window.__pdfReturnFolder||'All';
   render();
@@ -513,6 +541,28 @@ async function checkStudentLogin(){
 
 checkStudentLogin();
 if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}
+async function toggleTimerFullscreen(){
+  const candidates=[
+    document.getElementById('timer'),
+    document.getElementById('timerView'),
+    document.getElementById('focusTimer'),
+    document.querySelector('.timer-card'),
+    document.querySelector('[class*="timer"]')
+  ].filter(Boolean);
+  const target=candidates[0];
+  if(!target)return toast('Timer screen not found');
+  try{
+    if(document.fullscreenElement){
+      await document.exitFullscreen();
+      return;
+    }
+    if(target.requestFullscreen){
+      await target.requestFullscreen();
+    }else{
+      toast('Full screen is not supported on this device');
+    }
+  }catch(e){console.error(e);toast('Could not enter full screen');}
+}
 </script>
 </body></html>
 
