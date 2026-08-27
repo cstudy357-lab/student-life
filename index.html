@@ -13,44 +13,62 @@
 .toast{position:fixed;right:22px;bottom:22px;background:#102038;border:1px solid #2a4564;color:#fff;padding:12px 15px;border-radius:12px;box-shadow:var(--shadow);z-index:50}.mobile-nav{display:none}
 @media(max-width:1000px){.app{grid-template-columns:76px 1fr}.side{padding:16px 10px}.brand div:last-child,.nav-title,.nav button span,.streak{display:none}.brand{justify-content:center}.nav button{text-align:center}.nav button b{display:block}.grid4{grid-template-columns:repeat(2,1fr)}.planner-grid,.layout2{grid-template-columns:1fr}}
 @media(max-width:700px){.app{display:block}.side{display:none}.top{padding:0 14px}.content{padding:18px 14px 80px}.hero{align-items:flex-start}.hero h1{font-size:25px}.grid4,.quick,.planner-stats{grid-template-columns:1fr 1fr}.planner-top{padding:18px;align-items:flex-start;flex-direction:column}.planner-body{padding:0 12px 15px}.timeline-row{grid-template-columns:55px 10px minmax(0,1fr) 30px}.timeline-card{padding:10px}.mobile-nav{position:fixed;display:flex;bottom:0;left:0;right:0;background:#071321f5;border-top:1px solid var(--line);z-index:40;padding:7px 8px;justify-content:space-around}.mobile-nav button{border:0;background:transparent;color:#8193aa;padding:7px 9px;font-size:11px}.mobile-nav button b{display:block;font-size:17px}.row{flex-direction:column}.top-actions{display:none}.search-wrap{max-width:none}}
-
-/* Final app-shell polish */
-body{overscroll-behavior-y:none}
-button,input,select,textarea{touch-action:manipulation}
-@media(max-width:700px){
-  .content{padding-bottom:92px}
-  .toast{right:14px;left:14px;bottom:78px;text-align:center}
-  .timer{font-size:58px!important}
-}
-<style>.pdf-toolbar{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.pdf-filters{display:grid;grid-template-columns:1.4fr .7fr .7fr .7fr;gap:9px}.pdf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:13px;margin-top:15px}.pdf-card{background:#0a1727;border:1px solid #1c2d44;border-radius:17px;padding:16px;min-width:0}.pdf-icon{width:46px;height:46px;border-radius:13px;background:#281746;color:#c39bff;display:grid;place-items:center;font-weight:900;font-size:18px;flex:none}.pdf-head{display:flex;gap:12px;align-items:flex-start}.pdf-name{font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pdf-meta{color:#8193aa;font-size:12px;margin-top:4px;line-height:1.5}.pdf-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}.pdf-tag{font-size:10px;padding:4px 7px;border-radius:999px;background:#11294a;color:#7db2ff;font-weight:800}.pdf-tag.subject{background:#103526;color:#5be8a8}.pdf-tag.type{background:#38270f;color:#ffc45a}.pdf-modal{position:fixed;inset:0;background:#000b;z-index:100;display:none;align-items:center;justify-content:center;padding:18px}.pdf-modal.show{display:flex}.pdf-dialog{width:min(1250px,100%);height:min(90vh,900px);background:#071321;border:1px solid #263b57;border-radius:18px;overflow:hidden;display:grid;grid-template-rows:auto 1fr}.pdf-dialog-head{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 15px;border-bottom:1px solid #20344d}.pdf-dialog-head .meta{min-width:0}.pdf-dialog-head b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pdf-dialog iframe{width:100%;height:100%;border:0;background:#111}.pdf-analyze{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pdf-analyze .full{grid-column:1/-1}@media(max-width:700px){.pdf-filters,.pdf-analyze{grid-template-columns:1fr}.pdf-modal{padding:0}.pdf-dialog{height:100vh;border-radius:0}}
-.pdf-library-shell{display:grid;grid-template-columns:230px minmax(0,1fr);gap:14px}.pdf-folder-panel{background:#081525;border:1px solid #1b2d45;border-radius:18px;padding:14px;height:max-content;position:sticky;top:90px}.pdf-folder-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.pdf-folder-list{display:grid;gap:5px}.pdf-folder-btn{width:100%;border:1px solid transparent;background:transparent;color:#9badc3;padding:10px 11px;border-radius:11px;text-align:left;display:flex;justify-content:space-between;gap:8px}.pdf-folder-btn:hover{background:#0e1d31;color:#fff}.pdf-folder-btn.active{background:linear-gradient(135deg,#124cae,#176be6);color:#fff}.pdf-folder-btn span:last-child{opacity:.65;font-size:11px}.pdf-folder-add{width:100%;border:1px dashed #315070;background:#0a192c;color:#6daeff;padding:10px;border-radius:10px;margin-top:8px;font-weight:800}.pdf-library-main{min-width:0}.pdf-library-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.pdf-library-title{display:flex;align-items:center;gap:10px}.pdf-library-count{font-size:11px;background:#10294a;color:#7db2ff;border-radius:999px;padding:4px 8px;font-weight:800}.pdf-card{transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}.pdf-card:hover{transform:translateY(-2px);border-color:#2c4e75;box-shadow:0 14px 35px #0003}.pdf-card .folder-line{color:#7f93ae;font-size:11px;margin-top:7px}.pdf-empty{grid-column:1/-1;padding:35px;text-align:center;border:1px dashed #29405e;border-radius:15px;color:#7f93ae}.pdf-folder-modal .pdf-dialog{height:auto;max-width:500px}.folder-create-row{display:flex;gap:8px}.folder-create-row .input{flex:1}.pdf-breadcrumb{color:#7f93ae;font-size:12px;margin-top:2px}.pdf-upload-drop{border:1px dashed #315070;background:linear-gradient(145deg,#0a192d,#091625);border-radius:15px;padding:15px;margin-top:12px;color:#9fb0c5}
+.pdf-folder-panel{background:#081525;border:1px solid #1b2d45;border-radius:18px;padding:14px;height:max-content;position:sticky;top:90px}.pdf-folder-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.pdf-folder-list{display:grid;gap:5px}.pdf-folder-btn{width:100%;border:1px solid transparent;background:transparent;color:#9badc3;padding:10px 11px;border-radius:11px;text-align:left;display:flex;justify-content:space-between;gap:8px}.pdf-folder-btn:hover{background:#0e1d31;color:#fff}.pdf-folder-btn.active{background:linear-gradient(135deg,#124cae,#176be6);color:#fff}.pdf-folder-btn span:last-child{opacity:.65;font-size:11px}.pdf-folder-add{width:100%;border:1px dashed #315070;background:#0a192c;color:#6daeff;padding:10px;border-radius:10px;margin-top:8px;font-weight:800}.pdf-library-main{min-width:0}.pdf-library-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.pdf-library-title{display:flex;align-items:center;gap:10px}.pdf-library-count{font-size:11px;background:#10294a;color:#7db2ff;border-radius:999px;padding:4px 8px;font-weight:800}.pdf-card{transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}.pdf-card:hover{transform:translateY(-2px);border-color:#2c4e75;box-shadow:0 14px 35px #0003}.pdf-card .folder-line{color:#7f93ae;font-size:11px;margin-top:7px}.pdf-empty{grid-column:1/-1;padding:35px;text-align:center;border:1px dashed #29405e;border-radius:15px;color:#7f93ae}.pdf-folder-modal .pdf-dialog{height:auto;max-width:500px}.folder-create-row{display:flex;gap:8px}.folder-create-row .input{flex:1}.pdf-breadcrumb{color:#7f93ae;font-size:12px;margin-top:2px}.pdf-upload-drop{border:1px dashed #315070;background:linear-gradient(145deg,#0a192d,#091625);border-radius:15px;padding:15px;margin-top:12px;color:#9fb0c5}
 @media(max-width:900px){.pdf-library-shell{grid-template-columns:1fr}.pdf-folder-panel{position:static}.pdf-folder-list{display:flex;overflow:auto;padding-bottom:3px}.pdf-folder-btn{min-width:120px}.pdf-folder-add{margin-top:10px}.pdf-library-top{align-items:flex-start;flex-direction:column}}
 @media(max-width:700px){.pdf-grid{grid-template-columns:1fr}.pdf-card .actions button{flex:1}.pdf-card .actions{display:grid;grid-template-columns:1fr 1fr}}
-</style></style></head>
+
+</style></head>
 <body>
 <div class="app"><aside class="side"><div class="brand"><div class="brand-icon">🎓</div><div><b>Hello Chitranshu</b><small>Focus · Plan · Achieve</small></div></div><div class="nav"><div class="nav-title">Main</div><button data-page="home" onclick="go('home')">🏠 <span>Dashboard</span></button><button data-page="ai" onclick="go('ai')">▣ <span>Planner</span></button><button data-page="study" onclick="go('study')">◎ <span>Targets</span></button><button data-page="classes" onclick="go('classes')">🎓 <span>Live Classes</span></button><button data-page="focus" onclick="go('focus')">⏱ <span>Focus Timer</span></button><button data-page="notes" onclick="go('notes')">📄 <span>Notes & PDFs</span></button><div class="nav-title">Personal</div><button data-page="routine" onclick="go('routine')">◷ <span>Routine</span></button><button data-page="challenge" onclick="go('challenge')">🎯 <span>Goals</span></button><button data-page="workout" onclick="go('workout')">🏃 <span>Workout</span></button><button data-page="settings" onclick="go('settings')">⚙ <span>Settings</span></button></div><div class="streak"><small>Current streak</small><br><b id="streakSide">0</b> 🔥<br><small>days</small></div></aside>
 <main class="main"><header class="top"><div class="search-wrap"><div class="search"><input id="globalSearch" placeholder="Search targets, classes, goals, notes…" oninput="searchAll(this.value)"></div><div id="searchResults"></div></div><div class="top-actions"><button class="icon-btn" onclick="go('focus')">⏱ Focus</button><button class="icon-btn" onclick="quickTarget()">＋ Add</button></div></header><section class="content" id="app"></section></main></div>
 <nav class="mobile-nav"><button onclick="go('home')"><b>⌂</b>Home</button><button onclick="go('ai')"><b>▣</b>Planner</button><button onclick="quickTarget()"><b>＋</b>Add</button><button onclick="go('focus')"><b>◷</b>Focus</button><button onclick="go('settings')"><b>•••</b>More</button></nav><div id="toast" class="toast" style="display:none"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script><script>if(window.pdfjsLib){pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";}</script><div id="pdfMetaModal" class="pdf-modal"><div class="pdf-dialog" style="height:auto;max-height:92vh;display:block;overflow:auto"><div class="pdf-dialog-head"><div class="meta"><b id="pdfMetaFile">PDF details</b><small class="muted">Review automatic classification before saving</small></div><button class="secondary" onclick="closePDFMeta()">✕</button></div><div style="padding:18px"><div id="pdfAnalyzeStatus" class="empty" style="margin-bottom:12px">Analyzing PDF…</div><div class="pdf-analyze"><div class="field"><label>Title</label><input class="input" id="pdfTitle"></div><div class="field"><label>Subject</label><input class="input" id="pdfSubject"></div><div class="field"><label>Chapter / Topic</label><input class="input" id="pdfChapter"></div><div class="field"><label>Document type</label><select class="select" id="pdfType"><option>Notes</option><option>Question Paper</option><option>Practice Sheet</option><option>Revision</option><option>Book / Module</option><option>Reference</option><option>Other</option></select></div><div class="field full"><label>Tags</label><input class="input" id="pdfTags" placeholder="physics, chapter 3, revision"></div><div class="field full"><label>Folder</label><div class="row"><select class="select" id="pdfFolder"></select><button class="secondary" type="button" onclick="closePDFMeta();openFolderModal()">＋ New</button></div></div></div><div class="actions" style="justify-content:flex-end;margin-top:14px"><button class="secondary" onclick="closePDFMeta()">Cancel</button><button class="primary" id="pdfSaveBtn" onclick="confirmPDFUpload()" disabled>☁ Save PDF</button></div></div></div></div><div id="folderModal" class="pdf-modal pdf-folder-modal"><div class="pdf-dialog"><div class="pdf-dialog-head"><div class="meta"><b>Create PDF folder</b><small class="muted">Keep your study library organised</small></div><button class="secondary" onclick="closeFolderModal()">✕</button></div><div style="padding:18px"><div class="field"><label>Folder name</label><div class="folder-create-row"><input class="input" id="newFolderName" maxlength="40" placeholder="e.g. Physics, JEE PYQ, Revision" onkeydown="if(event.key==='Enter')createFolder()"><button class="primary" onclick="createFolder()">Create</button></div></div><div class="muted" style="margin-top:10px">Your PDFs will be stored in this folder and shown in the folder sidebar.</div></div></div></div><div id="pdfViewerModal" class="pdf-modal"><div class="pdf-dialog"><div class="pdf-dialog-head"><div class="meta"><b id="pdfViewerTitle">PDF</b><small id="pdfViewerInfo" class="muted"></small></div><div class="actions"><button class="secondary" id="pdfDownloadBtn">⬇ Download</button><button class="secondary" onclick="closePDFViewer()">✕ Close</button></div></div><iframe id="pdfViewerFrame" title="PDF viewer"></iframe></div></div><script>
+<script>
 const KEY='studentLifeShareV1';
-const defaultData={targets:[],classes:[],routine:[],goals:[],workouts:[],notes:[],folders:['General'],done:{},settings:{focus:25,theme:'dark',name:'Chitranshu'},sessions:[],plans:{}};
+const defaultData={targets:[],classes:[],routine:[],goals:[],workouts:[],notes:[],folders:['General'],done:{},settings:{focus:25,theme:'dark',name:'Student'},sessions:[],plans:{}};
 let d=load(); let current='home', plannerDate=todayLocal(), timer=null, timerLeft=0, timerRunning=false, pdfDB=null;
-function load(){try{let raw=localStorage.getItem(KEY);if(!raw){let legacy=JSON.parse(localStorage.getItem('studyLifeV3')||'null');if(legacy){let migrated=structuredClone(defaultData);migrated.targets=(legacy.study||[]).map((t,i)=>({id:t.id||'t-'+Date.now()+i,title:t.t||'Study task',subject:t.s||'Study',date:t.date||todayLocal(),time:t.time||'',minutes:+t.m||0,priority:'Normal'}));migrated.classes=legacy.classes||[];migrated.routine=legacy.routine||[];migrated.goals=(legacy.goals||[]).map((g,i)=>({id:g.id||'g-'+Date.now()+i,title:g.t||g.title||'Goal',date:g.date||todayLocal(),cat:g.p||g.cat||'Study',progress:g.progress||0,note:g.m||g.note||''}));migrated.workouts=legacy.workout||legacy.workouts||[];migrated.notes=legacy.notes||[];migrated.folders=legacy.noteFolders||['General'];migrated.done={};Object.keys(legacy.done||{}).forEach(k=>{if(k.startsWith('study-'))migrated.done['t-'+k.slice(6)]=legacy.done[k];else if(k.startsWith('goal-'))migrated.done['g-'+k.slice(5)]=legacy.done[k]});migrated.settings.focusMinutes=legacy.settings?.focusMinutes||25;raw=JSON.stringify(migrated);localStorage.setItem(KEY,raw)}}let x=JSON.parse(raw||'null')||structuredClone(defaultData);x=Object.assign(structuredClone(defaultData),x);x.targets=x.targets||x.study||[];x.classes=x.classes||[];x.routine=x.routine||[];x.goals=x.goals||[];x.workouts=x.workouts||x.workout||[];x.notes=x.notes||[];x.folders=x.folders||x.noteFolders||['General'];x.done=x.done||{};x.sessions=x.sessions||[];x.settings=Object.assign({},defaultData.settings,x.settings||{});x.settings.name=(x.settings.name||'Chitranshu').trim()||'Chitranshu';x.targets.forEach((t,i)=>{if(!t.id)t.id='t-'+Date.now()+i;t.start=t.start||t.time||'';t.end=t.end||((t.start&&t.minutes)?addMin(t.start,+t.minutes):'');t.time=t.start||t.time||''});x.classes.forEach((c,i)=>{if(!c.id)c.id='c-'+Date.now()+i;c.days=Array.isArray(c.days)?c.days:(c.day!=null?[+c.day]:[1,2,3,4,5]);c.start=c.start||c.time||'16:00';c.end=c.end||addMin(c.start,60)});x.routine.forEach((r,i)=>{if(!r.id)r.id='r-'+Date.now()+i;r.days=Array.isArray(r.days)?r.days:[0,1,2,3,4,5,6];r.start=r.start||r.time||'06:00';r.end=r.end||addMin(r.start,60)});x.folders=(Array.isArray(x.folders)?x.folders:[]).map(f=>typeof f==='string'?f:(f?.name||f?.title||'General')).filter(Boolean);if(!x.folders.some(f=>f.toLowerCase()==='general'))x.folders.unshift('General');x.folders=[...new Set(x.folders)];x.notes=(Array.isArray(x.notes)?x.notes:[]).map(n=>{n=n||{};if(typeof n.folder!=='string')n.folder=n.folder?.name||n.folder?.title||'General';if(typeof n.title!=='string')n.title=n.title?.name||n.title?.title||'Untitled';if(typeof n.subject!=='string')n.subject=n.subject?.name||n.subject?.title||'';if(typeof n.file!=='string'&&n.file!=null)n.file=n.file?.name||n.file?.title||'';if(!n.id)n.id='n-'+Date.now()+Math.random();return n});x.notes.forEach(n=>{n.folder=n.folder||'General'});return x}catch(e){return structuredClone(defaultData)}}
+function load(){try{let raw=localStorage.getItem(KEY);if(!raw){let legacy=JSON.parse(localStorage.getItem('studyLifeV3')||'null');if(legacy){let migrated=structuredClone(defaultData);migrated.targets=(legacy.study||[]).map((t,i)=>({id:t.id||'t-'+Date.now()+i,title:t.t||'Study task',subject:t.s||'Study',date:t.date||todayLocal(),time:t.time||'',minutes:+t.m||0,priority:'Normal'}));migrated.classes=legacy.classes||[];migrated.routine=legacy.routine||[];migrated.goals=(legacy.goals||[]).map((g,i)=>({id:g.id||'g-'+Date.now()+i,title:g.t||g.title||'Goal',date:g.date||todayLocal(),cat:g.p||g.cat||'Study',progress:g.progress||0,note:g.m||g.note||''}));migrated.workouts=legacy.workout||legacy.workouts||[];migrated.notes=legacy.notes||[];migrated.folders=legacy.noteFolders||['General'];migrated.done={};Object.keys(legacy.done||{}).forEach(k=>{if(k.startsWith('study-'))migrated.done['t-'+k.slice(6)]=legacy.done[k];else if(k.startsWith('goal-'))migrated.done['g-'+k.slice(5)]=legacy.done[k]});migrated.settings.focusMinutes=legacy.settings?.focusMinutes||25;raw=JSON.stringify(migrated);localStorage.setItem(KEY,raw)}}let x=JSON.parse(raw||'null')||structuredClone(defaultData);x=Object.assign(structuredClone(defaultData),x);x.targets=x.targets||x.study||[];x.classes=x.classes||[];x.routine=x.routine||[];x.goals=x.goals||[];x.workouts=x.workouts||x.workout||[];x.notes=x.notes||[];x.folders=x.folders||x.noteFolders||['General'];x.done=x.done||{};x.sessions=x.sessions||[];x.settings=Object.assign({},defaultData.settings,x.settings||{});x.settings.name=(x.settings.name||'Student').trim()||'Student';x.targets.forEach((t,i)=>{if(!t.id)t.id='t-'+Date.now()+i;t.start=t.start||t.time||'';t.end=t.end||((t.start&&t.minutes)?addMin(t.start,+t.minutes):'');t.time=t.start||t.time||''});x.classes.forEach((c,i)=>{if(!c.id)c.id='c-'+Date.now()+i;c.days=Array.isArray(c.days)?c.days:(c.day!=null?[+c.day]:[1,2,3,4,5]);c.start=c.start||c.time||'16:00';c.end=c.end||addMin(c.start,60)});x.routine.forEach((r,i)=>{if(!r.id)r.id='r-'+Date.now()+i;r.days=Array.isArray(r.days)?r.days:[0,1,2,3,4,5,6];r.start=r.start||r.time||'06:00';r.end=r.end||addMin(r.start,60)});x.folders=(Array.isArray(x.folders)?x.folders:[]).map(f=>typeof f==='string'?f:(f?.name||f?.title||'General')).filter(Boolean);if(!x.folders.some(f=>f.toLowerCase()==='general'))x.folders.unshift('General');x.folders=[...new Set(x.folders)];x.notes=(Array.isArray(x.notes)?x.notes:[]).map(n=>{n=n||{};if(typeof n.folder!=='string')n.folder=n.folder?.name||n.folder?.title||'General';if(typeof n.title!=='string')n.title=n.title?.name||n.title?.title||'Untitled';if(typeof n.subject!=='string')n.subject=n.subject?.name||n.subject?.title||'';if(typeof n.file!=='string'&&n.file!=null)n.file=n.file?.name||n.file?.title||'';if(!n.id)n.id='n-'+Date.now()+Math.random();return n});x.notes.forEach(n=>{n.folder=n.folder||'General'});return x}catch(e){return structuredClone(defaultData)}}
 async function save(){
+
+  // Local storage me save
   localStorage.setItem(KEY, JSON.stringify(d));
-  if(typeof supabaseClient === "undefined") return;
-  try{
-    const {data:sessionData,error:sessionError}=await supabaseClient.auth.getSession();
-    if(sessionError) throw sessionError;
-    const user=sessionData?.session?.user;
-    if(!user) return;
-    const {error}=await supabaseClient.from("study_data").upsert(
-      {user_id:user.id,data:d,updated_at:new Date().toISOString()},
-      {onConflict:"user_id"}
-    );
-    if(error) throw error;
-  }catch(error){
-    console.error("Supabase save error:",error);
+
+  // Supabase me save
+  try {
+
+    const { data: sessionData } =
+      await supabaseClient.auth.getSession();
+
+    const user = sessionData?.session?.user;
+
+    // Login nahi hai to sirf local save rahega
+    if (!user) {
+      console.log("Supabase: user not logged in");
+      return;
+    }
+
+    const { error } = await supabaseClient
+      .from("study_data")
+      .upsert(
+        {
+          user_id: user.id,
+          data: d,
+          updated_at: new Date().toISOString()
+        },
+        {
+          onConflict: "user_id"
+        }
+      );
+
+    if (error) {
+      console.error("Supabase save error:", error);
+      toast("Supabase save failed");
+      return;
+    }
+
+    console.log("✅ Data saved to Supabase");
+
+  } catch (error) {
+    console.error("Supabase error:", error);
   }
 }
 function todayLocal(){let z=new Date();return z.getFullYear()+'-'+String(z.getMonth()+1).padStart(2,'0')+'-'+String(z.getDate()).padStart(2,'0')}
@@ -64,7 +82,7 @@ function streak(){let dates=new Set(d.sessions.map(s=>s.date));d.targets.filter(
 function updateSide(){let e=document.getElementById('streakSide');if(e)e.textContent=streak()}
 function go(p){current=p;window.scrollTo({top:0,behavior:'smooth'});render();document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===p));}
 function render(){updateSide();let a=document.getElementById('app');if(current==='home')return home(a);if(current==='ai')return planner(a);if(current==='study')return targets(a);if(current==='classes')return classes(a);if(current==='focus')return focus(a);if(current==='notes')return notes(a);if(current==='routine')return routine(a);if(current==='challenge')return goals(a);if(current==='workout')return workout(a);if(current==='settings')return settings(a)}
-function home(a){let t=todayLocal(),dn=dayOf(t),ts=d.targets.filter(x=>x.date===t),cs=d.classes.filter(x=>x.days.includes(dn)).sort((a,b)=>a.start.localeCompare(b.start)),rs=d.routine.filter(x=>x.days.includes(dn)).sort((a,b)=>a.start.localeCompare(b.start)),done=ts.filter(x=>isDone('t-',x.id)).length,focus=d.sessions.filter(x=>x.date===t).reduce((n,x)=>n+x.minutes,0),pct=ts.length?Math.round(done/ts.length*100):0;let g='Hello Chitranshu';a.innerHTML=`<div class="hero"><div><div class="eyebrow">${g} 👋</div><h1>Hello Chitranshu</h1><p>Everything you need for a focused study day.</p></div><div class="date-pill">${fmtDate(t)}</div></div><div class="grid4"><div class="stat"><div class="num">${ts.length}</div><small>Today's targets</small></div><div class="stat"><div class="num">${done}</div><small>Targets completed</small></div><div class="stat"><div class="num">${Math.floor(focus/60)}h ${focus%60}m</div><small>Focus today</small></div><div class="stat"><div class="num">${cs.length}</div><small>Live classes</small></div></div><div class="card" style="margin-top:16px"><div class="section-head" style="display:flex;justify-content:space-between"><div><h2>Quick actions</h2><div class="muted">Jump straight into what you need.</div></div></div><div class="quick"><button class="q1" onclick="quickTarget()">◎ Add Target<small>Plan a study task</small></button><button class="q2" onclick="go('classes')">🎓 Live Classes<small>${cs.length} today</small></button><button class="q3" onclick="go('notes')">📄 Notes & PDFs<small>${d.notes.length} saved</small></button><button class="q4" onclick="go('focus')">⏱ Focus Timer<small>Start ${d.settings.focus} min</small></button></div></div><div class="layout2"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><h2>Today's Plan</h2><button class="secondary" onclick="go('ai')">Open Planner</button></div>${ts.slice().sort(sortTarget).map(t=>targetRow(t,true)).join('')||'<div class="empty">No targets for today. Add one and get started.</div>'}</div><div><div class="card"><h3>Daily Progress</h3><div class="progress-ring" style="--progress:${pct*3.6}deg"><span>${pct}%</span></div><div class="side-stat"><span>Done</span><b>${done}</b></div><div class="side-stat"><span>Pending</span><b>${Math.max(0,ts.length-done)}</b></div></div><div class="card"><h3>Next up</h3>${[...rs.map(x=>({kind:'routine',x})),...cs.map(x=>({kind:'class',x}))].sort((a,b)=>a.x.start.localeCompare(b.x.start)).slice(0,4).map(z=>`<div class="item"><b>${fmtTime(z.x.start)}</b> <span class="tag ${z.kind==='class'?'purple':'green'}">${z.kind==='class'?'Live Class':z.x.c||'Routine'}</span><div class="item-sub">${esc(z.kind==='class'?z.x.subject:z.x.t)}</div></div>`).join('')||'<div class="empty">Nothing scheduled.</div>'}</div></div></div>`}
+function home(a){let t=todayLocal(),dn=dayOf(t),ts=d.targets.filter(x=>x.date===t),cs=d.classes.filter(x=>x.days.includes(dn)).sort((a,b)=>a.start.localeCompare(b.start)),rs=d.routine.filter(x=>x.days.includes(dn)).sort((a,b)=>a.start.localeCompare(b.start)),done=ts.filter(x=>isDone('t-',x.id)).length,focus=d.sessions.filter(x=>x.date===t).reduce((n,x)=>n+x.minutes,0),pct=ts.length?Math.round(done/ts.length*100):0;let hr=new Date().getHours(),g=hr<12?'Good morning':hr<18?'Good afternoon':'Good evening';a.innerHTML=`<div class="hero"><div><div class="eyebrow">${g} 👋</div><h1>Hello Chitranshu</h1><p>Everything you need for a focused study day.</p></div><div class="date-pill">${fmtDate(t)}</div></div><div class="grid4"><div class="stat"><div class="num">${ts.length}</div><small>Today's targets</small></div><div class="stat"><div class="num">${done}</div><small>Targets completed</small></div><div class="stat"><div class="num">${Math.floor(focus/60)}h ${focus%60}m</div><small>Focus today</small></div><div class="stat"><div class="num">${cs.length}</div><small>Live classes</small></div></div><div class="card" style="margin-top:16px"><div class="section-head" style="display:flex;justify-content:space-between"><div><h2>Quick actions</h2><div class="muted">Jump straight into what you need.</div></div></div><div class="quick"><button class="q1" onclick="quickTarget()">◎ Add Target<small>Plan a study task</small></button><button class="q2" onclick="go('classes')">🎓 Live Classes<small>${cs.length} today</small></button><button class="q3" onclick="go('notes')">📄 Notes & PDFs<small>${d.notes.length} saved</small></button><button class="q4" onclick="go('focus')">⏱ Focus Timer<small>Start ${d.settings.focus} min</small></button></div></div><div class="layout2"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><h2>Today's Plan</h2><button class="secondary" onclick="go('ai')">Open Planner</button></div>${ts.slice().sort(sortTarget).map(t=>targetRow(t,true)).join('')||'<div class="empty">No targets for today. Add one and get started.</div>'}</div><div><div class="card"><h3>Daily Progress</h3><div class="progress-ring" style="--progress:${pct*3.6}deg"><span>${pct}%</span></div><div class="side-stat"><span>Done</span><b>${done}</b></div><div class="side-stat"><span>Pending</span><b>${Math.max(0,ts.length-done)}</b></div></div><div class="card"><h3>Next up</h3>${[...rs.map(x=>({kind:'routine',x})),...cs.map(x=>({kind:'class',x}))].sort((a,b)=>a.x.start.localeCompare(b.x.start)).slice(0,4).map(z=>`<div class="item"><b>${fmtTime(z.x.start)}</b> <span class="tag ${z.kind==='class'?'purple':'green'}">${z.kind==='class'?'Live Class':z.x.c||'Routine'}</span><div class="item-sub">${esc(z.kind==='class'?z.x.subject:z.x.t)}</div></div>`).join('')||'<div class="empty">Nothing scheduled.</div>'}</div></div></div>`}
 function timeParts(t){if(!t)return {h:'12',m:'00',p:'AM'};let [hh,mm]=t.split(':').map(Number),p=hh>=12?'PM':'AM',h=hh%12||12;return {h:String(h),m:String(mm).padStart(2,'0'),p}}
 function timeField(prefix,label,value=''){let q=timeParts(value);let mins=Array.from({length:60},(_,i)=>String(i).padStart(2,'0')).map(m=>`<option value="${m}" ${q.m===m?'selected':''}>${m}</option>`).join('');let hrs=Array.from({length:12},(_,i)=>String(i+1)).map(h=>`<option value="${h}" ${q.h===h?'selected':''}>${h}</option>`).join('');return `<div class="field"><label>${label}</label><div class="time-picker"><select class="select tp-hour" id="${prefix}H">${hrs}</select><span class="time-sep">:</span><select class="select tp-minute" id="${prefix}M">${mins}</select><select class="select tp-period" id="${prefix}P"><option ${q.p==='AM'?'selected':''}>AM</option><option ${q.p==='PM'?'selected':''}>PM</option></select></div></div>`}
 function readTime(prefix){let h=+(document.getElementById(prefix+'H')?.value||12),m=+(document.getElementById(prefix+'M')?.value||0),p=document.getElementById(prefix+'P')?.value||'AM';if(h===12)h=0;if(p==='PM')h+=12;return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')}
@@ -133,33 +151,33 @@ function closeFolderModal(){document.getElementById('folderModal').classList.rem
 function createFolder(){let n=v('newFolderName').trim().replace(/\s+/g,' ');if(!n)return toast('Enter a folder name');if(n.length>40)return toast('Folder name is too long');if(d.folders.some(x=>x.toLowerCase()===n.toLowerCase()))return toast('Folder already exists');d.folders.push(n);save();window.noteFolder=n;closeFolderModal();toast('Folder created ✓');render()}
 function addFolder(){openFolderModal()}
 async function deleteFolder(){
-  let f=window.noteFolder||'All';
-  if(f==='All'||f==='General')return toast('General folder cannot be deleted');
-  if(!d.folders.includes(f))return toast('Folder not found');
-  const count=d.notes.filter(x=>x.type==='pdf'&&x.folder===f).length;
-  const message=count
-    ? `Delete folder "${f}"? ${count} PDF${count===1?'':'s'} will be moved to General.`
-    : `Delete empty folder "${f}"?`;
-  if(!confirm(message))return;
-  try{
-    for(const n of d.notes.filter(x=>x.type==='pdf'&&x.folder===f&&x.storage_path)){
-      let parts=n.storage_path.split('/');
-      let fileName=parts[parts.length-1];
-      let newPath=`${parts[0]}/General/${fileName}`;
-      let {error}=await supabaseClient.storage.from('pdfs').move(n.storage_path,newPath);
-      if(error)throw error;
-      n.storage_path=newPath;
+  const selected=typeof window.noteFolder==='string'?window.noteFolder.trim():'';
+  if(!selected||selected==='All'||selected==='General')return toast('Select a custom folder first');
+  const folderExists=d.folders.some(f=>f===selected);
+  if(!folderExists)return toast('Selected folder not found');
+  const affected=d.notes.filter(n=>(n.folder||'General')===selected);
+  if(!confirm(`Delete only the selected folder "${selected}"? ${affected.length} item${affected.length===1?'':'s'} will be moved to General.`))return;
+  (async()=>{
+    try{
+      for(const n of affected.filter(x=>x.type==='pdf'&&x.storage_path)){
+        const parts=n.storage_path.split('/');
+        const fileName=parts[parts.length-1];
+        const newPath=`${parts[0]}/General/${fileName}`;
+        const {error}=await supabaseClient.storage.from('pdfs').move(n.storage_path,newPath);
+        if(error)throw error;
+        n.storage_path=newPath;
+      }
+      affected.forEach(n=>{if((n.folder||'General')===selected)n.folder='General'});
+      d.folders=d.folders.filter(f=>f!==selected);
+      window.noteFolder='All';
+      await save();
+      toast(`Folder "${selected}" deleted ✓`);
+      render();
+    }catch(e){
+      console.error('Folder delete error:',e);
+      toast('Could not delete selected folder: '+(e.message||'Storage error'));
     }
-    d.notes.forEach(n=>{if(n.folder===f)n.folder='General'});
-    d.folders=d.folders.filter(x=>x!==f);
-    window.noteFolder='All';
-    await save();
-    toast('Folder deleted • PDFs moved to General ✓');
-    render();
-  }catch(e){
-    console.error('Folder delete error:',e);
-    toast('Could not delete folder: '+(e.message||'Storage error'));
-  }
+  })();
 }
 function addTextNote(){let title=v('noteTitle'),text=v('noteText');if(!title||!text)return toast('Title and note are required');d.notes.push({id:id(),type:'text',title,subject:v('noteSubject'),text,folder:v('noteFolder')||'General',date:todayLocal()});save();toast('Note saved');render()}
 function editNote(id){let n=d.notes.find(x=>x.id===id);if(!n)return;let t=prompt('Title:',n.title);if(t===null)return;let tx=prompt('Note:',n.text||'');if(tx===null)return;n.title=t.trim()||n.title;n.text=tx;save();toast('Note updated');render()}
@@ -215,6 +233,79 @@ async function deleteNote(noteId){
   }catch(e){console.error("PDF delete error:",e);toast("Could not delete PDF: "+(e.message||"Storage error"));}
 }
 go('home');
+
+function workout(a){a.innerHTML=`<div class="hero"><div><div class="eyebrow">Health break</div><h1>Workout</h1><p>Keep movement simple and consistent.</p></div></div><div class="card"><div class="row"><input class="input" id="wTitle" placeholder="Workout / walk"><input class="input" id="wMin" type="number" min="1" placeholder="Minutes"><button class="primary" onclick="addWorkout()">Add</button></div></div><div class="card"><h2>History</h2>${d.workouts.slice().reverse().map(w=>`<div class="item"><div class="item-row"><div class="item-main"><b>${esc(w.title)}</b><div class="item-sub">${w.date} • ${w.minutes} min</div></div><div class="actions"><button class="secondary" onclick="editWorkout('${w.id}')">Edit</button><button class="danger" onclick="delWorkout('${w.id}')">Delete</button></div></div></div>`).join('')||'<div class="empty">No workouts yet.</div>'}</div>`}
+function addWorkout(){let title=v('wTitle'),min=+v('wMin');if(!title||!min)return toast('Workout and minutes required');d.workouts.push({id:id(),title,minutes:min,date:todayLocal()});save();toast('Workout added');render()}
+function editWorkout(id){let x=d.workouts.find(w=>w.id===id);if(!x)return;let t=prompt('Workout:',x.title);if(t===null)return;let m=prompt('Minutes:',x.minutes);if(m===null)return;x.title=t.trim()||x.title;x.minutes=+m||x.minutes;save();render()}
+function delWorkout(id){if(!confirm('Delete workout?'))return;d.workouts=d.workouts.filter(x=>x.id!==id);save();render()}
+function goals(a){a.innerHTML=`<div class="hero"><div><div class="eyebrow">Long-term direction</div><h1>Goals</h1><p>Track outcomes beyond today’s individual targets.</p></div></div><div class="card"><div class="row"><input class="input" id="gTitle" placeholder="Goal e.g. Finish Physics backlog"><input class="input" id="gDate" type="date" value="${todayLocal()}"><select class="select" id="gCat"><option>JEE</option><option>Study</option><option>Personal</option><option>Other</option></select></div><div class="row"><input class="input" id="gProgress" type="number" min="0" max="100" value="0" placeholder="Progress %"><input class="input" id="gNote" placeholder="Optional milestone / note"><button class="primary" onclick="addGoal()">Add Goal</button></div></div><div class="card"><h2>My Goals</h2>${d.goals.slice().sort((a,b)=>a.date.localeCompare(b.date)).map(g=>{let done=isDone('g-',g.id),p=done?100:(+g.progress||0);return `<div class="item"><div class="item-row"><button class="check ${done?'on':''}" onclick="toggleGoal('${g.id}')">${done?'✓':''}</button><div class="item-main"><div class="item-title ${done?'done':''}">${esc(g.title)} <span class="tag purple">${esc(g.cat)}</span></div><div class="item-sub">Due ${g.date} • ${p}%${g.note?' • '+esc(g.note):''}</div><div class="progress" style="height:7px;background:#14263d;margin:8px 0 0"><div style="height:100%;width:${p}%;background:#965cff;border-radius:9px"></div></div></div><div class="actions"><button class="secondary" onclick="editGoal('${g.id}')">Edit</button><button class="danger" onclick="delGoal('${g.id}')">Delete</button></div></div></div>`}).join('')||'<div class="empty">No goals yet.</div>'}</div>`}
+function addGoal(){let title=v('gTitle'),date=v('gDate');if(!title||!date)return toast('Goal and date required');d.goals.push({id:id(),title,date,cat:v('gCat'),progress:Math.max(0,Math.min(100,+v('gProgress')||0)),note:v('gNote')});save();toast('Goal added');render()}
+function toggleGoal(id){let g=d.goals.find(x=>x.id===id);if(!g)return;let done=!isDone('g-',id);setDone('g-',id,done);if(done)g.progress=100;save();toast(done?'Goal completed ✓':'Goal reopened');render()}
+function editGoal(id){let g=d.goals.find(x=>x.id===id);if(!g)return;let t=prompt('Goal:',g.title);if(t===null)return;let date=prompt('Due date:',g.date);if(date===null)return;let p=prompt('Progress %:',g.progress||0);if(p===null)return;g.title=t.trim()||g.title;g.date=date.trim()||g.date;g.progress=Math.max(0,Math.min(100,+p||0));if(g.progress>=100)setDone('g-',id,true);save();render()}
+function delGoal(id){if(!confirm('Delete goal?'))return;d.goals=d.goals.filter(x=>x.id!==id);delete d.done['g-'+id];save();render()}
+function settings(a){a.innerHTML=`<div class="hero"><div><div class="eyebrow">Control center</div><h1>Settings</h1><p>Keep your study system safe and portable.</p></div></div><div class="layout2"><div class="card"><h2>Data</h2><p class="muted">Export a backup before moving to another computer. Importing replaces current planner data.</p><div class="actions"><button class="primary" onclick="exportData()">Export Backup</button><button class="secondary" onclick="document.getElementById('importFile').click()">Import Backup</button><input id="importFile" type="file" accept="application/json" style="display:none" onchange="importData(this.files[0])"></div><hr style="border-color:#1b2d45;margin:20px 0"><button class="danger" onclick="resetData()">Reset All App Data</button><button class="danger" onclick="logout()">🚪 Logout</button></div><div class="card"><h2>Profile & preferences</h2><div class="field"><label>Your name</label><div class="row"><input class="input" id="profileName" value="${esc(d.settings.name)}" placeholder="Your name"><button class="primary" onclick="saveProfileName()">Save Name</button></div></div><div class="field"><label>Default focus minutes</label><input class="input" type="number" min="1" max="180" value="${d.settings.focus}" onchange="d.settings.focus=Math.max(1,Math.min(180,+this.value||25));save();toast('Saved')"></div><div class="field"><label>Tip</label><div class="empty">Use Planner for the day, Targets for individual tasks, and Goals for longer outcomes.</div></div></div></div>`}
+function saveProfileName(){let n=v('profileName');if(!n)return toast('Enter your name');d.settings.name=n.slice(0,40);save();toast('Name saved');render()}
+async function logout(){
+  const ok = confirm("Are you sure you want to logout?");
+  if(!ok) return;
+
+  const { error } = await supabaseClient.auth.signOut();
+
+  if(error){
+    console.error("Logout error:", error);
+    toast("Logout failed");
+    return;
+  }
+
+  location.reload();
+}
+function exportData(){let blob=new Blob([JSON.stringify(d,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Student-Life-backup.json';a.click();URL.revokeObjectURL(a.href);toast('Backup exported')}
+function importData(file){if(!file)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.targets||!x.classes)return toast('Invalid backup');localStorage.setItem(KEY,JSON.stringify(x));d=load();toast('Backup imported');go('home')}catch(e){toast('Could not import backup')}};r.readAsText(file)}
+function resetData(){if(!confirm('This will permanently delete app data. Continue?'))return;localStorage.removeItem(KEY);d=load();toast('Data reset');go('home')}
+function searchAll(q){q=q.trim().toLowerCase();let box=document.getElementById('searchResults');if(!q){box.innerHTML='';return}let r=[];d.targets.forEach(x=>{if((x.title+' '+x.subject).toLowerCase().includes(q))r.push({p:'study',t:'Target: '+x.title,s:x.subject})});d.classes.forEach(x=>{if((x.subject+' '+x.name).toLowerCase().includes(q))r.push({p:'classes',t:'Class: '+x.subject,s:x.name})});d.goals.forEach(x=>{if((x.title+' '+x.note).toLowerCase().includes(q))r.push({p:'challenge',t:'Goal: '+x.title,s:x.note})});d.notes.forEach(x=>{if((x.title+' '+x.subject+' '+x.text+' '+x.file).toLowerCase().includes(q))r.push({p:'notes',t:'Note: '+x.title,s:x.subject||x.file})});box.innerHTML=`<div class="search-results">${r.slice(0,8).map(x=>`<div class="search-result" onclick="go('${x.p}');document.getElementById('globalSearch').value='';document.getElementById('searchResults').innerHTML=''">${esc(x.t)}<small style="display:block;color:#7f93ae">${esc(x.s||'')}</small></div>`).join('')||'<div class="search-result">No matches</div>'}</div>`}
+function v(id){return (document.getElementById(id)?.value||'').trim()} function checked(prefix){return days().map((_,i)=>document.getElementById(prefix+i)?.checked?i:null).filter(x=>x!==null)}
+async function getCurrentUser(){
+  try{
+    const {data,error}=await supabaseClient.auth.getSession();
+    if(error)throw error;
+    return data?.session?.user||null;
+  }catch(e){console.error("Auth session error:",e);return null;}
+}
+function safeFileName(name){return String(name||"file.pdf").replace(/[^\w.\-() ]+/g,"_").replace(/\s+/g," ").slice(0,120)||"file.pdf";}
+async function uploadPDF(file){
+  if(!file)return;
+  if(file.type!=="application/pdf")return toast("Please select a PDF");
+  if(file.size>20*1024*1024)return toast("PDF limit is 20 MB");
+  const user=await getCurrentUser();if(!user)return toast("Please login first");
+  const fileName=safeFileName(file.name),storagePath=`${user.id}/${id()}-${fileName}`;
+  toast("Uploading PDF...");
+  try{
+    const {error}=await supabaseClient.storage.from("pdfs").upload(storagePath,file,{cacheControl:"3600",upsert:false,contentType:"application/pdf"});
+    if(error)throw error;
+    const folder=(typeof window.noteFolder==='string'&&window.noteFolder!=="All"&&window.noteFolder.trim())?window.noteFolder.trim():"General";
+    d.notes.push({id:id(),type:"pdf",title:file.name,subject:"",file:file.name,storage_path:storagePath,folder,date:todayLocal()});
+    await save();toast("PDF uploaded to cloud ✓");render();
+  }catch(e){console.error("PDF upload error:",e);toast("PDF upload failed: "+(e.message||"Check Storage bucket/policies"));}
+}
+async function openPDF(noteId){
+  const n=d.notes.find(x=>x.id===noteId);if(!n)return;
+  const user=await getCurrentUser();if(!user)return toast("Please login first");
+  if(!n.storage_path)return toast("This PDF is from the old local storage. Upload it again to sync it.");
+  try{
+    const {data,error}=await supabaseClient.storage.from("pdfs").createSignedUrl(n.storage_path,600);
+    if(error)throw error;if(!data?.signedUrl)return toast("Could not create PDF link");
+    const w=window.open(data.signedUrl,"_blank");if(!w)toast("Popup blocked. Allow popups for this site.");
+  }catch(e){console.error("PDF open error:",e);toast("Could not open PDF: "+(e.message||"Storage error"));}
+}
+async function deleteNote(noteId){
+  if(!confirm("Delete this note?"))return;
+  const n=d.notes.find(x=>x.id===noteId);if(!n)return;
+  try{
+    if(n.type==="pdf"&&n.storage_path){const {error}=await supabaseClient.storage.from("pdfs").remove([n.storage_path]);if(error)throw error;}
+    d.notes=d.notes.filter(x=>x.id!==noteId);await save();toast("Deleted");render();
+  }catch(e){console.error("PDF delete error:",e);toast("Could not delete PDF: "+(e.message||"Storage error"));}
+}
+go('home');
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -239,7 +330,7 @@ background:#07111f;color:white;font-family:Arial,sans-serif;">
   background:#101d35;border-radius:22px;
   box-shadow:0 20px 60px #0008;">
     
-    <h2 style="margin-top:0">🎓 Student Life</h2>
+    <h2 style="margin-top:0">🎓 Hello Chitranshu</h2>
     <p style="color:#aebbd0">Login to sync your study data</p>
 
     <input id="loginEmail" type="email"
@@ -368,27 +459,15 @@ async function loadStudyDataFromSupabase(){
 }
 
 async function checkStudentLogin(){
-  try{
-    const {data,error}=await supabaseClient.auth.getSession();
-    if(error) throw error;
-    if(data?.session){
-      document.getElementById("loginBox").style.display="none";
-      await loadStudyDataFromSupabase();
-      go("home");
-    }else{
-      document.getElementById("loginBox").style.display="flex";
-      go("home");
-    }
-  }catch(error){
-    console.error("Startup error:",error);
-    document.getElementById("loginBox").style.display="flex";
-    go("home");
+  const {data}=await supabaseClient.auth.getSession();
+
+  if(data.session){
+    document.getElementById("loginBox").style.display="none";
+    await loadStudyDataFromSupabase();
   }
 }
 
-if("serviceWorker" in navigator){
-  window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
-}
 checkStudentLogin();
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}
 </script>
 </body></html>
