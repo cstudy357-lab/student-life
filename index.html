@@ -244,16 +244,24 @@ async function openPDF(id){
 }
 
 async function deleteNote(id){
-  if(!confirm("Delete this note?"))return;
-
-  const index=d.notes.findIndex(x=>x.id===id);
+  // Strict single-item deletion: only the exact clicked note/PDF ID may be removed.
+  const index=d.notes.findIndex(x=>String(x.id)===String(id));
   if(index===-1)return toast("Item not found");
 
   const n=d.notes[index];
+  const isPDF=n.type==="pdf";
+  const label=n.title||n.file||"this item";
+
+  if(!confirm(`Delete only this ${isPDF?"PDF":"note"}?\n\n${label}\n\nNo other files will be deleted.`))return;
 
   try{
-    // Delete ONLY the clicked PDF's unique storage object.
-    if(n.type==="pdf" && n.storage_path){
+    // For PDFs, remove ONLY this PDF's exact unique storage object.
+    // Never list/remove the bucket, folder, or other files.
+    if(isPDF){
+      if(!n.storage_path){
+        return toast("This PDF has no storage path, so nothing was deleted.");
+      }
+
       const {error}=await supabaseClient.storage
         .from("pdfs")
         .remove([n.storage_path]);
@@ -261,15 +269,17 @@ async function deleteNote(id){
       if(error)throw error;
     }
 
-    // Delete ONLY the clicked note from the data array.
-    d.notes.splice(index,1);
+    // Remove ONLY the exact selected record, and only after storage deletion succeeds.
+    const verifyIndex=d.notes.findIndex(x=>String(x.id)===String(id));
+    if(verifyIndex===-1)return toast("Item no longer exists");
+    d.notes.splice(verifyIndex,1);
 
     await save();
-    toast("Deleted");
+    toast(`${isPDF?"PDF":"Note"} deleted successfully`);
     render();
   }catch(e){
-    console.error("PDF delete error:",e);
-    toast("Could not delete PDF: "+(e.message||"Storage error"));
+    console.error("Single-item delete error:",e);
+    toast(`Could not delete ${isPDF?"PDF":"note"}: `+(e.message||"Storage error"));
   }
 }
 initDB().catch(()=>{}).finally(()=>go('home'));
