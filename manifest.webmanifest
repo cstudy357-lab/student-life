@@ -1,39 +1,9 @@
 {
-  "name": "Student Life",
-  "short_name": "Student Life",
+  "name": "Mission Discipline",
+  "short_name": "Mission Discipline",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#f5f7fb",
-  "theme_color": "#4f46e5",
-  "description": "Student study planner, targets, schedule, notes, challenges and focus app.",
-  "icons": [
-    {
-      "src": "icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Targets",
-      "short_name": "Targets",
-      "url": "./#targets"
-    },
-    {
-      "name": "Schedule",
-      "short_name": "Schedule",
-      "url": "./#schedule"
-    },
-    {
-      "name": "Notes",
-      "short_name": "Notes",
-      "url": "./#notes"
-    },
-    {
-      "name": "Challenges",
-      "short_name": "Challenges",
-      "url": "./#challenge"
-    }
-  ]
+  "background_color": "#06101d",
+  "theme_color": "#07111f",
+  "description": "Mission Discipline — focus, plan and achieve."
 }
