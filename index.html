@@ -114,7 +114,7 @@ function startTimer(){if(timerRunning)return;if(!timerLeft)timerLeft=d.settings.
 function pauseTimer(){timerRunning=false;clearInterval(timer);timer=null;render()}
 function resetTimer(){timerRunning=false;clearInterval(timer);timer=null;timerLeft=d.settings.focus*60;render()}
 function finishTimer(){clearInterval(timer);timer=null;timerRunning=false;let mins=d.settings.focus,sub=document.getElementById('focusSubject')?.value||'Focus';d.sessions.push({id:id(),date:todayLocal(),minutes:mins,subject:sub});save();timerLeft=0;toast('🎉 Focus session complete');render()}
-function notes(a){let q=(window.noteQ||'').toLowerCase(),folder=window.noteFolder||'All';let ns=d.notes.filter(n=>(folder==='All'||n.folder===folder)&&(!q||[n.title,n.subject,n.text,n.file].join(' ').toLowerCase().includes(q)));a.innerHTML=`<div class="hero"><div><div class="eyebrow">Knowledge base</div><h1>Notes & PDFs</h1><p>Keep chapter notes, revision sheets and PDFs organised.</p></div><button class="primary" onclick="document.getElementById('pdfFile').click()">＋ Add PDF</button></div><div class="card"><div class="row"><input class="input" placeholder="Search notes…" value="${esc(q)}" oninput="window.noteQ=this.value;render()"><select class="select" onchange="window.noteFolder=this.value;render()"><option>All</option>${d.folders.map(f=>`<option ${folder===f?'selected':''}>${esc(f)}</option>`).join('')}</select></div><div class="row"><input class="input" id="folderInput" placeholder="New folder"><button class="secondary" onclick="addFolder()">＋ Folder</button><button class="danger" onclick="deleteFolder()">Delete Folder</button></div><div class="row"><input class="input" id="noteTitle" placeholder="Text note title"><input class="input" id="noteSubject" placeholder="Subject"><select class="select" id="noteFolder">${d.folders.map(f=>`<option>${esc(f)}</option>`).join('')}</select></div><textarea class="textarea" id="noteText" placeholder="Write quick revision notes here…"></textarea><div class="actions"><button class="primary" onclick="addTextNote()">Save Note</button><input id="pdfFile" type="file" accept="application/pdf" style="display:none" onchange="uploadPDF(this.files[0])"><button class="secondary" onclick="document.getElementById('pdfFile').click()">Upload PDF</button></div></div><div class="card"><h2>${folder==='All'?'All Notes':esc(folder)}</h2>${ns.map(n=>`<div class="item"><div class="item-row"><div class="item-main"><div class="item-title">${esc(n.title)} <span class="tag">${esc(n.subject||'General')}</span> <span class="tag orange">${n.type==='pdf'?'PDF':'Note'}</span></div><div class="item-sub">${esc(n.file||'Text note')} • ${n.date} • 📁 ${esc(n.folder)}</div>${n.text?`<div class="item-sub">${esc(n.text).slice(0,180)}</div>`:''}</div><div class="actions">${n.type==='pdf'?`<button class="secondary" onclick="openPDF('${n.id}')">Open</button>`:'<button class="secondary" onclick="editNote(\''+n.id+'\')">Edit</button>'}<button class="secondary" onclick="moveNote('${n.id}')">Move</button><button class="danger" onclick="deleteNote('${n.id}')">Delete</button></div></div></div>`).join('')||'<div class="empty">No notes here.</div>'}</div>`}
+function notes(a){let q=(window.noteQ||'').toLowerCase(),folder=window.noteFolder||'All';let ns=d.notes.filter(n=>(folder==='All'||n.folder===folder)&&(!q||[n.title,n.subject,n.text,n.file].join(' ').toLowerCase().includes(q)));a.innerHTML=`<div class="hero"><div><div class="eyebrow">Knowledge base</div><h1>Notes & PDFs</h1><p>Keep chapter notes, revision sheets and PDFs organised. PDFs sync to Supabase Storage.</p></div><button class="primary" onclick="document.getElementById('pdfFile').click()">＋ Add PDF</button></div><div class="card"><div class="row"><input class="input" placeholder="Search notes…" value="${esc(q)}" oninput="window.noteQ=this.value;render()"><select class="select" onchange="window.noteFolder=this.value;render()"><option>All</option>${d.folders.map(f=>`<option ${folder===f?'selected':''}>${esc(f)}</option>`).join('')}</select></div><div class="row"><input class="input" id="folderInput" placeholder="New folder"><button class="secondary" onclick="addFolder()">＋ Folder</button><button class="danger" onclick="deleteFolder()">Delete Folder</button></div><div class="row"><input class="input" id="noteTitle" placeholder="Text note title"><input class="input" id="noteSubject" placeholder="Subject"><select class="select" id="noteFolder">${d.folders.map(f=>`<option>${esc(f)}</option>`).join('')}</select></div><textarea class="textarea" id="noteText" placeholder="Write quick revision notes here…"></textarea><div class="actions"><button class="primary" onclick="addTextNote()">Save Note</button><input id="pdfFile" type="file" accept="application/pdf" style="display:none" onchange="uploadPDF(this.files[0])"><button class="secondary" onclick="document.getElementById('pdfFile').click()">Upload PDF</button></div></div><div class="card"><h2>${folder==='All'?'All Notes':esc(folder)}</h2>${ns.map(n=>`<div class="item"><div class="item-row"><div class="item-main"><div class="item-title">${esc(n.title)} <span class="tag">${esc(n.subject||'General')}</span> <span class="tag orange">${n.type==='pdf'?'PDF':'Note'}</span></div><div class="item-sub">${esc(n.file||'Text note')} • ${n.date} • 📁 ${esc(n.folder)}</div>${n.text?`<div class="item-sub">${esc(n.text).slice(0,180)}</div>`:''}</div><div class="actions">${n.type==='pdf'?`<button class="secondary" onclick="openPDF('${n.id}')">Open</button>`:'<button class="secondary" onclick="editNote(\''+n.id+'\')">Edit</button>'}<button class="secondary" onclick="moveNote('${n.id}')">Move</button><button class="danger" onclick="deleteNote('${n.id}')">Delete</button></div></div></div>`).join('')||'<div class="empty">No notes here.</div>'}</div>`}
 function addFolder(){let n=v('folderInput').trim();if(!n)return;if(d.folders.some(x=>x.toLowerCase()===n.toLowerCase()))return toast('Folder already exists');d.folders.push(n);save();window.noteFolder=n;toast('Folder created');render()}
 function deleteFolder(){let f=window.noteFolder||'All';if(f==='All'||f==='General')return toast('General folder cannot be deleted');if(!confirm('Delete folder and keep notes in General?'))return;d.notes.forEach(n=>{if(n.folder===f)n.folder='General'});d.folders=d.folders.filter(x=>x!==f);window.noteFolder='All';save();toast('Folder deleted');render()}
 function addTextNote(){let title=v('noteTitle'),text=v('noteText');if(!title||!text)return toast('Title and note are required');d.notes.push({id:id(),type:'text',title,subject:v('noteSubject'),text,folder:v('noteFolder')||'General',date:todayLocal()});save();toast('Note saved');render()}
@@ -154,8 +154,93 @@ function importData(file){if(!file)return;let r=new FileReader();r.onload=()=>{t
 function resetData(){if(!confirm('This will permanently delete app data. Continue?'))return;localStorage.removeItem(KEY);d=load();toast('Data reset');go('home')}
 function searchAll(q){q=q.trim().toLowerCase();let box=document.getElementById('searchResults');if(!q){box.innerHTML='';return}let r=[];d.targets.forEach(x=>{if((x.title+' '+x.subject).toLowerCase().includes(q))r.push({p:'study',t:'Target: '+x.title,s:x.subject})});d.classes.forEach(x=>{if((x.subject+' '+x.name).toLowerCase().includes(q))r.push({p:'classes',t:'Class: '+x.subject,s:x.name})});d.goals.forEach(x=>{if((x.title+' '+x.note).toLowerCase().includes(q))r.push({p:'challenge',t:'Goal: '+x.title,s:x.note})});d.notes.forEach(x=>{if((x.title+' '+x.subject+' '+x.text+' '+x.file).toLowerCase().includes(q))r.push({p:'notes',t:'Note: '+x.title,s:x.subject||x.file})});box.innerHTML=`<div class="search-results">${r.slice(0,8).map(x=>`<div class="search-result" onclick="go('${x.p}');document.getElementById('globalSearch').value='';document.getElementById('searchResults').innerHTML=''">${esc(x.t)}<small style="display:block;color:#7f93ae">${esc(x.s||'')}</small></div>`).join('')||'<div class="search-result">No matches</div>'}</div>`}
 function v(id){return (document.getElementById(id)?.value||'').trim()} function checked(prefix){return days().map((_,i)=>document.getElementById(prefix+i)?.checked?i:null).filter(x=>x!==null)}
-function initDB(){return new Promise((res,rej)=>{let r=indexedDB.open('StudentLifeFiles',1);r.onupgradeneeded=()=>r.result.createObjectStore('pdfs',{keyPath:'name'});r.onsuccess=()=>{pdfDB=r.result;res()};r.onerror=()=>rej(r.error)})}
-function dbPut(name,data){return new Promise((res,rej)=>{let tx=pdfDB.transaction('pdfs','readwrite');tx.objectStore('pdfs').put({name,data});tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}function dbGet(name){return new Promise((res,rej)=>{let tx=pdfDB.transaction('pdfs');let r=tx.objectStore('pdfs').get(name);r.onsuccess=()=>res(r.result?.data);r.onerror=()=>rej(r.error)})}function dbDelete(name){return new Promise((res,rej)=>{let tx=pdfDB.transaction('pdfs','readwrite');tx.objectStore('pdfs').delete(name);tx.oncomplete=res;tx.onerror=()=>rej(tx.error)})}
+async function getCurrentUser(){
+  try{
+    const {data,error}=await supabaseClient.auth.getSession();
+    if(error) throw error;
+    return data?.session?.user || null;
+  }catch(e){
+    console.error("Auth session error:",e);
+    return null;
+  }
+}
+
+function safeFileName(name){
+  return String(name||"file.pdf").replace(/[^\w.\-() ]+/g,"_").replace(/\s+/g," ").slice(0,120) || "file.pdf";
+}
+
+async function uploadPDF(file){
+  if(!file)return;
+  if(file.type!=="application/pdf")return toast("Please select a PDF");
+  if(file.size>20*1024*1024)return toast("PDF limit is 20 MB");
+
+  const user=await getCurrentUser();
+  if(!user)return toast("Please login first");
+
+  const fileName=safeFileName(file.name);
+  const storagePath=`${user.id}/${id()}-${fileName}`;
+  toast("Uploading PDF...");
+
+  try{
+    const {error}=await supabaseClient.storage.from("pdfs").upload(storagePath,file,{
+      cacheControl:"3600",upsert:false,contentType:"application/pdf"
+    });
+    if(error)throw error;
+
+    d.notes.push({
+      id:id(),type:"pdf",title:file.name,subject:"",file:file.name,
+      storage_path:storagePath,
+      folder:window.noteFolder&&window.noteFolder!=="All"?window.noteFolder:"General",
+      date:todayLocal()
+    });
+
+    await save();
+    toast("PDF uploaded to cloud ✓");
+    render();
+  }catch(e){
+    console.error("PDF upload error:",e);
+    toast("PDF upload failed: "+(e.message||"Check Storage bucket/policies"));
+  }
+}
+
+async function openPDF(id){
+  const n=d.notes.find(x=>x.id===id);
+  if(!n)return;
+  const user=await getCurrentUser();
+  if(!user)return toast("Please login first");
+  if(!n.storage_path)return toast("This PDF is local-only. Please upload it again.");
+
+  try{
+    const {data,error}=await supabaseClient.storage.from("pdfs").createSignedUrl(n.storage_path,600);
+    if(error)throw error;
+    if(!data?.signedUrl)return toast("Could not create PDF link");
+    const w=window.open(data.signedUrl,"_blank");
+    if(!w)toast("Popup blocked. Allow popups for this site.");
+  }catch(e){
+    console.error("PDF open error:",e);
+    toast("Could not open PDF: "+(e.message||"Storage error"));
+  }
+}
+
+async function deleteNote(id){
+  if(!confirm("Delete this note?"))return;
+  const n=d.notes.find(x=>x.id===id);
+  if(!n)return;
+
+  try{
+    if(n.type==="pdf" && n.storage_path){
+      const {error}=await supabaseClient.storage.from("pdfs").remove([n.storage_path]);
+      if(error)throw error;
+    }
+    d.notes=d.notes.filter(x=>x.id!==id);
+    await save();
+    toast("Deleted");
+    render();
+  }catch(e){
+    console.error("PDF delete error:",e);
+    toast("Could not delete PDF: "+(e.message||"Storage error"));
+  }
+}
 initDB().catch(()=>{}).finally(()=>go('home'));
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -268,6 +353,7 @@ async function studentSignup(){
   if(data.session){
     msg.textContent="✅ Account created";
     document.getElementById("loginBox").style.display="none";
+    await loadStudyDataFromSupabase();
   }else{
     msg.textContent="✅ Account created. Email confirmation check करें.";
   }
@@ -313,6 +399,7 @@ async function checkStudentLogin(){
 
   if(data.session){
     document.getElementById("loginBox").style.display="none";
+    await loadStudyDataFromSupabase();
   }
 }
 
