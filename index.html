@@ -22,7 +22,7 @@
 const KEY='studentLifeShareV1';
 const defaultData={targets:[],classes:[],routine:[],goals:[],workouts:[],notes:[],folders:['General'],done:{},settings:{focus:25,theme:'dark',name:'Student'},sessions:[],plans:{}};
 let d=load(); let current='home', plannerDate=todayLocal(), timer=null, timerLeft=0, timerRunning=false, pdfDB=null;
-function load(){try{let raw=localStorage.getItem(KEY);if(!raw){let legacy=JSON.parse(localStorage.getItem('studyLifeV3')||'null');if(legacy){let migrated=structuredClone(defaultData);migrated.targets=(legacy.study||[]).map((t,i)=>({id:t.id||'t-'+Date.now()+i,title:t.t||'Study task',subject:t.s||'Study',date:t.date||todayLocal(),time:t.time||'',minutes:+t.m||0,priority:'Normal'}));migrated.classes=legacy.classes||[];migrated.routine=legacy.routine||[];migrated.goals=(legacy.goals||[]).map((g,i)=>({id:g.id||'g-'+Date.now()+i,title:g.t||g.title||'Goal',date:g.date||todayLocal(),cat:g.p||g.cat||'Study',progress:g.progress||0,note:g.m||g.note||''}));migrated.workouts=legacy.workout||legacy.workouts||[];migrated.notes=legacy.notes||[];migrated.folders=legacy.noteFolders||['General'];migrated.done={};Object.keys(legacy.done||{}).forEach(k=>{if(k.startsWith('study-'))migrated.done['t-'+k.slice(6)]=legacy.done[k];else if(k.startsWith('goal-'))migrated.done['g-'+k.slice(5)]=legacy.done[k]});migrated.settings.focusMinutes=legacy.settings?.focusMinutes||25;raw=JSON.stringify(migrated);localStorage.setItem(KEY,raw)}}let x=JSON.parse(raw||'null')||structuredClone(defaultData);x=Object.assign(structuredClone(defaultData),x);x.targets=x.targets||x.study||[];x.classes=x.classes||[];x.routine=x.routine||[];x.goals=x.goals||[];x.workouts=x.workouts||x.workout||[];x.notes=x.notes||[];x.folders=x.folders||x.noteFolders||['General'];x.done=x.done||{};x.sessions=x.sessions||[];x.settings=Object.assign({},defaultData.settings,x.settings||{});x.settings.name=(x.settings.name||'Student').trim()||'Student';x.targets.forEach((t,i)=>{if(!t.id)t.id='t-'+Date.now()+i;t.start=t.start||t.time||'';t.end=t.end||((t.start&&t.minutes)?addMin(t.start,+t.minutes):'');t.time=t.start||t.time||''});x.classes.forEach((c,i)=>{if(!c.id)c.id='c-'+Date.now()+i;c.days=Array.isArray(c.days)?c.days:(c.day!=null?[+c.day]:[1,2,3,4,5]);c.start=c.start||c.time||'16:00';c.end=c.end||addMin(c.start,60)});x.routine.forEach((r,i)=>{if(!r.id)r.id='r-'+Date.now()+i;r.days=Array.isArray(r.days)?r.days:[0,1,2,3,4,5,6];r.start=r.start||r.time||'06:00';r.end=r.end||addMin(r.start,60)});x.notes.forEach(n=>{n.folder=n.folder||'General';if(!n.id)n.id='n-'+Date.now()+Math.random()});return x}catch(e){return structuredClone(defaultData)}}
+function load(){try{let raw=localStorage.getItem(KEY);if(!raw){let legacy=JSON.parse(localStorage.getItem('studyLifeV3')||'null');if(legacy){let migrated=structuredClone(defaultData);migrated.targets=(legacy.study||[]).map((t,i)=>({id:t.id||'t-'+Date.now()+i,title:t.t||'Study task',subject:t.s||'Study',date:t.date||todayLocal(),time:t.time||'',minutes:+t.m||0,priority:'Normal'}));migrated.classes=legacy.classes||[];migrated.routine=legacy.routine||[];migrated.goals=(legacy.goals||[]).map((g,i)=>({id:g.id||'g-'+Date.now()+i,title:g.t||g.title||'Goal',date:g.date||todayLocal(),cat:g.p||g.cat||'Study',progress:g.progress||0,note:g.m||g.note||''}));migrated.workouts=legacy.workout||legacy.workouts||[];migrated.notes=legacy.notes||[];migrated.folders=legacy.noteFolders||['General'];migrated.done={};Object.keys(legacy.done||{}).forEach(k=>{if(k.startsWith('study-'))migrated.done['t-'+k.slice(6)]=legacy.done[k];else if(k.startsWith('goal-'))migrated.done['g-'+k.slice(5)]=legacy.done[k]});migrated.settings.focusMinutes=legacy.settings?.focusMinutes||25;raw=JSON.stringify(migrated);localStorage.setItem(KEY,raw)}}let x=JSON.parse(raw||'null')||structuredClone(defaultData);x=Object.assign(structuredClone(defaultData),x);x.targets=x.targets||x.study||[];x.classes=x.classes||[];x.routine=x.routine||[];x.goals=x.goals||[];x.workouts=x.workouts||x.workout||[];x.notes=x.notes||[];x.folders=x.folders||x.noteFolders||['General'];x.done=x.done||{};x.sessions=x.sessions||[];x.settings=Object.assign({},defaultData.settings,x.settings||{});x.settings.name=(x.settings.name||'Student').trim()||'Student';x.targets.forEach((t,i)=>{if(!t.id)t.id='t-'+Date.now()+i;t.start=t.start||t.time||'';t.end=t.end||((t.start&&t.minutes)?addMin(t.start,+t.minutes):'');t.time=t.start||t.time||''});x.classes.forEach((c,i)=>{if(!c.id)c.id='c-'+Date.now()+i;c.days=Array.isArray(c.days)?c.days:(c.day!=null?[+c.day]:[1,2,3,4,5]);c.start=c.start||c.time||'16:00';c.end=c.end||addMin(c.start,60)});x.routine.forEach((r,i)=>{if(!r.id)r.id='r-'+Date.now()+i;r.days=Array.isArray(r.days)?r.days:[0,1,2,3,4,5,6];r.start=r.start||r.time||'06:00';r.end=r.end||addMin(r.start,60)});x.folders=(Array.isArray(x.folders)?x.folders:[]).map(f=>typeof f==='string'?f:(f?.name||f?.title||'General')).filter(Boolean);if(!x.folders.some(f=>f.toLowerCase()==='general'))x.folders.unshift('General');x.folders=[...new Set(x.folders)];x.notes=(Array.isArray(x.notes)?x.notes:[]).map(n=>{n=n||{};if(typeof n.folder!=='string')n.folder=n.folder?.name||n.folder?.title||'General';if(typeof n.title!=='string')n.title=n.title?.name||n.title?.title||'Untitled';if(typeof n.subject!=='string')n.subject=n.subject?.name||n.subject?.title||'';if(typeof n.file!=='string'&&n.file!=null)n.file=n.file?.name||n.file?.title||'';if(!n.id)n.id='n-'+Date.now()+Math.random();return n});x.notes.forEach(n=>{n.folder=n.folder||'General'});return x}catch(e){return structuredClone(defaultData)}}
 async function save(){
 
   // Local storage me save
@@ -114,15 +114,11 @@ function startTimer(){if(timerRunning)return;if(!timerLeft)timerLeft=d.settings.
 function pauseTimer(){timerRunning=false;clearInterval(timer);timer=null;render()}
 function resetTimer(){timerRunning=false;clearInterval(timer);timer=null;timerLeft=d.settings.focus*60;render()}
 function finishTimer(){clearInterval(timer);timer=null;timerRunning=false;let mins=d.settings.focus,sub=document.getElementById('focusSubject')?.value||'Focus';d.sessions.push({id:id(),date:todayLocal(),minutes:mins,subject:sub});save();timerLeft=0;toast('🎉 Focus session complete');render()}
-function notes(a){let q=(window.noteQ||'').toLowerCase(),folder=window.noteFolder||'All';let ns=d.notes.filter(n=>(folder==='All'||n.folder===folder)&&(!q||[n.title,n.subject,n.text,n.file].join(' ').toLowerCase().includes(q)));a.innerHTML=`<div class="hero"><div><div class="eyebrow">Knowledge base</div><h1>Notes & PDFs</h1><p>Keep chapter notes, revision sheets and PDFs organised. PDFs sync to Supabase Storage.</p></div><button class="primary" onclick="document.getElementById('pdfFile').click()">＋ Add PDF</button></div><div class="card"><div class="row"><input class="input" placeholder="Search notes…" value="${esc(q)}" oninput="window.noteQ=this.value;render()"><select class="select" onchange="window.noteFolder=this.value;render()"><option>All</option>${d.folders.map(f=>`<option ${folder===f?'selected':''}>${esc(f)}</option>`).join('')}</select></div><div class="row"><input class="input" id="folderInput" placeholder="New folder"><button class="secondary" onclick="addFolder()">＋ Folder</button><button class="danger" onclick="deleteFolder()">Delete Folder</button></div><div class="row"><input class="input" id="noteTitle" placeholder="Text note title"><input class="input" id="noteSubject" placeholder="Subject"><select class="select" id="noteFolder">${d.folders.map(f=>`<option>${esc(f)}</option>`).join('')}</select></div><textarea class="textarea" id="noteText" placeholder="Write quick revision notes here…"></textarea><div class="actions"><button class="primary" onclick="addTextNote()">Save Note</button><input id="pdfFile" type="file" accept="application/pdf" style="display:none" onchange="uploadPDF(this.files[0])"><button class="secondary" onclick="document.getElementById('pdfFile').click()">Upload PDF</button></div></div><div class="card"><h2>${folder==='All'?'All Notes':esc(folder)}</h2>${ns.map(n=>`<div class="item"><div class="item-row"><div class="item-main"><div class="item-title">${esc(n.title)} <span class="tag">${esc(n.subject||'General')}</span> <span class="tag orange">${n.type==='pdf'?'PDF':'Note'}</span></div><div class="item-sub">${esc(n.file||'Text note')} • ${n.date} • 📁 ${esc(n.folder)}</div>${n.text?`<div class="item-sub">${esc(n.text).slice(0,180)}</div>`:''}</div><div class="actions">${n.type==='pdf'?`<button class="secondary" onclick="openPDF('${n.id}')">Open</button>`:'<button class="secondary" onclick="editNote(\''+n.id+'\')">Edit</button>'}<button class="secondary" onclick="moveNote('${n.id}')">Move</button><button class="danger" onclick="deleteNote('${n.id}')">Delete</button></div></div></div>`).join('')||'<div class="empty">No notes here.</div>'}</div>`}
+function notes(a){let q=(window.noteQ||'').toLowerCase(),folder=window.noteFolder||'All';let ns=d.notes.filter(n=>(folder==='All'||n.folder===folder)&&(!q||[n.title,n.subject,n.text,n.file].join(' ').toLowerCase().includes(q)));a.innerHTML=`<div class="hero"><div><div class="eyebrow">Knowledge base</div><h1>Notes & PDFs</h1><p>Keep chapter notes, revision sheets and PDFs organised. PDFs sync to Supabase Storage.</p></div><button class="primary" onclick="document.getElementById('pdfFile').click()">＋ Add PDF</button></div><div class="card"><div class="row"><input class="input" placeholder="Search notes…" value="${esc(q)}" oninput="window.noteQ=this.value;render()"><select class="select" onchange="window.noteFolder=this.value;render()"><option>All</option>${d.folders.map(f=>`<option ${folder===f?'selected':''}>${esc(f)}</option>`).join('')}</select></div><div class="row"><input class="input" id="folderInput" placeholder="New folder"><button class="secondary" onclick="addFolder()">＋ Folder</button><button class="danger" onclick="deleteFolder()">Delete Folder</button></div><div class="row"><input class="input" id="noteTitle" placeholder="Text note title"><input class="input" id="noteSubject" placeholder="Subject"><select class="select" id="noteFolder">${d.folders.map(f=>`<option>${esc(f)}</option>`).join('')}</select></div><textarea class="textarea" id="noteText" placeholder="Write quick revision notes here…"></textarea><div class="actions"><button class="primary" onclick="addTextNote()">Save Note</button><input id="pdfFile" type="file" accept="application/pdf" style="display:none" onchange="uploadPDF(this.files[0])"><button class="secondary" onclick="document.getElementById('pdfFile').click()">Upload PDF</button></div></div><div class="card"><h2>${folder==='All'?'All Notes':esc(folder)}</h2>${ns.map(n=>`<div class="item"><div class="item-row"><div class="item-main"><div class="item-title">${esc(n.title)} <span class="tag">${esc(typeof n.subject==='string'&&n.subject?n.subject:'General')}</span> <span class="tag orange">${n.type==='pdf'?'PDF':'Note'}</span></div><div class="item-sub">${esc(typeof n.file==='string'&&n.file?n.file:'Text note')} • ${n.date} • 📁 ${esc(typeof n.folder==='string'?n.folder:'General')}</div>${n.text?`<div class="item-sub">${esc(n.text).slice(0,180)}</div>`:''}</div><div class="actions">${n.type==='pdf'?`<button class="secondary" onclick="openPDF('${n.id}')">Open</button>`:'<button class="secondary" onclick="editNote(\''+n.id+'\')">Edit</button>'}<button class="secondary" onclick="moveNote('${n.id}')">Move</button><button class="danger" onclick="deleteNote('${n.id}')">Delete</button></div></div></div>`).join('')||'<div class="empty">No notes here.</div>'}</div>`}
 function addFolder(){let n=v('folderInput').trim();if(!n)return;if(d.folders.some(x=>x.toLowerCase()===n.toLowerCase()))return toast('Folder already exists');d.folders.push(n);save();window.noteFolder=n;toast('Folder created');render()}
 function deleteFolder(){let f=window.noteFolder||'All';if(f==='All'||f==='General')return toast('General folder cannot be deleted');if(!confirm('Delete folder and keep notes in General?'))return;d.notes.forEach(n=>{if(n.folder===f)n.folder='General'});d.folders=d.folders.filter(x=>x!==f);window.noteFolder='All';save();toast('Folder deleted');render()}
 function addTextNote(){let title=v('noteTitle'),text=v('noteText');if(!title||!text)return toast('Title and note are required');d.notes.push({id:id(),type:'text',title,subject:v('noteSubject'),text,folder:v('noteFolder')||'General',date:todayLocal()});save();toast('Note saved');render()}
 function editNote(id){let n=d.notes.find(x=>x.id===id);if(!n)return;let t=prompt('Title:',n.title);if(t===null)return;let tx=prompt('Note:',n.text||'');if(tx===null)return;n.title=t.trim()||n.title;n.text=tx;save();toast('Note updated');render()}
-async function legacyUploadPDF(file){return toast("Please use the current PDF uploader.");}
-function fileToData(file){return new Promise((res,rej)=>{let r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsArrayBuffer(file)})}
-async function legacyOpenPDF(id){return toast("This PDF uses the older storage format. Please re-upload it.");}
-async function legacyDeleteNote(id){return toast("Please use the current PDF delete action.");}
 function moveNote(id){let n=d.notes.find(x=>x.id===id);if(!n)return;let f=prompt('Folder:',n.folder);if(f===null)return;if(!d.folders.includes(f.trim()))return toast('Folder not found');n.folder=f.trim();save();render()}
 function workout(a){a.innerHTML=`<div class="hero"><div><div class="eyebrow">Health break</div><h1>Workout</h1><p>Keep movement simple and consistent.</p></div></div><div class="card"><div class="row"><input class="input" id="wTitle" placeholder="Workout / walk"><input class="input" id="wMin" type="number" min="1" placeholder="Minutes"><button class="primary" onclick="addWorkout()">Add</button></div></div><div class="card"><h2>History</h2>${d.workouts.slice().reverse().map(w=>`<div class="item"><div class="item-row"><div class="item-main"><b>${esc(w.title)}</b><div class="item-sub">${w.date} • ${w.minutes} min</div></div><div class="actions"><button class="secondary" onclick="editWorkout('${w.id}')">Edit</button><button class="danger" onclick="delWorkout('${w.id}')">Delete</button></div></div></div>`).join('')||'<div class="empty">No workouts yet.</div>'}</div>`}
 function addWorkout(){let title=v('wTitle'),min=+v('wMin');if(!title||!min)return toast('Workout and minutes required');d.workouts.push({id:id(),title,minutes:min,date:todayLocal()});save();toast('Workout added');render()}
@@ -157,132 +153,45 @@ function v(id){return (document.getElementById(id)?.value||'').trim()} function 
 async function getCurrentUser(){
   try{
     const {data,error}=await supabaseClient.auth.getSession();
-    if(error) throw error;
-    return data?.session?.user || null;
-  }catch(e){
-    console.error("Auth session error:",e);
-    return null;
-  }
+    if(error)throw error;
+    return data?.session?.user||null;
+  }catch(e){console.error("Auth session error:",e);return null;}
 }
-
-function safeFileName(name){
-  return String(name||"file.pdf").replace(/[^\w.\-() ]+/g,"_").replace(/\s+/g," ").slice(0,120) || "file.pdf";
-}
-
+function safeFileName(name){return String(name||"file.pdf").replace(/[^\w.\-() ]+/g,"_").replace(/\s+/g," ").slice(0,120)||"file.pdf";}
 async function uploadPDF(file){
   if(!file)return;
   if(file.type!=="application/pdf")return toast("Please select a PDF");
   if(file.size>20*1024*1024)return toast("PDF limit is 20 MB");
-
-  const user=await getCurrentUser();
-  if(!user)return toast("Please login first");
-
-  // One unique ID belongs to one PDF for its entire lifetime.
-  const noteId=id();
-  const fileName=safeFileName(file.name);
-  const storagePath=`${user.id}/pdfs/${noteId}-${fileName}`;
-  const folder=window.noteFolder&&window.noteFolder!=="All"
-    ?window.noteFolder:"General";
-
+  const user=await getCurrentUser();if(!user)return toast("Please login first");
+  const fileName=safeFileName(file.name),storagePath=`${user.id}/${id()}-${fileName}`;
   toast("Uploading PDF...");
-
   try{
-    const {error}=await supabaseClient.storage.from("pdfs").upload(
-      storagePath,file,{
-        cacheControl:"3600",
-        upsert:false,
-        contentType:"application/pdf"
-      }
-    );
+    const {error}=await supabaseClient.storage.from("pdfs").upload(storagePath,file,{cacheControl:"3600",upsert:false,contentType:"application/pdf"});
     if(error)throw error;
-
-    d.notes.push({
-      id:noteId,
-      type:"pdf",
-      title:file.name,
-      subject:"",
-      file:file.name,
-      storage_path:storagePath,
-      folder:folder,
-      date:todayLocal()
-    });
-
-    await save();
-    toast("PDF uploaded to cloud ✓");
-    render();
-  }catch(e){
-    console.error("PDF upload error:",e);
-    toast("PDF upload failed: "+(e.message||"Check Storage bucket/policies"));
-  }
+    const folder=(typeof window.noteFolder==='string'&&window.noteFolder!=="All"&&window.noteFolder.trim())?window.noteFolder.trim():"General";
+    d.notes.push({id:id(),type:"pdf",title:file.name,subject:"",file:file.name,storage_path:storagePath,folder,date:todayLocal()});
+    await save();toast("PDF uploaded to cloud ✓");render();
+  }catch(e){console.error("PDF upload error:",e);toast("PDF upload failed: "+(e.message||"Check Storage bucket/policies"));}
 }
-
-async function openPDF(id){
-  const n=d.notes.find(x=>x.id===id);
-  if(!n)return toast("PDF not found");
-
-  const user=await getCurrentUser();
-  if(!user)return toast("Please login first");
-
-  if(!n.storage_path){
-    return toast("This PDF was uploaded with an older version. Please re-upload it.");
-  }
-
+async function openPDF(noteId){
+  const n=d.notes.find(x=>x.id===noteId);if(!n)return;
+  const user=await getCurrentUser();if(!user)return toast("Please login first");
+  if(!n.storage_path)return toast("This PDF is from the old local storage. Upload it again to sync it.");
   try{
-    const {data,error}=await supabaseClient.storage
-      .from("pdfs")
-      .createSignedUrl(n.storage_path,600);
-
-    if(error)throw error;
-    if(!data?.signedUrl)return toast("Could not create PDF link");
-
-    const w=window.open(data.signedUrl,"_blank");
-    if(!w)toast("Popup blocked. Allow popups for this site.");
-  }catch(e){
-    console.error("PDF open error:",e);
-    toast("Could not open PDF: "+(e.message||"Storage error"));
-  }
+    const {data,error}=await supabaseClient.storage.from("pdfs").createSignedUrl(n.storage_path,600);
+    if(error)throw error;if(!data?.signedUrl)return toast("Could not create PDF link");
+    const w=window.open(data.signedUrl,"_blank");if(!w)toast("Popup blocked. Allow popups for this site.");
+  }catch(e){console.error("PDF open error:",e);toast("Could not open PDF: "+(e.message||"Storage error"));}
 }
-
-async function deleteNote(id){
-  // Strict single-item deletion: only the exact clicked note/PDF ID may be removed.
-  const index=d.notes.findIndex(x=>String(x.id)===String(id));
-  if(index===-1)return toast("Item not found");
-
-  const n=d.notes[index];
-  const isPDF=n.type==="pdf";
-  const label=n.title||n.file||"this item";
-
-  if(!confirm(`Delete only this ${isPDF?"PDF":"note"}?\n\n${label}\n\nNo other files will be deleted.`))return;
-
+async function deleteNote(noteId){
+  if(!confirm("Delete this note?"))return;
+  const n=d.notes.find(x=>x.id===noteId);if(!n)return;
   try{
-    // For PDFs, remove ONLY this PDF's exact unique storage object.
-    // Never list/remove the bucket, folder, or other files.
-    if(isPDF){
-      if(!n.storage_path){
-        return toast("This PDF has no storage path, so nothing was deleted.");
-      }
-
-      const {error}=await supabaseClient.storage
-        .from("pdfs")
-        .remove([n.storage_path]);
-
-      if(error)throw error;
-    }
-
-    // Remove ONLY the exact selected record, and only after storage deletion succeeds.
-    const verifyIndex=d.notes.findIndex(x=>String(x.id)===String(id));
-    if(verifyIndex===-1)return toast("Item no longer exists");
-    d.notes.splice(verifyIndex,1);
-
-    await save();
-    toast(`${isPDF?"PDF":"Note"} deleted successfully`);
-    render();
-  }catch(e){
-    console.error("Single-item delete error:",e);
-    toast(`Could not delete ${isPDF?"PDF":"note"}: `+(e.message||"Storage error"));
-  }
+    if(n.type==="pdf"&&n.storage_path){const {error}=await supabaseClient.storage.from("pdfs").remove([n.storage_path]);if(error)throw error;}
+    d.notes=d.notes.filter(x=>x.id!==noteId);await save();toast("Deleted");render();
+  }catch(e){console.error("PDF delete error:",e);toast("Could not delete PDF: "+(e.message||"Storage error"));}
 }
-initDB().catch(()=>{}).finally(()=>go('home'));
+go('home');
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
