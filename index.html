@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#07111f"><link rel="manifest" href="manifest.webmanifest"><title>Hello Chitranshu</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#07111f"><link rel="manifest" href="manifest.webmanifest"><title>Student Life</title>
 <style>
 :root{--bg:#06101d;--panel:#0b1727;--panel2:#0e1c2f;--line:#1b2d45;--text:#edf4ff;--muted:#8295ae;--blue:#2680ff;--blue2:#155bd1;--green:#19c878;--purple:#965cff;--orange:#ffad22;--red:#ff5d6c;--shadow:0 18px 50px #0006}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text)}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}
@@ -8,26 +8,42 @@
 .main{min-width:0}.top{height:74px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:0 28px;background:#071321e8;backdrop-filter:blur(16px);position:sticky;top:0;z-index:10}.search{flex:1;max-width:520px}.search input{width:100%;background:#0c1a2c;border:1px solid var(--line);color:#fff;padding:11px 14px;border-radius:12px;outline:none}.top-actions{margin-left:auto;display:flex;gap:8px}.icon-btn{border:1px solid var(--line);background:#0c1a2c;color:#d8e4f5;border-radius:11px;padding:10px 12px}.content{padding:28px;max-width:1500px;margin:auto}.hero{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:22px}.eyebrow{color:#7590b2;text-transform:uppercase;font-size:11px;font-weight:800;letter-spacing:.14em}.hero h1{font-size:31px;margin:5px 0}.hero p{color:var(--muted);margin:0}.date-pill{background:#0d1b2d;border:1px solid var(--line);padding:11px 14px;border-radius:12px;color:#d8e4f5}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.stat{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:18px}.stat .num{font-size:26px;font-weight:850}.stat small{display:block;color:var(--muted);margin-top:4px}.layout2{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,.8fr);gap:16px;margin-top:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 12px 40px #0002}.card h2,.card h3{margin:0 0 14px}.muted{color:var(--muted);font-size:13px}.row{display:flex;gap:10px}.row>*{flex:1}.field{margin:8px 0}.field label{display:block;font-size:12px;color:#91a2b9;margin-bottom:6px}.input,.select,.textarea{width:100%;background:#0a1728;border:1px solid #223650;color:#edf4ff;padding:11px 12px;border-radius:11px;outline:none}.input:focus,.select:focus,.textarea:focus{border-color:#2680ff;box-shadow:0 0 0 3px #2680ff22}.textarea{min-height:90px;resize:vertical}.primary{border:0;background:linear-gradient(135deg,#1668ea,#2b80ff);color:#fff;padding:11px 15px;border-radius:11px;font-weight:800}.secondary{border:1px solid var(--line);background:#0c1a2c;color:#dbe7f5;padding:10px 13px;border-radius:11px;font-weight:750}.danger{border:1px solid #5a2630;background:#25141a;color:#ff9da7;padding:10px 13px;border-radius:11px}.success{border:0;background:#123f2d;color:#5df0ad;padding:10px 13px;border-radius:11px}.actions{display:flex;gap:7px;flex-wrap:wrap}.tag{display:inline-block;background:#11294a;color:#71aaff;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:750}.tag.green{background:#103526;color:#5be8a8}.tag.orange{background:#38270f;color:#ffc45a}.tag.purple{background:#281746;color:#c39bff}.empty{padding:26px;text-align:center;color:var(--muted);border:1px dashed #29405e;border-radius:14px}.list{display:flex;flex-direction:column}.item{padding:14px 0;border-bottom:1px solid #17283d}.item:last-child{border-bottom:0}.item-main{min-width:0;flex:1}.item-title{font-weight:800}.item-title.done{text-decoration:line-through;color:#708198}.item-sub{font-size:12px;color:var(--muted);margin-top:5px}.item-row{display:flex;gap:12px;align-items:center}.check{width:28px;height:28px;border:1px solid #2a405b;background:#0c1a2b;border-radius:9px;display:grid;place-items:center;color:#5be8a8;flex:none}.check.on{background:#123b2b;border-color:#2d9d6a}.check input{display:none}
 .quick{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.quick button{min-height:120px;border:1px solid var(--line);border-radius:16px;text-align:left;padding:17px;color:#fff;font-weight:800}.q1{background:linear-gradient(145deg,#0f2a51,#0b1c32)}.q2{background:linear-gradient(145deg,#10382a,#0b211a)}.q3{background:linear-gradient(145deg,#3b2a0f,#221a0a)}.q4{background:linear-gradient(145deg,#2d1b50,#171027)}.quick small{display:block;color:#9eb0c6;margin-top:7px}
+/* folder cards */
+.folder-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:14px;margin-top:14px}
+.folder-card{width:100%;aspect-ratio:1/1;min-height:135px;border:1px solid #233955;background:linear-gradient(145deg,#0d1d31,#091626);color:#eaf2ff;border-radius:18px;padding:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:9px;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease,background .18s ease}
+.folder-card:hover{transform:translateY(-3px);border-color:#3674b8;background:linear-gradient(145deg,#102846,#0b192b);box-shadow:0 12px 28px #0005}
+.folder-card.active{border-color:#2680ff;background:linear-gradient(145deg,#12396b,#0c2038);box-shadow:0 0 0 2px #2680ff22,0 12px 28px #0004}
+.folder-icon{font-size:40px;line-height:1;filter:drop-shadow(0 6px 8px #0004)}
+.folder-name{font-size:14px;font-weight:850;line-height:1.2;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.folder-count{font-size:11px;color:#8198b5}
+@media(max-width:700px){.folder-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.folder-card{min-height:145px}}
 /* planner */.planner{background:#07111f;border:1px solid #1c2d44;border-radius:24px;overflow:hidden;box-shadow:var(--shadow)}.planner-top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:24px 26px;background:linear-gradient(135deg,#09172a,#0b1422)}.planner-title h2{margin:0;font-size:28px}.planner-title p{margin:4px 0;color:#8194ae;font-size:13px}.planner-controls{display:flex;gap:8px}.planner-date{background:#0d1a2b;border:1px solid #24364e;color:#e7edf7;border-radius:11px;padding:10px;width:auto}.planner-body{padding:0 26px 26px}.planner-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;padding:16px 0}.pstat{background:#0d1a2b;border:1px solid #1c2d44;border-radius:15px;padding:15px}.pstat b{font-size:20px}.pstat small{display:block;color:#7f93ae;margin-top:3px}.planner-grid{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:14px}.planner-main,.p-side-card{background:#0a1727;border:1px solid #1c2d44;border-radius:18px}.planner-tabs{display:flex;gap:24px;padding:17px 18px 0;border-bottom:1px solid #1b2a40}.planner-tab{border:0;background:transparent;color:#8193aa;padding-bottom:13px;font-weight:800;border-bottom:3px solid transparent}.planner-tab.active{color:#fff;border-color:#2680ff}.timeline{padding:10px 18px 18px}.timeline-row{display:grid;grid-template-columns:76px 12px minmax(0,1fr) 32px;gap:11px;align-items:center;padding:9px 0}.timeline-time{text-align:right;color:#8da0b8;font-size:12px;font-weight:800}.timeline-line{height:100%;min-height:62px;display:flex;justify-content:center;position:relative}.timeline-line:before{content:"";position:absolute;top:0;bottom:-18px;width:1px;background:#243750}.timeline-dot{width:10px;height:10px;border-radius:50%;background:#2680ff;z-index:1;margin-top:7px;box-shadow:0 0 0 5px #2680ff18}.timeline-card{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#0e1a2a;border:1px solid #1b2c42;border-radius:13px;padding:13px}.timeline-card small{display:block;color:#7f93ae;margin-top:4px}.pcheck{border:1px solid #29405b;background:#0b1b2e;color:#6f88a4;border-radius:8px;width:30px;height:30px}.pcheck.done{background:#123b2b;color:#5be8a8;border-color:#2d9d6a}.p-side-card{padding:18px}.p-side-card+.p-side-card{margin-top:12px}.progress-ring{width:130px;height:130px;border-radius:50%;margin:8px auto 16px;background:conic-gradient(#2680ff var(--progress),#172a42 0);display:grid;place-items:center;position:relative}.progress-ring:after{content:"";position:absolute;inset:10px;background:#0a1727;border-radius:50%}.progress-ring span{z-index:1;font-size:24px;font-weight:850}.side-stat{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #17283d}.side-stat span{color:#7f93ae}.quick-add{display:grid;gap:8px}.quick-add button{border:1px solid #243b58;background:#0d1e33;color:#dce7f5;padding:11px;border-radius:10px;text-align:left}.planner-add{width:100%;margin-top:9px;border:1px dashed #2a4b72;background:#091a2e;color:#5fa5ff;padding:13px;border-radius:11px;font-weight:800}
 .day-picker{display:flex;gap:6px;flex-wrap:wrap;margin:9px 0}.time-picker{display:flex;gap:6px;align-items:center}.time-picker .select{min-width:0;padding:10px 9px}.time-picker .tp-hour{width:74px}.time-picker .tp-minute{width:78px}.time-picker .tp-period{width:78px}.time-sep{color:#7890ad;font-weight:900}.day-chip input{display:none}.day-chip span{display:inline-block;padding:7px 9px;border:1px solid #263c58;background:#0b1a2c;color:#8193aa;border-radius:9px;font-size:12px;font-weight:800;cursor:pointer}.day-chip input:checked+span{background:#1457c8;border-color:#2680ff;color:#fff}.search-results{position:absolute;top:58px;left:0;right:0;background:#0b1727;border:1px solid var(--line);border-radius:14px;padding:8px;box-shadow:var(--shadow);z-index:30}.search-wrap{position:relative;flex:1;max-width:560px}.search-result{padding:10px;border-radius:9px;color:#dbe7f5;cursor:pointer}.search-result:hover{background:#102038}
 .toast{position:fixed;right:22px;bottom:22px;background:#102038;border:1px solid #2a4564;color:#fff;padding:12px 15px;border-radius:12px;box-shadow:var(--shadow);z-index:50}.mobile-nav{display:none}
 @media(max-width:1000px){.app{grid-template-columns:76px 1fr}.side{padding:16px 10px}.brand div:last-child,.nav-title,.nav button span,.streak{display:none}.brand{justify-content:center}.nav button{text-align:center}.nav button b{display:block}.grid4{grid-template-columns:repeat(2,1fr)}.planner-grid,.layout2{grid-template-columns:1fr}}
 @media(max-width:700px){.app{display:block}.side{display:none}.top{padding:0 14px}.content{padding:18px 14px 80px}.hero{align-items:flex-start}.hero h1{font-size:25px}.grid4,.quick,.planner-stats{grid-template-columns:1fr 1fr}.planner-top{padding:18px;align-items:flex-start;flex-direction:column}.planner-body{padding:0 12px 15px}.timeline-row{grid-template-columns:55px 10px minmax(0,1fr) 30px}.timeline-card{padding:10px}.mobile-nav{position:fixed;display:flex;bottom:0;left:0;right:0;background:#071321f5;border-top:1px solid var(--line);z-index:40;padding:7px 8px;justify-content:space-around}.mobile-nav button{border:0;background:transparent;color:#8193aa;padding:7px 9px;font-size:11px}.mobile-nav button b{display:block;font-size:17px}.row{flex-direction:column}.top-actions{display:none}.search-wrap{max-width:none}}
-.pdf-folder-panel{background:#081525;border:1px solid #1b2d45;border-radius:18px;padding:14px;height:max-content;position:sticky;top:90px}.pdf-folder-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.pdf-folder-list{display:grid;gap:5px}.pdf-folder-btn{width:100%;border:1px solid transparent;background:transparent;color:#9badc3;padding:10px 11px;border-radius:11px;text-align:left;display:flex;justify-content:space-between;gap:8px}.pdf-folder-btn:hover{background:#0e1d31;color:#fff}.pdf-folder-btn.active{background:linear-gradient(135deg,#124cae,#176be6);color:#fff}.pdf-folder-btn span:last-child{opacity:.65;font-size:11px}.pdf-folder-add{width:100%;border:1px dashed #315070;background:#0a192c;color:#6daeff;padding:10px;border-radius:10px;margin-top:8px;font-weight:800}.pdf-library-main{min-width:0}.pdf-library-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.pdf-library-title{display:flex;align-items:center;gap:10px}.pdf-library-count{font-size:11px;background:#10294a;color:#7db2ff;border-radius:999px;padding:4px 8px;font-weight:800}.pdf-card{transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}.pdf-card:hover{transform:translateY(-2px);border-color:#2c4e75;box-shadow:0 14px 35px #0003}.pdf-card .folder-line{color:#7f93ae;font-size:11px;margin-top:7px}.pdf-empty{grid-column:1/-1;padding:35px;text-align:center;border:1px dashed #29405e;border-radius:15px;color:#7f93ae}.pdf-folder-modal .pdf-dialog{height:auto;max-width:500px}.folder-create-row{display:flex;gap:8px}.folder-create-row .input{flex:1}.pdf-breadcrumb{color:#7f93ae;font-size:12px;margin-top:2px}.pdf-upload-drop{border:1px dashed #315070;background:linear-gradient(145deg,#0a192d,#091625);border-radius:15px;padding:15px;margin-top:12px;color:#9fb0c5}
-@media(max-width:900px){.pdf-library-shell{grid-template-columns:1fr}.pdf-folder-panel{position:static}.pdf-folder-list{display:flex;overflow:auto;padding-bottom:3px}.pdf-folder-btn{min-width:120px}.pdf-folder-add{margin-top:10px}.pdf-library-top{align-items:flex-start;flex-direction:column}}
-@media(max-width:700px){.pdf-grid{grid-template-columns:1fr}.pdf-card .actions button{flex:1}.pdf-card .actions{display:grid;grid-template-columns:1fr 1fr}}
 
-<style>
-.modal{display:none;position:fixed;inset:0;z-index:90000;background:rgba(2,8,18,.82);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}
-.pdf-folder-modal .pdf-dialog{width:min(520px,100%);max-height:90vh;overflow:auto}.folder-create-row{display:flex;gap:8px}.folder-create-row .input{flex:1}
-.pdf-reader-modal{padding:0}.pdf-reader-shell{width:100%;height:100%;background:#07111f;display:flex;flex-direction:column}.pdf-reader-bar{height:76px;flex:0 0 76px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 16px;border-bottom:1px solid #1b2d45}.pdf-reader-bar b{display:block;max-width:60vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-@media(max-width:700px){.pdf-reader-bar{height:68px;flex-basis:68px;padding:0 9px}.pdf-reader-bar .secondary{padding:8px 9px}}
-</style></style></head>
+/* ===== Mission Discipline PDF Reader ===== */
+.pdf-reader-modal{display:none;position:fixed;inset:0;z-index:99990;background:#030812;color:#edf4ff;align-items:stretch;justify-content:stretch;padding:0}
+.pdf-reader-modal.show{display:flex}
+.pdf-reader-shell{width:100%;height:100%;display:flex;flex-direction:column;background:#050b15;overflow:hidden}
+.pdf-reader-head{height:62px;flex:0 0 62px;display:flex;align-items:center;gap:12px;padding:8px 14px;background:linear-gradient(135deg,#071a34,#0b1330 55%,#17103a);border-bottom:1px solid #223554;box-shadow:0 8px 28px #0005;z-index:3}
+.pdf-reader-doc{display:flex;align-items:center;gap:10px;min-width:190px;max-width:290px}
+.pdf-file-icon{width:36px;height:40px;border-radius:9px;background:linear-gradient(145deg,#ff4f61,#d91f3a);display:grid;place-items:center;font-size:11px;font-weight:900;box-shadow:0 7px 18px #e62a4733}
+.pdf-reader-doc b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pdf-reader-doc small{color:#91a4bf;display:block;margin-top:2px}
+.pdf-reader-search{flex:1;max-width:460px;position:relative}.pdf-reader-search input{width:100%;background:#08172b;border:1px solid #294264;color:#fff;padding:10px 13px 10px 38px;border-radius:12px;outline:none}.pdf-reader-search span{position:absolute;left:13px;top:9px;color:#7890ae}
+.pdf-reader-head-actions{margin-left:auto;display:flex;gap:7px;align-items:center}.pdf-tool-btn{border:1px solid #2a4263;background:#0a192c;color:#dce8f7;border-radius:10px;padding:9px 11px;font-weight:800;min-width:38px}.pdf-tool-btn:hover{background:#112642;border-color:#3c6090}.pdf-tool-btn.primary{background:linear-gradient(135deg,#175ed8,#7649ff);border:0;color:#fff}.pdf-reader-main{display:grid;grid-template-columns:245px minmax(0,1fr) 250px;min-height:0;flex:1}
+.pdf-thumb-panel{background:#07111f;border-right:1px solid #1b2e49;display:flex;flex-direction:column;min-width:0}.pdf-panel-head{padding:14px 14px 10px;border-bottom:1px solid #182b43;display:flex;justify-content:space-between;align-items:center}.pdf-panel-head b{font-size:13px}.pdf-panel-head small{color:#7187a3;display:block;margin-top:3px}.pdf-tabs{display:flex;gap:6px;padding:9px;border-bottom:1px solid #182b43}.pdf-tab{flex:1;border:1px solid transparent;background:transparent;color:#7890ad;padding:8px;border-radius:9px;font-weight:800}.pdf-tab.active{background:#10294b;color:#72adff;border-color:#214e87}.pdf-thumbs{padding:12px;overflow:auto;display:flex;flex-direction:column;gap:10px}.pdf-thumb{position:relative;border:1px solid #233955;background:#0a1727;border-radius:10px;padding:6px;cursor:pointer;transition:.16s}.pdf-thumb:hover{border-color:#3b6ca5;transform:translateY(-1px)}.pdf-thumb.active{border-color:#3180ff;box-shadow:0 0 0 2px #3180ff33}.pdf-thumb canvas{display:block;width:100%;height:auto;background:#fff;border-radius:5px}.pdf-thumb-num{position:absolute;left:8px;top:8px;background:#07111fcc;color:#fff;border-radius:6px;padding:3px 6px;font-size:10px;font-weight:900}.pdf-workspace{min-width:0;min-height:0;display:flex;flex-direction:column;background:radial-gradient(circle at 50% 30%,#152844 0,#07101d 50%,#040912 100%)}
+.pdf-toolbar{min-height:52px;display:flex;align-items:center;gap:5px;padding:7px 10px;border-bottom:1px solid #1a2c45;background:#081322;overflow:auto}.pdf-toolbar-group{display:flex;align-items:center;gap:4px;padding-right:7px;margin-right:4px;border-right:1px solid #20334d}.pdf-toolbar-group:last-child{border-right:0}.pdf-page-box{display:flex;align-items:center;gap:5px;color:#a8b9ce;font-size:12px}.pdf-page-box input{width:48px;background:#0b1a2c;border:1px solid #29415f;color:#fff;border-radius:8px;padding:7px;text-align:center}.pdf-zoom{min-width:56px;text-align:center;font-size:12px;font-weight:850;color:#d8e6f7}
+.pdf-canvas-area{position:relative;flex:1;min-height:0;overflow:auto;padding:28px;display:flex;justify-content:center;align-items:flex-start}.pdf-page-wrap{position:relative;display:inline-block;transform-origin:top center;box-shadow:0 20px 60px #0008;background:#fff}.pdf-page-wrap canvas{display:block;background:#fff}.pdf-loading{position:absolute;inset:0;display:grid;place-items:center;color:#8da2bd;font-weight:800;background:#050c16aa;backdrop-filter:blur(3px);z-index:2}.pdf-error{max-width:520px;margin:60px auto;padding:25px;text-align:center;border:1px solid #4a2630;background:#211118;border-radius:16px;color:#ffb2bb}
+.pdf-tools-panel{background:#07111f;border-left:1px solid #1b2e49;overflow:auto}.pdf-tool-section{padding:14px;border-bottom:1px solid #182b43}.pdf-tool-section h3{font-size:13px;margin:0 0 10px}.pdf-action{width:100%;display:flex;align-items:center;gap:9px;border:1px solid #223b59;background:#0a1829;color:#dce8f7;padding:11px;border-radius:10px;margin:6px 0;text-align:left;font-weight:750}.pdf-action:hover{background:#10233d}.pdf-action.active{border-color:#376fae;background:#102c4e;color:#7db6ff}.pdf-reader-hint{font-size:11px;color:#7187a3;line-height:1.55}.pdf-search-results{font-size:11px;color:#91a5bf;margin-top:8px}.pdf-reader-toast{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);background:#10223a;border:1px solid #34577e;padding:10px 14px;border-radius:10px;z-index:5;display:none;box-shadow:0 12px 30px #0007}
+@media(max-width:1050px){.pdf-reader-main{grid-template-columns:190px minmax(0,1fr)}.pdf-tools-panel{display:none}.pdf-reader-search{max-width:320px}}
+@media(max-width:700px){.pdf-reader-head{height:auto;min-height:58px;flex-wrap:wrap;padding:8px}.pdf-reader-doc{min-width:0;flex:1}.pdf-reader-search{order:3;flex-basis:100%;max-width:none}.pdf-reader-main{grid-template-columns:1fr}.pdf-thumb-panel{display:none}.pdf-toolbar{min-height:48px}.pdf-canvas-area{padding:12px}.pdf-tool-btn{padding:8px}.pdf-reader-doc small{display:none}}
+</style></head>
 <body>
-<div class="app"><aside class="side"><div class="brand"><div class="brand-icon">🎓</div><div><b>Hello Chitranshu</b><small>Focus · Plan · Achieve</small></div></div><div class="nav"><div class="nav-title">Main</div><button data-page="home" onclick="go('home')">🏠 <span>Dashboard</span></button><button data-page="ai" onclick="go('ai')">▣ <span>Planner</span></button><button data-page="study" onclick="go('study')">◎ <span>Targets</span></button><button data-page="classes" onclick="go('classes')">🎓 <span>Live Classes</span></button><button data-page="focus" onclick="go('focus')">⏱ <span>Focus Timer</span></button><button data-page="notes" onclick="go('notes')">📄 <span>Notes & PDFs</span></button><div class="nav-title">Personal</div><button data-page="routine" onclick="go('routine')">◷ <span>Routine</span></button><button data-page="challenge" onclick="go('challenge')">🎯 <span>Goals</span></button><button data-page="workout" onclick="go('workout')">🏃 <span>Workout</span></button><button data-page="settings" onclick="go('settings')">⚙ <span>Settings</span></button></div><div class="streak"><small>Current streak</small><br><b id="streakSide">0</b> 🔥<br><small>days</small></div></aside>
+<div class="app"><aside class="side"><div class="brand"><div class="brand-icon">🎓</div><div><b>Student Life</b><small>Focus · Plan · Achieve</small></div></div><div class="nav"><div class="nav-title">Main</div><button data-page="home" onclick="go('home')">🏠 <span>Dashboard</span></button><button data-page="ai" onclick="go('ai')">▣ <span>Planner</span></button><button data-page="study" onclick="go('study')">◎ <span>Targets</span></button><button data-page="classes" onclick="go('classes')">🎓 <span>Live Classes</span></button><button data-page="focus" onclick="go('focus')">⏱ <span>Focus Timer</span></button><button data-page="notes" onclick="go('notes')">📄 <span>Notes & PDFs</span></button><div class="nav-title">Personal</div><button data-page="routine" onclick="go('routine')">◷ <span>Routine</span></button><button data-page="challenge" onclick="go('challenge')">🎯 <span>Goals</span></button><button data-page="workout" onclick="go('workout')">🏃 <span>Workout</span></button><button data-page="settings" onclick="go('settings')">⚙ <span>Settings</span></button></div><div class="streak"><small>Current streak</small><br><b id="streakSide">0</b> 🔥<br><small>days</small></div></aside>
 <main class="main"><header class="top"><div class="search-wrap"><div class="search"><input id="globalSearch" placeholder="Search targets, classes, goals, notes…" oninput="searchAll(this.value)"></div><div id="searchResults"></div></div><div class="top-actions"><button class="icon-btn" onclick="go('focus')">⏱ Focus</button><button class="icon-btn" onclick="quickTarget()">＋ Add</button></div></header><section class="content" id="app"></section></main></div>
 <nav class="mobile-nav"><button onclick="go('home')"><b>⌂</b>Home</button><button onclick="go('ai')"><b>▣</b>Planner</button><button onclick="quickTarget()"><b>＋</b>Add</button><button onclick="go('focus')"><b>◷</b>Focus</button><button onclick="go('settings')"><b>•••</b>More</button></nav><div id="toast" class="toast" style="display:none"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
 const KEY='studentLifeShareV1';
 const defaultData={targets:[],classes:[],routine:[],goals:[],workouts:[],notes:[],folders:['General'],done:{},settings:{focus:25,theme:'dark',name:'Student'},sessions:[],plans:{}};
@@ -88,7 +104,7 @@ function streak(){let dates=new Set(d.sessions.map(s=>s.date));d.targets.filter(
 function updateSide(){let e=document.getElementById('streakSide');if(e)e.textContent=streak()}
 function go(p){current=p;window.scrollTo({top:0,behavior:'smooth'});render();document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===p));}
 function render(){updateSide();let a=document.getElementById('app');if(current==='home')return home(a);if(current==='ai')return planner(a);if(current==='study')return targets(a);if(current==='classes')return classes(a);if(current==='focus')return focus(a);if(current==='notes')return notes(a);if(current==='routine')return routine(a);if(current==='challenge')return goals(a);if(current==='workout')return workout(a);if(current==='settings')return settings(a)}
-function home(a){let t=todayLocal(),dn=dayOf(t),ts=d.targets.filter(x=>x.date===t),cs=d.classes.filter(x=>x.days.includes(dn)).sort((a,b)=>a.start.localeCompare(b.start)),rs=d.routine.filter(x=>x.days.includes(dn)).sort((a,b)=>a.start.localeCompare(b.start)),done=ts.filter(x=>isDone('t-',x.id)).length,focus=d.sessions.filter(x=>x.date===t).reduce((n,x)=>n+x.minutes,0),pct=ts.length?Math.round(done/ts.length*100):0;let hr=new Date().getHours(),g=hr<12?'Good morning':hr<18?'Good afternoon':'Good evening';a.innerHTML=`<div class="hero"><div><div class="eyebrow">${g} 👋</div><h1>Hello Chitranshu</h1><p>Everything you need for a focused study day.</p></div><div class="date-pill">${fmtDate(t)}</div></div><div class="grid4"><div class="stat"><div class="num">${ts.length}</div><small>Today's targets</small></div><div class="stat"><div class="num">${done}</div><small>Targets completed</small></div><div class="stat"><div class="num">${Math.floor(focus/60)}h ${focus%60}m</div><small>Focus today</small></div><div class="stat"><div class="num">${cs.length}</div><small>Live classes</small></div></div><div class="card" style="margin-top:16px"><div class="section-head" style="display:flex;justify-content:space-between"><div><h2>Quick actions</h2><div class="muted">Jump straight into what you need.</div></div></div><div class="quick"><button class="q1" onclick="quickTarget()">◎ Add Target<small>Plan a study task</small></button><button class="q2" onclick="go('classes')">🎓 Live Classes<small>${cs.length} today</small></button><button class="q3" onclick="go('notes')">📄 Notes & PDFs<small>${d.notes.length} saved</small></button><button class="q4" onclick="go('focus')">⏱ Focus Timer<small>Start ${d.settings.focus} min</small></button></div></div><div class="layout2"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><h2>Today's Plan</h2><button class="secondary" onclick="go('ai')">Open Planner</button></div>${ts.slice().sort(sortTarget).map(t=>targetRow(t,true)).join('')||'<div class="empty">No targets for today. Add one and get started.</div>'}</div><div><div class="card"><h3>Daily Progress</h3><div class="progress-ring" style="--progress:${pct*3.6}deg"><span>${pct}%</span></div><div class="side-stat"><span>Done</span><b>${done}</b></div><div class="side-stat"><span>Pending</span><b>${Math.max(0,ts.length-done)}</b></div></div><div class="card"><h3>Next up</h3>${[...rs.map(x=>({kind:'routine',x})),...cs.map(x=>({kind:'class',x}))].sort((a,b)=>a.x.start.localeCompare(b.x.start)).slice(0,4).map(z=>`<div class="item"><b>${fmtTime(z.x.start)}</b> <span class="tag ${z.kind==='class'?'purple':'green'}">${z.kind==='class'?'Live Class':z.x.c||'Routine'}</span><div class="item-sub">${esc(z.kind==='class'?z.x.subject:z.x.t)}</div></div>`).join('')||'<div class="empty">Nothing scheduled.</div>'}</div></div></div>`}
+function home(a){let t=todayLocal(),dn=dayOf(t),ts=d.targets.filter(x=>x.date===t),cs=d.classes.filter(x=>x.days.includes(dn)).sort((a,b)=>a.start.localeCompare(b.start)),rs=d.routine.filter(x=>x.days.includes(dn)).sort((a,b)=>a.start.localeCompare(b.start)),done=ts.filter(x=>isDone('t-',x.id)).length,focus=d.sessions.filter(x=>x.date===t).reduce((n,x)=>n+x.minutes,0),pct=ts.length?Math.round(done/ts.length*100):0;let hr=new Date().getHours(),g=hr<12?'Good morning':hr<18?'Good afternoon':'Good evening';a.innerHTML=`<div class="hero"><div><div class="eyebrow">${g} 👋</div><h1>Student Life</h1><p>Everything you need for a focused study day.</p></div><div class="date-pill">${fmtDate(t)}</div></div><div class="grid4"><div class="stat"><div class="num">${ts.length}</div><small>Today's targets</small></div><div class="stat"><div class="num">${done}</div><small>Targets completed</small></div><div class="stat"><div class="num">${Math.floor(focus/60)}h ${focus%60}m</div><small>Focus today</small></div><div class="stat"><div class="num">${cs.length}</div><small>Live classes</small></div></div><div class="card" style="margin-top:16px"><div class="section-head" style="display:flex;justify-content:space-between"><div><h2>Quick actions</h2><div class="muted">Jump straight into what you need.</div></div></div><div class="quick"><button class="q1" onclick="quickTarget()">◎ Add Target<small>Plan a study task</small></button><button class="q2" onclick="go('classes')">🎓 Live Classes<small>${cs.length} today</small></button><button class="q3" onclick="go('notes')">📄 Notes & PDFs<small>${d.notes.length} saved</small></button><button class="q4" onclick="go('focus')">⏱ Focus Timer<small>Start ${d.settings.focus} min</small></button></div></div><div class="layout2"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><h2>Today's Plan</h2><button class="secondary" onclick="go('ai')">Open Planner</button></div>${ts.slice().sort(sortTarget).map(t=>targetRow(t,true)).join('')||'<div class="empty">No targets for today. Add one and get started.</div>'}</div><div><div class="card"><h3>Daily Progress</h3><div class="progress-ring" style="--progress:${pct*3.6}deg"><span>${pct}%</span></div><div class="side-stat"><span>Done</span><b>${done}</b></div><div class="side-stat"><span>Pending</span><b>${Math.max(0,ts.length-done)}</b></div></div><div class="card"><h3>Next up</h3>${[...rs.map(x=>({kind:'routine',x})),...cs.map(x=>({kind:'class',x}))].sort((a,b)=>a.x.start.localeCompare(b.x.start)).slice(0,4).map(z=>`<div class="item"><b>${fmtTime(z.x.start)}</b> <span class="tag ${z.kind==='class'?'purple':'green'}">${z.kind==='class'?'Live Class':z.x.c||'Routine'}</span><div class="item-sub">${esc(z.kind==='class'?z.x.subject:z.x.t)}</div></div>`).join('')||'<div class="empty">Nothing scheduled.</div>'}</div></div></div>`}
 function timeParts(t){if(!t)return {h:'12',m:'00',p:'AM'};let [hh,mm]=t.split(':').map(Number),p=hh>=12?'PM':'AM',h=hh%12||12;return {h:String(h),m:String(mm).padStart(2,'0'),p}}
 function timeField(prefix,label,value=''){let q=timeParts(value);let mins=Array.from({length:60},(_,i)=>String(i).padStart(2,'0')).map(m=>`<option value="${m}" ${q.m===m?'selected':''}>${m}</option>`).join('');let hrs=Array.from({length:12},(_,i)=>String(i+1)).map(h=>`<option value="${h}" ${q.h===h?'selected':''}>${h}</option>`).join('');return `<div class="field"><label>${label}</label><div class="time-picker"><select class="select tp-hour" id="${prefix}H">${hrs}</select><span class="time-sep">:</span><select class="select tp-minute" id="${prefix}M">${mins}</select><select class="select tp-period" id="${prefix}P"><option ${q.p==='AM'?'selected':''}>AM</option><option ${q.p==='PM'?'selected':''}>PM</option></select></div></div>`}
 function readTime(prefix){let h=+(document.getElementById(prefix+'H')?.value||12),m=+(document.getElementById(prefix+'M')?.value||0),p=document.getElementById(prefix+'P')?.value||'AM';if(h===12)h=0;if(p==='PM')h+=12;return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')}
@@ -124,127 +140,13 @@ function startTimer(){if(timerRunning)return;if(!timerLeft)timerLeft=d.settings.
 function pauseTimer(){timerRunning=false;clearInterval(timer);timer=null;render()}
 function resetTimer(){timerRunning=false;clearInterval(timer);timer=null;timerLeft=d.settings.focus*60;render()}
 function finishTimer(){clearInterval(timer);timer=null;timerRunning=false;let mins=d.settings.focus,sub=document.getElementById('focusSubject')?.value||'Focus';d.sessions.push({id:id(),date:todayLocal(),minutes:mins,subject:sub});save();timerLeft=0;toast('🎉 Focus session complete');render()}
-function notes(a){
-let q=(window.noteQ||'').toLowerCase(),folder=window.noteFolder||'All',pdfType=window.pdfTypeFilter||'All',subject=window.pdfSubjectFilter||'All',sort=window.pdfSort||'new';
-let allNotes=d.notes.filter(n=>(!q||[n.title,n.subject,n.text,n.file,n.chapter,n.tags,n.document_type,n.folder].join(' ').toLowerCase().includes(q)));
-let ns=allNotes.filter(n=>(folder==='All'||n.folder===folder));
-let pdfs=ns.filter(n=>n.type==='pdf'),texts=ns.filter(n=>n.type!=='pdf');
-if(pdfType!=='All')pdfs=pdfs.filter(n=>(n.document_type||'Other')===pdfType);
-if(subject!=='All subjects'&&subject!=='All')pdfs=pdfs.filter(n=>(n.subject||'General')===subject);
-if(sort==='az')pdfs.sort((a,b)=>a.title.localeCompare(b.title));else if(sort==='size')pdfs.sort((a,b)=>(b.size||0)-(a.size||0));else pdfs.sort((a,b)=>(b.created_at||b.date||'').localeCompare(a.created_at||a.date||''));
-let subjects=[...new Set(d.notes.filter(n=>n.type==='pdf').map(n=>n.subject).filter(Boolean))];
-let types=['Notes','Question Paper','Practice Sheet','Revision','Book / Module','Reference','Other'];
-let folderButtons=`<button class="pdf-folder-btn ${folder==='All'?'active':''}" onclick="selectPdfFolder('All')"><span>📚 All PDFs</span><span>${d.notes.filter(n=>n.type==='pdf').length}</span></button>`+d.folders.map(f=>{let c=d.notes.filter(n=>n.type==='pdf'&&n.folder===f).length;return `<button class="pdf-folder-btn ${folder===f?'active':''}" onclick="selectPdfFolder('${encodeURIComponent(f)}')"><span>📁 ${esc(f)}</span><span>${c}</span></button>`}).join('');
-a.innerHTML=`<div class="hero"><div><div class="eyebrow">Knowledge base</div><h1>Notes & PDFs</h1><p>Your personal study library — folders, smart classification, search and in-app reading.</p></div><button class="primary" onclick="document.getElementById('pdfFile').click()">＋ Add PDF</button></div>
-<div class="pdf-library-shell">
-<aside class="pdf-folder-panel">
-<div class="pdf-folder-head"><b>Library</b><span class="pdf-library-count">${d.folders.length} folders</span></div>
-<div class="pdf-folder-list">${folderButtons}</div>
-<button class="pdf-folder-add" onclick="openFolderModal()">＋ New folder</button>${folder!=='All'&&folder!=='General'&&d.folders.includes(folder)?`<button class="danger pdf-folder-delete" onclick="deleteFolder('${encodeURIComponent(folder)}')">🗑 Delete selected folder</button>`:''}
-
-</aside>
-<section class="pdf-library-main"><div class="card"><div class="pdf-library-top"><div><div class="pdf-library-title"><h2 style="margin:0">${folder==='All'?'All PDFs':esc(folder)}</h2><span class="pdf-library-count">${pdfs.length}</span></div><div class="pdf-breadcrumb">📚 Notes & PDFs ${folder==='All'?'':' / 📁 '+esc(folder)}</div></div><div class="actions"><button class="secondary" onclick="document.getElementById('pdfFile').click()">☁ Upload</button></div></div>
-<div class="pdf-filters"><input class="input" placeholder="Search title, subject, chapter, tags…" value="${esc(q)}" oninput="window.noteQ=this.value;render()"><select class="select" onchange="window.pdfTypeFilter=this.value;render()"><option>All</option>${types.map(x=>`<option ${pdfType===x?'selected':''}>${x}</option>`).join('')}</select><select class="select" onchange="window.pdfSubjectFilter=this.value;render()"><option>All subjects</option>${subjects.map(x=>`<option ${subject===x?'selected':''}>${esc(x)}</option>`).join('')}</select><select class="select" onchange="window.pdfSort=this.value;render()"><option value="new" ${sort==='new'?'selected':''}>Newest</option><option value="az" ${sort==='az'?'selected':''}>A–Z</option><option value="size" ${sort==='size'?'selected':''}>Largest</option></select></div>
-<div class="pdf-upload-drop">💡 <b>Organise faster:</b> create folders like <b>Physics</b>, <b>Chemistry</b>, <b>JEE PYQ</b>, <b>Revision</b>. Every uploaded PDF is saved inside the selected folder.</div>
-<input id="pdfFile" type="file" accept="application/pdf,.pdf" style="display:none" onchange="uploadPDF(this.files[0])">
-<div class="pdf-grid">${pdfs.map(n=>pdfCard(n)).join('')||'<div class="pdf-empty">📂 No PDFs in this folder yet.<br><small>Upload a PDF or create another folder.</small></div>'}</div></div>
-<div class="card" style="margin-top:14px"><div style="display:flex;justify-content:space-between;align-items:center"><h2>Text Notes</h2><span class="pdf-library-count">${texts.length}</span></div>${texts.map(n=>`<div class="item"><div class="item-row"><div class="item-main"><div class="item-title">${esc(n.title)} <span class="tag">${esc(n.subject||'General')}</span><span class="tag orange">Note</span></div><div class="item-sub">${n.date} • 📁 ${esc(n.folder||'General')}</div><div class="item-sub">${esc(n.text||'').slice(0,220)}</div></div><div class="actions"><button class="secondary" onclick="editNote('${n.id}')">Edit</button><button class="secondary" onclick="moveNote('${n.id}')">Move</button><button class="danger" onclick="deleteNote('${n.id}')">Delete</button></div></div></div>`).join('')||'<div class="empty">No text notes.</div>'}</div></section></div>`;
-}
-function pdfCard(n){let tags=Array.isArray(n.tags)?n.tags:(n.tags?String(n.tags).split(',').map(x=>x.trim()).filter(Boolean):[]),mb=n.size?((n.size/1048576).toFixed(1)+' MB'):'Cloud PDF',pages=n.pages?`${n.pages} pages`:'Pages unknown';return `<article class="pdf-card"><div class="pdf-head"><div class="pdf-icon">PDF</div><div style="min-width:0;flex:1"><div class="pdf-name" title="${esc(n.title)}">${esc(n.title)}</div><div class="pdf-meta">${esc(n.subject||'General')} • ${esc(n.chapter||'Unclassified')}<br>${pages} • ${mb} • ${n.date}</div><div class="folder-line">📁 ${esc(n.folder||'General')}</div></div></div><div class="pdf-tags"><span class="pdf-tag type">${esc(n.document_type||'PDF')}</span>${n.subject?`<span class="pdf-tag subject">${esc(n.subject)}</span>`:''}${tags.slice(0,5).map(t=>`<span class="pdf-tag">${esc(t)}</span>`).join('')}</div><div class="actions" style="margin-top:13px"><button class="primary" onclick="openPDF('${n.id}')">📖 Read</button><button class="secondary" onclick="editPDF('${n.id}')">✏️ Edit</button><button class="secondary" onclick="moveNote('${n.id}')">📁 Move</button><button class="danger" onclick="deleteNote('${n.id}')">Delete</button></div></article>`}
-// PDF folders are real Supabase Storage subfolders: <user-id>/<folder>/<file>
-function selectPdfFolder(encoded){
-  const f=encoded==='All'?'All':decodeURIComponent(encoded);
-  if(f!=='All'&&!d.folders.includes(f))return toast('Folder not found');
-  window.noteFolder=f;
-  window.noteQ='';
-  window.pdfTypeFilter='All';
-  window.pdfSubjectFilter='All subjects';
-  render();
-}
-function openFolderModal(){document.getElementById('folderModal').classList.add('show');setTimeout(()=>document.getElementById('newFolderName')?.focus(),50)}
-function closeFolderModal(){document.getElementById('folderModal').classList.remove('show')}
-async function createFolder(){let n=v('newFolderName').trim().replace(/\s+/g,' ');if(!n)return toast('Enter a folder name');if(n.length>40)return toast('Folder name is too long');if(d.folders.some(x=>x.toLowerCase()===n.toLowerCase()))return toast('Folder already exists');d.folders.push(n);await save();window.noteFolder=n;closeFolderModal();toast('Folder created ✓');render()}
-function addFolder(){openFolderModal()}
-async function deleteFolder(selectedName){
-  let selected=String(selectedName||'').trim();
-  try{if(selected)selected=decodeURIComponent(selected)}catch(_){}
-  if(!selected)selected=String(window.noteFolder||'').trim();
-  if(!selected||selected==='All'||selected==='General')return toast('Select a custom folder first');
-  if(!d.folders.includes(selected))return toast('Selected folder not found');
-
-  const affected=d.notes.filter(n=>(n.folder||'General')===selected);
-  const pdfs=affected.filter(n=>n.type==='pdf');
-  if(!confirm(`Delete ONLY "${selected}"? ${pdfs.length} PDF${pdfs.length===1?'':'s'} will move to General. Other folders will remain unchanged.`))return;
-
-  try{
-    for(const n of pdfs.filter(x=>x.storage_path)){
-      const parts=n.storage_path.split('/');
-      const newPath=`${parts[0]}/General/${parts[parts.length-1]}`;
-      const {error}=await supabaseClient.storage.from('pdfs').move(n.storage_path,newPath);
-      if(error)throw error;
-      n.storage_path=newPath;
-    }
-    affected.forEach(n=>{if((n.folder||'General')===selected)n.folder='General'});
-    d.folders=d.folders.filter(f=>f!==selected);
-    window.noteFolder='All';
-    await save();
-    toast(`"${selected}" folder deleted ✓`);
-    render();
-  }catch(e){
-    console.error(e);
-    toast('Could not delete selected folder: '+(e.message||'Storage error'));
-  }
-}
+function notes(a){let q=(window.noteQ||'').toLowerCase(),folder=window.noteFolder||'All';let ns=d.notes.filter(n=>(folder==='All'||n.folder===folder)&&(!q||[n.title,n.subject,n.text,n.file].join(' ').toLowerCase().includes(q)));let folderCards=d.folders.map(f=>{let count=d.notes.filter(n=>n.folder===f).length;let active=folder===f?' active':'';return `<button class="folder-card${active}" onclick='selectFolder(${JSON.stringify(f).replace(/'/g,'&#39;')})'><span class="folder-icon">📁</span><span class="folder-name">${esc(f)}</span><span class="folder-count">${count} item${count===1?'':'s'}</span></button>`}).join('');a.innerHTML=`<div class="hero"><div><div class="eyebrow">Knowledge base</div><h1>Notes & PDFs</h1><p>Keep chapter notes, revision sheets and PDFs organised. PDFs sync to Supabase Storage.</p></div><button class="primary" onclick="document.getElementById('pdfFile').click()">＋ Add PDF</button></div><div class="card"><div class="row"><input class="input" placeholder="Search notes…" value="${esc(q)}" oninput="window.noteQ=this.value;render()"><select class="select" onchange="window.noteFolder=this.value;render()"><option>All</option>${d.folders.map(f=>`<option ${folder===f?'selected':''}>${esc(f)}</option>`).join('')}</select></div><div class="row"><input class="input" id="folderInput" placeholder="New folder name" onkeydown="if(event.key==='Enter'){event.preventDefault();addFolder()}"><button class="secondary" onclick="addFolder()">＋ Create Folder</button><button class="danger" onclick="deleteFolder()">Delete Folder</button></div><div class="folder-grid"><button class="folder-card${folder==='All'?' active':''}" onclick="selectFolder('All')"><span class="folder-icon">🗂️</span><span class="folder-name">All Notes</span><span class="folder-count">${d.notes.length} item${d.notes.length===1?'':'s'}</span></button>${folderCards}</div></div><div class="card"><div class="row"><input class="input" id="noteTitle" placeholder="Text note title"><input class="input" id="noteSubject" placeholder="Subject"><select class="select" id="noteFolder">${d.folders.map(f=>`<option>${esc(f)}</option>`).join('')}</select></div><textarea class="textarea" id="noteText" placeholder="Write quick revision notes here…"></textarea><div class="actions"><button class="primary" onclick="addTextNote()">Save Note</button><input id="pdfFile" type="file" accept="application/pdf" style="display:none" onchange="uploadPDF(this.files[0])"><button class="secondary" onclick="document.getElementById('pdfFile').click()">Upload PDF</button></div></div><div class="card"><h2>${folder==='All'?'All Notes':esc(folder)}</h2>${ns.map(n=>`<div class="item"><div class="item-row"><div class="item-main"><div class="item-title">${esc(n.title)} <span class="tag">${esc(typeof n.subject==='string'&&n.subject?n.subject:'General')}</span> <span class="tag orange">${n.type==='pdf'?'PDF':'Note'}</span></div><div class="item-sub">${esc(typeof n.file==='string'&&n.file?n.file:'Text note')} • ${n.date} • 📁 ${esc(typeof n.folder==='string'?n.folder:'General')}</div>${n.text?`<div class="item-sub">${esc(n.text).slice(0,180)}</div>`:''}</div><div class="actions">${n.type==='pdf'?`<button class="secondary" onclick="openPDF('${n.id}')">Open</button>`:'<button class="secondary" onclick="editNote(\''+n.id+'\')">Edit</button>'}<button class="secondary" onclick="moveNote('${n.id}')">Move</button><button class="danger" onclick="deleteNote('${n.id}')">Delete</button></div></div></div>`).join('')||'<div class="empty">No notes here.</div>'}</div>`}
+function selectFolder(f){window.noteFolder=f;render()}
+function addFolder(){let el=document.getElementById('folderInput');let n=(el?.value||'').trim().replace(/\s+/g,' ');if(!n)return toast('Enter a folder name');if(n.length>60)return toast('Folder name is too long');if(n.toLowerCase()==='all')return toast('All is reserved for the library view');if(d.folders.some(x=>x.toLowerCase()===n.toLowerCase()))return toast('Folder already exists');d.folders.push(n);window.noteFolder=n;save();toast('Folder created ✓');render()}
+function deleteFolder(){let f=window.noteFolder||'All';if(f==='All'||f==='General')return toast('General folder cannot be deleted');if(!confirm('Delete folder and keep notes in General?'))return;d.notes.forEach(n=>{if(n.folder===f)n.folder='General'});d.folders=d.folders.filter(x=>x!==f);window.noteFolder='All';save();toast('Folder deleted');render()}
 function addTextNote(){let title=v('noteTitle'),text=v('noteText');if(!title||!text)return toast('Title and note are required');d.notes.push({id:id(),type:'text',title,subject:v('noteSubject'),text,folder:v('noteFolder')||'General',date:todayLocal()});save();toast('Note saved');render()}
 function editNote(id){let n=d.notes.find(x=>x.id===id);if(!n)return;let t=prompt('Title:',n.title);if(t===null)return;let tx=prompt('Note:',n.text||'');if(tx===null)return;n.title=t.trim()||n.title;n.text=tx;save();toast('Note updated');render()}
-async function moveNote(noteId){let n=d.notes.find(x=>x.id===noteId);if(!n)return;let choices=d.folders.join(', ');let f=prompt(`Move to folder:
-${choices}`,n.folder||'General');if(f===null)return;f=f.trim();if(!d.folders.includes(f))return toast('Folder not found. Create it first.');if(f===(n.folder||'General'))return toast('Already in this folder');try{if(n.type==='pdf'&&n.storage_path){let parts=n.storage_path.split('/');let fileName=parts[parts.length-1];let newPath=`${parts[0]}/${f}/${fileName}`;let {error}=await supabaseClient.storage.from('pdfs').move(n.storage_path,newPath);if(error)throw error;n.storage_path=newPath}n.folder=f;await save();toast('Moved to '+f+' ✓');render()}catch(e){console.error(e);toast('Could not move PDF: '+(e.message||'Storage error'))}}
-function exportData(){let blob=new Blob([JSON.stringify(d,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Student-Life-backup.json';a.click();URL.revokeObjectURL(a.href);toast('Backup exported')}
-function importData(file){if(!file)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.targets||!x.classes)return toast('Invalid backup');localStorage.setItem(KEY,JSON.stringify(x));d=load();toast('Backup imported');go('home')}catch(e){toast('Could not import backup')}};r.readAsText(file)}
-function resetData(){if(!confirm('This will permanently delete app data. Continue?'))return;localStorage.removeItem(KEY);d=load();toast('Data reset');go('home')}
-function searchAll(q){q=q.trim().toLowerCase();let box=document.getElementById('searchResults');if(!q){box.innerHTML='';return}let r=[];d.targets.forEach(x=>{if((x.title+' '+x.subject).toLowerCase().includes(q))r.push({p:'study',t:'Target: '+x.title,s:x.subject})});d.classes.forEach(x=>{if((x.subject+' '+x.name).toLowerCase().includes(q))r.push({p:'classes',t:'Class: '+x.subject,s:x.name})});d.goals.forEach(x=>{if((x.title+' '+x.note).toLowerCase().includes(q))r.push({p:'challenge',t:'Goal: '+x.title,s:x.note})});d.notes.forEach(x=>{if((x.title+' '+x.subject+' '+x.text+' '+x.file).toLowerCase().includes(q))r.push({p:'notes',t:'Note: '+x.title,s:x.subject||x.file})});box.innerHTML=`<div class="search-results">${r.slice(0,8).map(x=>`<div class="search-result" onclick="go('${x.p}');document.getElementById('globalSearch').value='';document.getElementById('searchResults').innerHTML=''">${esc(x.t)}<small style="display:block;color:#7f93ae">${esc(x.s||'')}</small></div>`).join('')||'<div class="search-result">No matches</div>'}</div>`}
-function v(id){return (document.getElementById(id)?.value||'').trim()} function checked(prefix){return days().map((_,i)=>document.getElementById(prefix+i)?.checked?i:null).filter(x=>x!==null)}
-async function getCurrentUser(){
-  try{
-    const {data,error}=await supabaseClient.auth.getSession();
-    if(error)throw error;
-    return data?.session?.user||null;
-  }catch(e){console.error("Auth session error:",e);return null;}
-}
-function safeFileName(name){return String(name||"file.pdf").replace(/[^\w.\-() ]+/g,"_").replace(/\s+/g," ").slice(0,120)||"file.pdf";}
-let pdfUploadState=null;
-async function analyzePDF(file){
-if(!window.pdfjsLib)throw new Error("PDF engine is still loading");
-const buf=await file.arrayBuffer(),pdf=await pdfjsLib.getDocument({data:buf}).promise,max=Math.min(pdf.numPages,5);let text='';
-for(let i=1;i<=max;i++){let page=await pdf.getPage(i),content=await page.getTextContent();text+=' '+content.items.map(x=>x.str).join(' ')}
-let lower=text.toLowerCase(),subject='General',type='Reference';
-const rules=[['Physics',['physics','mechanics','electrostatics','optics','thermodynamics','current electricity','magnetism']],['Chemistry',['chemistry','organic chemistry','inorganic','physical chemistry','mole concept','reaction']],['Mathematics',['mathematics','maths','algebra','calculus','trigonometry','geometry','probability']],['Biology',['biology','botany','zoology','genetics','cell biology','human physiology']],['JEE',['jee main','jee advanced','engineering entrance']],['School',['class 10','class 11','class 12','cbse','board exam']]];
-for(const [s,words] of rules)if(words.some(w=>lower.includes(w))){subject=s;break}
-if(/question paper|question bank|previous year|pyq|sample paper/.test(lower))type='Question Paper';else if(/practice sheet|worksheet|dpp|assignment|exercise/.test(lower))type='Practice Sheet';else if(/revision|quick revision|short notes|formula sheet/.test(lower))type='Revision';else if(/notes|lecture notes|handwritten/.test(lower))type='Notes';else if(/module|chapter|unit|lesson/.test(lower))type='Book / Module';
-let chapter='',cm=text.match(/(?:chapter|ch\.|unit|topic)\s*[-:]*\s*([A-Za-z0-9][A-Za-z0-9 .&()/-]{2,70})/i);if(cm)chapter=cm[1].trim().replace(/\s+/g,' ').slice(0,70);
-return {pages:pdf.numPages,subject,type,chapter,tags:[...new Set([subject,type==='Question Paper'?'PYQ':'',chapter].filter(Boolean))]};
-}
-function closePDFMeta(){document.getElementById('pdfMetaModal').classList.remove('show');pdfUploadState=null}
-async function uploadPDF(file){
-if(!file)return;if(file.type!=="application/pdf"&&!/\.pdf$/i.test(file.name))return toast("Please select a PDF");if(file.size>50*1024*1024)return toast("PDF limit is 50 MB");const user=await getCurrentUser();if(!user)return toast("Please login first");
-pdfUploadState={file,user};document.getElementById('pdfMetaFile').textContent=file.name;document.getElementById('pdfMetaModal').classList.add('show');document.getElementById('pdfSaveBtn').disabled=true;
-try{let meta=await analyzePDF(file);pdfUploadState.meta=meta;document.getElementById('pdfTitle').value=file.name.replace(/\.pdf$/i,'');document.getElementById('pdfSubject').value=meta.subject;document.getElementById('pdfChapter').value=meta.chapter;document.getElementById('pdfType').value=meta.type;document.getElementById('pdfTags').value=meta.tags.join(', ');document.getElementById('pdfFolder').innerHTML=d.folders.map(f=>`<option>${esc(f)}</option>`).join('');document.getElementById('pdfFolder').value=(window.noteFolder&&window.noteFolder!=='All'&&d.folders.includes(window.noteFolder))?window.noteFolder:'General';document.getElementById('pdfAnalyzeStatus').innerHTML=`✅ Analyzed <b>${meta.pages} pages</b> • detected <b>${esc(meta.subject)}</b> • <b>${esc(meta.type)}</b>${meta.chapter?` • chapter/topic: <b>${esc(meta.chapter)}</b>`:''}`;document.getElementById('pdfSaveBtn').disabled=false}catch(e){console.error(e);document.getElementById('pdfAnalyzeStatus').textContent='Could not analyze; you can enter details manually.';pdfUploadState.meta={pages:0};document.getElementById('pdfTitle').value=file.name.replace(/\.pdf$/i,'');document.getElementById('pdfSubject').value='General';document.getElementById('pdfType').value='Reference';document.getElementById('pdfTags').value='';document.getElementById('pdfFolder').innerHTML=d.folders.map(f=>`<option>${esc(f)}</option>`).join('');document.getElementById('pdfSaveBtn').disabled=false}
-}
-async function confirmPDFUpload(){
-if(!pdfUploadState)return;let {file,user,meta}=pdfUploadState,btn=document.getElementById('pdfSaveBtn');btn.disabled=true;btn.textContent='Uploading…';try{let fileName=safeFileName(file.name),folder=(document.getElementById('pdfFolder').value||'General').trim(),storagePath=`${user.id}/${folder}/${id()}-${fileName}`;let {error}=await supabaseClient.storage.from("pdfs").upload(storagePath,file,{cacheControl:"3600",upsert:false,contentType:"application/pdf"});if(error)throw error;let tags=document.getElementById('pdfTags').value.split(',').map(x=>x.trim()).filter(Boolean);d.notes.push({id:id(),type:"pdf",title:v('pdfTitle')||file.name.replace(/\.pdf$/i,''),subject:v('pdfSubject')||'General',chapter:v('pdfChapter'),document_type:document.getElementById('pdfType').value,tags:[...new Set(tags)],file:file.name,storage_path:storagePath,folder:document.getElementById('pdfFolder').value||'General',date:todayLocal(),size:file.size,pages:meta?.pages||0,created_at:new Date().toISOString()});await save();closePDFMeta();toast("PDF classified & saved to cloud ✓");render()}catch(e){console.error(e);toast("PDF upload failed: "+(e.message||"Check Storage bucket/policies"));btn.disabled=false;btn.textContent='☁ Save PDF'}
-}
-
-function closePDFReader(){const f=document.getElementById("pdfReaderFrame");if(f)f.src="about:blank";document.getElementById("pdfReaderModal")?.classList.remove("show");}
-async function deleteNote(noteId){
-  if(!confirm("Delete this note?"))return;
-  const n=d.notes.find(x=>x.id===noteId);if(!n)return;
-  try{
-    if(n.type==="pdf"&&n.storage_path){const {error}=await supabaseClient.storage.from("pdfs").remove([n.storage_path]);if(error)throw error;}
-    d.notes=d.notes.filter(x=>x.id!==noteId);await save();toast("Deleted");render();
-  }catch(e){console.error("PDF delete error:",e);toast("Could not delete PDF: "+(e.message||"Storage error"));}
-}
-go('home');
-
+function moveNote(id){let n=d.notes.find(x=>x.id===id);if(!n)return;let f=prompt('Folder:',n.folder);if(f===null)return;if(!d.folders.includes(f.trim()))return toast('Folder not found');n.folder=f.trim();save();render()}
 function workout(a){a.innerHTML=`<div class="hero"><div><div class="eyebrow">Health break</div><h1>Workout</h1><p>Keep movement simple and consistent.</p></div></div><div class="card"><div class="row"><input class="input" id="wTitle" placeholder="Workout / walk"><input class="input" id="wMin" type="number" min="1" placeholder="Minutes"><button class="primary" onclick="addWorkout()">Add</button></div></div><div class="card"><h2>History</h2>${d.workouts.slice().reverse().map(w=>`<div class="item"><div class="item-row"><div class="item-main"><b>${esc(w.title)}</b><div class="item-sub">${w.date} • ${w.minutes} min</div></div><div class="actions"><button class="secondary" onclick="editWorkout('${w.id}')">Edit</button><button class="danger" onclick="delWorkout('${w.id}')">Delete</button></div></div></div>`).join('')||'<div class="empty">No workouts yet.</div>'}</div>`}
 function addWorkout(){let title=v('wTitle'),min=+v('wMin');if(!title||!min)return toast('Workout and minutes required');d.workouts.push({id:id(),title,minutes:min,date:todayLocal()});save();toast('Workout added');render()}
 function editWorkout(id){let x=d.workouts.find(w=>w.id===id);if(!x)return;let t=prompt('Workout:',x.title);if(t===null)return;let m=prompt('Minutes:',x.minutes);if(m===null)return;x.title=t.trim()||x.title;x.minutes=+m||x.minutes;save();render()}
@@ -288,9 +190,7 @@ async function uploadPDF(file){
   if(file.type!=="application/pdf")return toast("Please select a PDF");
   if(file.size>20*1024*1024)return toast("PDF limit is 20 MB");
   const user=await getCurrentUser();if(!user)return toast("Please login first");
-  const fileName=safeFileName(file.name);
-  const folder=(typeof window.noteFolder==='string'&&window.noteFolder!=='All'&&d.folders.includes(window.noteFolder))?window.noteFolder:'General';
-  const storagePath=`${user.id}/${folder}/${id()}-${fileName}`;
+  const fileName=safeFileName(file.name),storagePath=`${user.id}/${id()}-${fileName}`;
   toast("Uploading PDF...");
   try{
     const {error}=await supabaseClient.storage.from("pdfs").upload(storagePath,file,{cacheControl:"3600",upsert:false,contentType:"application/pdf"});
@@ -302,26 +202,77 @@ async function uploadPDF(file){
 }
 async function openPDF(noteId){
   const n=d.notes.find(x=>x.id===noteId);if(!n)return;
-  const user=await getCurrentUser();if(!user)return toast("Please login first");
-  if(!n.storage_path)return toast("Please upload this PDF again.");
+  const user=await getCurrentUser();if(!user)return toast('Please login first');
+  if(!n.storage_path)return toast('This PDF is from the old local storage. Upload it again to sync it.');
   try{
-    const {data,error}=await supabaseClient.storage.from('pdfs').createSignedUrl(n.storage_path,1800);
-    if(error)throw error;
-    if(!data?.signedUrl)throw new Error('Could not create PDF link');
-    window.__pdfReturnFolder=window.noteFolder||'All';
-    document.getElementById('pdfReaderTitle').textContent=n.title||'PDF';
-    document.getElementById('pdfReaderFrame').src=data.signedUrl;
-    document.getElementById('pdfReaderDownload').href=data.signedUrl;
-    document.getElementById('pdfReaderModal').classList.add('show');
-  }catch(e){console.error(e);toast('Could not open PDF: '+(e.message||'Storage error'))}
+    const {data,error}=await supabaseClient.storage.from('pdfs').createSignedUrl(n.storage_path,900);
+    if(error)throw error;if(!data?.signedUrl)throw new Error('Could not create PDF link');
+    await openPDFReader(data.signedUrl,n.title||n.file||'PDF Document',n.id);
+  }catch(e){console.error('PDF open error:',e);toast('Could not open PDF: '+(e.message||'Storage error'));}
 }
-function closePDFReader(){
-  const f=document.getElementById('pdfReaderFrame');
-  if(f)f.src='about:blank';
-  document.getElementById('pdfReaderModal')?.classList.remove('show');
-  window.noteFolder=window.__pdfReturnFolder||'All';
-  render();
+
+let pdfReaderState={pdf:null,url:'',title:'',noteId:'',page:1,scale:1,rotation:0,fit:'fit',bookmarks:new Set(),renderToken:0};
+async function openPDFReader(url,title,noteId){
+  const modal=document.getElementById('pdfReaderModal');if(!modal)return toast('PDF reader unavailable');
+  pdfReaderState={pdf:null,url,title,noteId,page:1,scale:1,rotation:0,fit:'fit',bookmarks:new Set(JSON.parse(localStorage.getItem('studentLifePdfBookmarks')||'[]')),renderToken:0};
+  document.getElementById('pdfReaderTitle').textContent=title;
+  document.getElementById('pdfReaderMeta').textContent='Loading secure document…';
+  document.getElementById('pdfPageInput').value='1';
+  document.getElementById('pdfZoomLabel').textContent='Fit';
+  document.getElementById('pdfThumbs').innerHTML='<div class="pdf-loading">Preparing pages…</div>';
+  document.getElementById('pdfCanvasArea').innerHTML='<div class="pdf-loading" id="pdfReaderLoading">Opening PDF…</div><div class="pdf-page-wrap" id="pdfPageWrap"><canvas id="pdfCanvas"></canvas></div>';
+  modal.classList.add('show');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
+  try{
+    if(!window.pdfjsLib)throw new Error('PDF engine did not load');
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    const res=await fetch(url,{cache:'no-store'});if(!res.ok)throw new Error('Secure PDF request failed ('+res.status+')');
+    const buf=await res.arrayBuffer();
+    const task=window.pdfjsLib.getDocument({data:buf});
+    const pdf=await task.promise;pdfReaderState.pdf=pdf;
+    document.getElementById('pdfReaderMeta').textContent='PDF Library • '+pdf.numPages+' pages';
+    document.getElementById('pdfPageTotalHead').textContent=pdf.numPages;document.getElementById('pdfPageTotalToolbar').textContent=pdf.numPages;
+    await renderPDFPage(1);renderPDFThumbs();
+  }catch(e){console.error(e);document.getElementById('pdfCanvasArea').innerHTML='<div class="pdf-error"><h3>Couldn’t open this PDF</h3><p>'+esc(e.message||'PDF loading failed')+'</p><button class="secondary" onclick="closePDFReader()">Back to PDF Library</button></div>';}
 }
+async function renderPDFPage(pageNo){
+  const pdf=pdfReaderState.pdf;if(!pdf)return;pageNo=Math.max(1,Math.min(pdf.numPages,pageNo));pdfReaderState.page=pageNo;document.getElementById('pdfPageInput').value=pageNo;
+  const token=++pdfReaderState.renderToken,page=await pdf.getPage(pageNo);if(token!==pdfReaderState.renderToken)return;
+  let base=page.getViewport({scale:1,rotation:pdfReaderState.rotation});let scale=pdfReaderState.scale;
+  const area=document.getElementById('pdfCanvasArea'),maxW=Math.max(280,area.clientWidth-56),maxH=Math.max(300,area.clientHeight-56);
+  if(pdfReaderState.fit==='fit-width')scale=maxW/base.width;
+  else if(pdfReaderState.fit==='fit')scale=Math.min(maxW/base.width,maxH/base.height);
+  scale=Math.max(.45,Math.min(3,scale));
+  const viewport=page.getViewport({scale,rotation:pdfReaderState.rotation}),canvas=document.getElementById('pdfCanvas'),ctx=canvas.getContext('2d');
+  const dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.floor(viewport.width*dpr);canvas.height=Math.floor(viewport.height*dpr);canvas.style.width=viewport.width+'px';canvas.style.height=viewport.height+'px';
+  document.getElementById('pdfPageWrap').style.width=viewport.width+'px';
+  await page.render({canvasContext:ctx,viewport,transform:dpr!==1?[dpr,0,0,dpr,0,0]:null}).promise;
+  pdfReaderState.scale=scale;document.getElementById('pdfZoomLabel').textContent=Math.round(scale*100)+'%';
+  document.querySelectorAll('.pdf-thumb').forEach(x=>x.classList.toggle('active',+x.dataset.page===pageNo));
+  const load=document.getElementById('pdfReaderLoading');if(load)load.remove();
+}
+async function renderPDFThumbs(){
+  const pdf=pdfReaderState.pdf,box=document.getElementById('pdfThumbs');if(!pdf||!box)return;box.innerHTML='';
+  const frag=document.createDocumentFragment();
+  for(let i=1;i<=pdf.numPages;i++){const item=document.createElement('div');item.className='pdf-thumb'+(i===1?' active':'');item.dataset.page=i;item.innerHTML='<span class="pdf-thumb-num">'+i+'</span><canvas></canvas>';item.onclick=()=>renderPDFPage(i);frag.appendChild(item);}
+  box.appendChild(frag);
+  const renderThumb=async(item)=>{try{const pg=await pdf.getPage(+item.dataset.page),v=pg.getViewport({scale:.18}),c=item.querySelector('canvas');c.width=Math.ceil(v.width);c.height=Math.ceil(v.height);c.style.width='100%';await pg.render({canvasContext:c.getContext('2d'),viewport:v}).promise}catch(e){console.warn('Thumbnail failed',e)}};
+  // Render the first few immediately, then progressively render the rest so large PDFs open quickly.
+  const items=[...box.children];
+  for(let i=0;i<Math.min(6,items.length);i++) await renderThumb(items[i]);
+  for(let i=6;i<items.length;i++) renderThumb(items[i]);
+}
+function closePDFReader(){const modal=document.getElementById('pdfReaderModal');if(modal){modal.classList.remove('show');modal.setAttribute('aria-hidden','true')}document.body.style.overflow='';pdfReaderState.pdf=null;}
+function pdfReaderPage(delta){if(pdfReaderState.pdf)renderPDFPage(pdfReaderState.page+delta)}
+function pdfReaderGo(){let n=Math.floor(+(document.getElementById('pdfPageInput').value||1));if(pdfReaderState.pdf){n=Math.max(1,Math.min(pdfReaderState.pdf.numPages,n));renderPDFPage(n)}}
+function pdfZoom(delta){pdfReaderState.fit='manual';pdfReaderState.scale=Math.max(.5,Math.min(3,(pdfReaderState.scale||1)+delta));renderPDFPage(pdfReaderState.page)}
+function pdfFit(mode){pdfReaderState.fit=mode;renderPDFPage(pdfReaderState.page)}
+function pdfRotate(){pdfReaderState.rotation=(pdfReaderState.rotation+90)%360;renderPDFPage(pdfReaderState.page)}
+function pdfToggleBookmark(){const s=pdfReaderState.bookmarks,key=pdfReaderState.noteId+':'+pdfReaderState.page;s.has(key)?s.delete(key):s.add(key);localStorage.setItem('studentLifePdfBookmarks',JSON.stringify([...s]));document.querySelectorAll('.pdfBookmarkBtn').forEach(b=>b.classList.toggle('active',s.has(key)));toast(s.has(key)?'Page bookmarked ✓':'Bookmark removed')}
+function pdfFullscreen(){const el=document.getElementById('pdfReaderShell');if(!document.fullscreenElement)el.requestFullscreen?.();else document.exitFullscreen?.()}
+async function pdfSearch(){const q=(document.getElementById('pdfSearchInput').value||'').trim().toLowerCase(),out=document.getElementById('pdfSearchResults');if(!q||!pdfReaderState.pdf){out.textContent='';return}out.textContent='Searching…';for(let i=1;i<=pdfReaderState.pdf.numPages;i++){const pg=await pdfReaderState.pdf.getPage(i),tc=await pg.getTextContent(),txt=tc.items.map(x=>x.str).join(' ').toLowerCase();if(txt.includes(q)){await renderPDFPage(i);out.textContent='Found on page '+i;return}}out.textContent='No matching text found.'}
+document.addEventListener('keydown',e=>{if(!document.getElementById('pdfReaderModal')?.classList.contains('show'))return;if(e.key==='Escape')closePDFReader();if(e.key==='ArrowRight')pdfReaderPage(1);if(e.key==='ArrowLeft')pdfReaderPage(-1);if(e.key==='+'||e.key==='=')pdfZoom(.1);if(e.key==='-')pdfZoom(-.1)});
+window.addEventListener('resize',()=>{if(document.getElementById('pdfReaderModal')?.classList.contains('show')&&pdfReaderState.pdf)renderPDFPage(pdfReaderState.page)});
+
 async function deleteNote(noteId){
   if(!confirm("Delete this note?"))return;
   const n=d.notes.find(x=>x.id===noteId);if(!n)return;
@@ -330,6 +281,7 @@ async function deleteNote(noteId){
     d.notes=d.notes.filter(x=>x.id!==noteId);await save();toast("Deleted");render();
   }catch(e){console.error("PDF delete error:",e);toast("Could not delete PDF: "+(e.message||"Storage error"));}
 }
+go('home');
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -344,20 +296,34 @@ const supabaseClient = supabase.createClient(
 
 console.log("Supabase connected");
 </script>
-<!-- PDF MODALS -->
-<div id="folderModal" class="modal pdf-folder-modal"><div class="pdf-dialog card">
-<div style="display:flex;justify-content:space-between;align-items:center"><div><h2 style="margin:0">Create Folder</h2><div class="muted">Organise your PDFs.</div></div><button class="secondary" onclick="closeFolderModal()">✕</button></div>
-<div class="field" style="margin-top:18px"><label>Folder name</label><div class="folder-create-row"><input class="input" id="newFolderName" maxlength="40" placeholder="Physics, Chemistry, JEE PYQ…"><button class="primary" onclick="createFolder()">Create</button></div></div>
-</div></div>
-<div id="pdfReaderModal" class="modal pdf-reader-modal">
-  <div class="pdf-reader-shell">
-    <div class="pdf-reader-bar">
-      <button class="reader-back" onclick="closePDFReader()">←</button>
-      <div class="pdf-reader-title"><b id="pdfReaderTitle">PDF</b><small>Notes & PDFs</small></div>
-      <a id="pdfReaderDownload" class="secondary" href="#" download>⬇</a>
+<!-- IN-APP PDF READER -->
+<div id="pdfReaderModal" class="pdf-reader-modal" aria-hidden="true">
+ <div id="pdfReaderShell" class="pdf-reader-shell">
+  <header class="pdf-reader-head">
+   <div class="pdf-reader-doc"><div class="pdf-file-icon">PDF</div><div style="min-width:0"><b id="pdfReaderTitle">PDF Reader</b><small id="pdfReaderMeta">Secure document</small></div></div>
+   <div class="pdf-reader-search"><span>⌕</span><input id="pdfSearchInput" placeholder="Search in this PDF…" onkeydown="if(event.key==='Enter')pdfSearch()"></div>
+   <div class="pdf-reader-head-actions"><button class="pdf-tool-btn" title="Search" onclick="pdfSearch()">⌕</button><button class="pdfBookmarkBtn pdf-tool-btn" title="Bookmark page" onclick="pdfToggleBookmark()">🔖</button><button class="pdf-tool-btn" title="Fullscreen" onclick="pdfFullscreen()">⛶</button><button class="pdf-tool-btn primary" onclick="closePDFReader()">← Back</button></div>
+  </header>
+  <div class="pdf-reader-main">
+   <aside class="pdf-thumb-panel"><div class="pdf-panel-head"><div><b>Pages</b><small>Document navigation</small></div><b id="pdfPageTotalHead">—</b></div><div class="pdf-tabs"><button class="pdf-tab active">Pages</button><button class="pdf-tab" onclick="toast('Bookmarks are saved on each PDF page')">Bookmarks</button></div><div id="pdfThumbs" class="pdf-thumbs"></div></aside>
+   <section class="pdf-workspace">
+    <div class="pdf-toolbar">
+     <div class="pdf-toolbar-group"><button class="pdf-tool-btn" onclick="pdfReaderPage(-1)">‹</button><div class="pdf-page-box"><input id="pdfPageInput" value="1" onchange="pdfReaderGo()"><span>/</span><b id="pdfPageTotalToolbar">—</b></div><button class="pdf-tool-btn" onclick="pdfReaderPage(1)">›</button></div>
+     <div class="pdf-toolbar-group"><button class="pdf-tool-btn" onclick="pdfZoom(-.1)">−</button><span id="pdfZoomLabel" class="pdf-zoom">Fit</span><button class="pdf-tool-btn" onclick="pdfZoom(.1)">＋</button></div>
+     <div class="pdf-toolbar-group"><button class="pdf-tool-btn" onclick="pdfFit('fit')">Fit</button><button class="pdf-tool-btn" onclick="pdfFit('fit-width')">Width</button></div>
+     <div class="pdf-toolbar-group"><button class="pdf-tool-btn" onclick="pdfRotate()">↻</button></div>
+     <div style="margin-left:auto;color:#7288a4;font-size:11px">← → Pages &nbsp; • &nbsp; + − Zoom</div>
     </div>
-    <div class="pdf-reader-body"><iframe id="pdfReaderFrame" title="PDF Reader"></iframe></div>
+    <div id="pdfCanvasArea" class="pdf-canvas-area"><div class="pdf-loading">Opening PDF…</div><div class="pdf-page-wrap" id="pdfPageWrap"><canvas id="pdfCanvas"></canvas></div></div>
+   </section>
+   <aside class="pdf-tools-panel">
+    <div class="pdf-tool-section"><h3>Reading Tools</h3><button class="pdf-action" onclick="pdfFit('fit-width')">↔️ Fit to width</button><button class="pdf-action" onclick="pdfFit('fit')">⛶ Fit page</button><button class="pdf-action" onclick="pdfRotate()">↻ Rotate page</button></div>
+    <div class="pdf-tool-section"><h3>Study</h3><button class="pdfBookmarkBtn pdf-action" onclick="pdfToggleBookmark()">🔖 Bookmark current page</button><button class="pdf-action" onclick="document.getElementById('pdfSearchInput').focus()">⌕ Find in PDF</button></div>
+    <div class="pdf-tool-section"><h3>Search result</h3><div id="pdfSearchResults" class="pdf-search-results">Search for a word or topic above.</div></div>
+    <div class="pdf-tool-section"><h3>Reader</h3><div class="pdf-reader-hint">The PDF stays inside Student Life. Use the page rail to jump quickly, zoom for comfortable reading, and bookmark important pages.</div></div>
+   </aside>
   </div>
+ </div>
 </div>
 <!-- SUPABASE LOGIN -->
 <div id="loginBox" style="
@@ -369,7 +335,7 @@ background:#07111f;color:white;font-family:Arial,sans-serif;">
   background:#101d35;border-radius:22px;
   box-shadow:0 20px 60px #0008;">
     
-    <h2 style="margin-top:0">🎓 Hello Chitranshu</h2>
+    <h2 style="margin-top:0">🎓 Student Life</h2>
     <p style="color:#aebbd0">Login to sync your study data</p>
 
     <input id="loginEmail" type="email"
@@ -485,11 +451,6 @@ async function loadStudyDataFromSupabase(){
 
     if(remote && remote.data){
       d = Object.assign(structuredClone(defaultData), remote.data);
-      d.folders=Array.isArray(d.folders)?d.folders.map(x=>String(x).trim()).filter(Boolean):['General'];
-      if(!d.folders.some(f=>f.toLowerCase()==='general'))d.folders.unshift('General');
-      d.folders=[...new Set(d.folders)];
-      d.notes=Array.isArray(d.notes)?d.notes:[];
-      d.notes.forEach(n=>{if(!n.folder||!d.folders.includes(n.folder))n.folder='General';});
       localStorage.setItem(KEY, JSON.stringify(d));
       if(typeof render === "function") render();
       console.log("✅ Data loaded from Supabase");
@@ -512,8 +473,6 @@ async function checkStudentLogin(){
 }
 
 checkStudentLogin();
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </body></html>
-
-
