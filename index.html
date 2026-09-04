@@ -3,6 +3,8 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#07111f"><link rel="manifest" href="manifest.webmanifest"><title>Student Life</title>
 <style>
 :root{--bg:#06101d;--panel:#0b1727;--panel2:#0e1c2f;--line:#1b2d45;--text:#edf4ff;--muted:#8295ae;--blue:#2680ff;--blue2:#155bd1;--green:#19c878;--purple:#965cff;--orange:#ffad22;--red:#ff5d6c;--shadow:0 18px 50px #0006}
+
+
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text)}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}
 .app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.side{border-right:1px solid var(--line);background:#071321;padding:22px 16px;position:sticky;top:0;height:100vh;overflow:auto}.brand{display:flex;gap:12px;align-items:center;margin:4px 8px 28px}.brand-icon{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#1677ff,#6a45ff);display:grid;place-items:center;font-size:22px;box-shadow:0 10px 25px #1677ff44}.brand b{font-size:19px}.brand small{display:block;color:var(--muted);margin-top:2px}.nav-title{font-size:11px;color:#647993;letter-spacing:.12em;text-transform:uppercase;margin:22px 10px 8px}.nav button{width:100%;border:0;background:transparent;color:#91a2b9;text-align:left;border-radius:12px;padding:11px 12px;margin:3px 0;font-weight:700}.nav button:hover{background:#0e1d31;color:#fff}.nav button.active{background:linear-gradient(135deg,#1457c8,#176be6);color:#fff;box-shadow:0 8px 25px #1667e044}.streak{margin-top:28px;padding:16px;border:1px solid var(--line);background:linear-gradient(145deg,#0d1c30,#10192a);border-radius:16px}.streak b{font-size:28px}.streak small{color:var(--muted)}
 .main{min-width:0}.top{height:74px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:0 28px;background:#071321e8;backdrop-filter:blur(16px);position:sticky;top:0;z-index:10}.search{flex:1;max-width:520px}.search input{width:100%;background:#0c1a2c;border:1px solid var(--line);color:#fff;padding:11px 14px;border-radius:12px;outline:none}.top-actions{margin-left:auto;display:flex;gap:8px}.icon-btn{border:1px solid var(--line);background:#0c1a2c;color:#d8e4f5;border-radius:11px;padding:10px 12px}.content{padding:28px;max-width:1500px;margin:auto}.hero{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:22px}.eyebrow{color:#7590b2;text-transform:uppercase;font-size:11px;font-weight:800;letter-spacing:.14em}.hero h1{font-size:31px;margin:5px 0}.hero p{color:var(--muted);margin:0}.date-pill{background:#0d1b2d;border:1px solid var(--line);padding:11px 14px;border-radius:12px;color:#d8e4f5}
@@ -43,12 +45,59 @@
 .folder-icon{font-size:40px;line-height:1;filter:drop-shadow(0 6px 8px #0004)}
 .folder-name{font-size:14px;font-weight:850;line-height:1.2;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .folder-count{font-size:11px;color:#8198b5}
+@media(max-width:900px){.ai-chat{height:calc(100vh - 210px);min-height:500px}}
 @media(max-width:700px){.folder-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.folder-card{min-height:145px}}
 /* planner */.planner{background:#07111f;border:1px solid #1c2d44;border-radius:24px;overflow:hidden;box-shadow:var(--shadow)}.planner-top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:24px 26px;background:linear-gradient(135deg,#09172a,#0b1422)}.planner-title h2{margin:0;font-size:28px}.planner-title p{margin:4px 0;color:#8194ae;font-size:13px}.planner-controls{display:flex;gap:8px}.planner-date{background:#0d1a2b;border:1px solid #24364e;color:#e7edf7;border-radius:11px;padding:10px;width:auto}.planner-body{padding:0 26px 26px}.planner-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;padding:16px 0}.pstat{background:#0d1a2b;border:1px solid #1c2d44;border-radius:15px;padding:15px}.pstat b{font-size:20px}.pstat small{display:block;color:#7f93ae;margin-top:3px}.planner-grid{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:14px}.planner-main,.p-side-card{background:#0a1727;border:1px solid #1c2d44;border-radius:18px}.planner-tabs{display:flex;gap:24px;padding:17px 18px 0;border-bottom:1px solid #1b2a40}.planner-tab{border:0;background:transparent;color:#8193aa;padding-bottom:13px;font-weight:800;border-bottom:3px solid transparent}.planner-tab.active{color:#fff;border-color:#2680ff}.timeline{padding:10px 18px 18px}.timeline-row{display:grid;grid-template-columns:76px 12px minmax(0,1fr) 32px;gap:11px;align-items:center;padding:9px 0}.timeline-time{text-align:right;color:#8da0b8;font-size:12px;font-weight:800}.timeline-line{height:100%;min-height:62px;display:flex;justify-content:center;position:relative}.timeline-line:before{content:"";position:absolute;top:0;bottom:-18px;width:1px;background:#243750}.timeline-dot{width:10px;height:10px;border-radius:50%;background:#2680ff;z-index:1;margin-top:7px;box-shadow:0 0 0 5px #2680ff18}.timeline-card{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#0e1a2a;border:1px solid #1b2c42;border-radius:13px;padding:13px}.timeline-card small{display:block;color:#7f93ae;margin-top:4px}.pcheck{border:1px solid #29405b;background:#0b1b2e;color:#6f88a4;border-radius:8px;width:30px;height:30px}.pcheck.done{background:#123b2b;color:#5be8a8;border-color:#2d9d6a}.p-side-card{padding:18px}.p-side-card+.p-side-card{margin-top:12px}.progress-ring{width:130px;height:130px;border-radius:50%;margin:8px auto 16px;background:conic-gradient(#2680ff var(--progress),#172a42 0);display:grid;place-items:center;position:relative}.progress-ring:after{content:"";position:absolute;inset:10px;background:#0a1727;border-radius:50%}.progress-ring span{z-index:1;font-size:24px;font-weight:850}.side-stat{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #17283d}.side-stat span{color:#7f93ae}.quick-add{display:grid;gap:8px}.quick-add button{border:1px solid #243b58;background:#0d1e33;color:#dce7f5;padding:11px;border-radius:10px;text-align:left}.planner-add{width:100%;margin-top:9px;border:1px dashed #2a4b72;background:#091a2e;color:#5fa5ff;padding:13px;border-radius:11px;font-weight:800}
 .day-picker{display:flex;gap:6px;flex-wrap:wrap;margin:9px 0}.time-picker{display:flex;gap:6px;align-items:center}.time-picker .select{min-width:0;padding:10px 9px}.time-picker .tp-hour{width:74px}.time-picker .tp-minute{width:78px}.time-picker .tp-period{width:78px}.time-sep{color:#7890ad;font-weight:900}.day-chip input{display:none}.day-chip span{display:inline-block;padding:7px 9px;border:1px solid #263c58;background:#0b1a2c;color:#8193aa;border-radius:9px;font-size:12px;font-weight:800;cursor:pointer}.day-chip input:checked+span{background:#1457c8;border-color:#2680ff;color:#fff}.search-results{position:absolute;top:58px;left:0;right:0;background:#0b1727;border:1px solid var(--line);border-radius:14px;padding:8px;box-shadow:var(--shadow);z-index:30}.search-wrap{position:relative;flex:1;max-width:560px}.search-result{padding:10px;border-radius:9px;color:#dbe7f5;cursor:pointer}.search-result:hover{background:#102038}
 .toast{position:fixed;right:22px;bottom:22px;background:#102038;border:1px solid #2a4564;color:#fff;padding:12px 15px;border-radius:12px;box-shadow:var(--shadow);z-index:50}.mobile-nav{display:none}
 @media(max-width:1000px){.app{grid-template-columns:76px 1fr}.side{padding:16px 10px}.brand div:last-child,.nav-title,.nav button span,.streak{display:none}.brand{justify-content:center}.nav button{text-align:center}.nav button b{display:block}.grid4{grid-template-columns:repeat(2,1fr)}.planner-grid,.layout2{grid-template-columns:1fr}}
 @media(max-width:700px){.app{display:block}.side{display:none}.top{padding:0 14px}.content{padding:18px 14px 80px}.hero{align-items:flex-start}.hero h1{font-size:25px}.grid4,.quick,.planner-stats{grid-template-columns:1fr 1fr}.planner-top{padding:18px;align-items:flex-start;flex-direction:column}.planner-body{padding:0 12px 15px}.timeline-row{grid-template-columns:55px 10px minmax(0,1fr) 30px}.timeline-card{padding:10px}.mobile-nav{position:fixed;display:flex;bottom:0;left:0;right:0;background:#071321f5;border-top:1px solid var(--line);z-index:40;padding:7px 8px;justify-content:space-around}.mobile-nav button{border:0;background:transparent;color:#8193aa;padding:7px 9px;font-size:11px}.mobile-nav button b{display:block;font-size:17px}.row{flex-direction:column}.top-actions{display:none}.search-wrap{max-width:none}}
+
+
+/* ===== AI Chat History + File Upload ===== */
+.ai-history{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.ai-history select{max-width:190px}
+.ai-file-row{display:flex;gap:8px;align-items:center;margin-top:9px;flex-wrap:wrap}
+.ai-file-btn{border:1px solid #29415f;background:#0b1a2c;color:#dce8f7;padding:9px 12px;border-radius:10px;font-weight:800}
+.ai-file-list{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.ai-file-chip{display:flex;align-items:center;gap:6px;background:#10223a;border:1px solid #294666;color:#cfe0f5;border-radius:9px;padding:6px 8px;font-size:11px}
+.ai-file-chip button{border:0;background:transparent;color:#ff9da7;padding:0 2px}
+.ai-chat-list{display:grid;gap:7px}
+.ai-chat-item{display:flex;gap:8px;align-items:center;border:1px solid #233955;background:#0b1a2c;color:#dce8f7;padding:9px 10px;border-radius:10px;text-align:left}
+.ai-chat-item.active{border-color:#2680ff;background:#10294b}
+.ai-chat-item span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.ai-chat-item small{color:#7187a3}
+
+/* ===== AI Study Assistant ===== */
+.ai-wrap{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px}
+
+.ai-page-shell{width:100%;min-height:0}
+.ai-page-shell:fullscreen{background:var(--bg);padding:16px;box-sizing:border-box;overflow:hidden;display:flex;flex-direction:column;min-height:100vh}
+.ai-page-shell:fullscreen .hero{flex:0 0 auto;margin-bottom:14px}
+.ai-page-shell:fullscreen .ai-wrap{flex:1 1 auto;height:auto;min-height:0;grid-template-columns:minmax(0,1fr) 300px}
+.ai-page-shell:fullscreen .ai-chat{height:100%;min-height:0}
+.ai-page-shell:fullscreen .ai-messages{min-height:0}
+.ai-fullscreen-btn{white-space:nowrap}
+.ai-chat{background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;height:min(760px,calc(100vh - 150px));min-height:560px;display:flex;flex-direction:column}
+.ai-head{padding:18px 20px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,#0b1d35,#16102f);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.ai-head h2{margin:0}.ai-status{font-size:11px;color:#7f93ae}
+.ai-messages{flex:1 1 auto;padding:18px;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;gap:12px;min-height:0;scroll-behavior:smooth;overscroll-behavior:contain;scrollbar-width:thin}
+.ai-msg{max-width:90%;padding:12px 14px;border-radius:15px;line-height:1.55;font-size:14px;overflow-wrap:anywhere}.ai-msg.user{white-space:pre-wrap}.ai-msg.bot{white-space:normal}.ai-msg.bot h1,.ai-msg.bot h2,.ai-msg.bot h3{margin:8px 0 6px}.ai-msg.bot p{margin:6px 0}.ai-msg.bot ul,.ai-msg.bot ol{margin:6px 0 8px;padding-left:22px}.ai-msg.bot li{margin:3px 0}.ai-msg.bot pre{margin:9px 0;padding:11px 12px;overflow:auto;background:#07111f;border:1px solid #243a56;border-radius:10px}.ai-msg.bot code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#081522;border:1px solid #20344d;border-radius:5px;padding:1px 4px;font-size:.92em}.ai-msg.bot pre code{background:transparent;border:0;padding:0}.ai-msg.bot blockquote{margin:8px 0;padding-left:12px;border-left:3px solid #397bd2;color:#aebed1}.ai-typing{min-height:22px}.ai-attachment-note{font-size:11px;color:#8297b0;margin-top:6px}.ai-head-actions{display:flex;gap:7px;align-items:center}.ai-stop{display:none;border:1px solid #5a2630;background:#25141a;color:#ffb0b8;padding:9px 11px;border-radius:10px;font-weight:800}.ai-stop.show{display:block}
+.ai-msg.user{align-self:flex-end;background:#1457c8;color:#fff;border-bottom-right-radius:5px}
+.ai-msg.bot{align-self:flex-start;background:#0e1c2f;border:1px solid #203650;color:#e6effa;border-bottom-left-radius:5px}
+.ai-msg.system{align-self:center;background:#0a1727;border:1px dashed #29405e;color:#8da1ba;font-size:12px;max-width:95%}
+.ai-compose{padding:14px;border-top:1px solid var(--line);background:#081423}
+.ai-compose-row{display:flex;gap:8px}.ai-compose textarea{min-height:52px;max-height:150px;resize:vertical;flex:1}
+.ai-side{display:flex;flex-direction:column;gap:12px}
+.ai-side .card{margin:0}
+.ai-quick{display:grid;gap:8px}.ai-quick button{border:1px solid #243b58;background:#0d1e33;color:#dce7f5;padding:10px;border-radius:10px;text-align:left;font-weight:750}
+.ai-key-row{display:flex;gap:7px}.ai-key-row input{flex:1}
+.ai-mini{font-size:11px;color:#7187a3;line-height:1.5}
+.ai-loading{display:inline-flex;gap:5px;align-items:center;color:#8da2bd}
+.ai-loading i{width:6px;height:6px;border-radius:50%;background:#6fa8ff;animation:aiPulse .9s infinite}.ai-loading i:nth-child(2){animation-delay:.15s}.ai-loading i:nth-child(3){animation-delay:.3s}
+@keyframes aiPulse{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+@media(max-width:1000px){.ai-wrap{grid-template-columns:1fr}.ai-side{display:grid;grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.ai-side{display:flex}.ai-msg{max-width:94%}.ai-compose-row{align-items:stretch}.ai-compose-row .primary{width:90px}}
 
 /* ===== Mission Discipline PDF Reader ===== */
 .pdf-reader-modal{display:none;position:fixed;inset:0;z-index:99990;background:#030812;color:#edf4ff;align-items:stretch;justify-content:stretch;padding:0}
@@ -92,13 +141,15 @@
 
 </style></head>
 <body>
-<div class="app"><aside class="side"><div class="brand"><div class="brand-icon" id="brandIcon">🎓</div><div><b id="brandNameSide">Student Life</b><small>Focus · Plan · Achieve</small></div></div><div class="nav"><div class="nav-title">Main</div><button data-page="home" onclick="go('home')">🏠 <span>Dashboard</span></button><button data-page="ai" onclick="go('ai')">▣ <span>Planner</span></button><button data-page="study" onclick="go('study')">◎ <span>Targets</span></button><button data-page="classes" onclick="go('classes')">🎓 <span>Live Classes</span></button><button data-page="focus" onclick="go('focus')">⏱ <span>Focus Timer</span></button><button data-page="notes" onclick="go('notes')">📄 <span>Notes & PDFs</span></button><div class="nav-title">Personal</div><button data-page="routine" onclick="go('routine')">◷ <span>Routine</span></button><button data-page="challenge" onclick="go('challenge')">🎯 <span>Goals</span></button><button data-page="workout" onclick="go('workout')">🏃 <span>Workout</span></button><button data-page="settings" onclick="go('settings')">⚙ <span>Settings</span></button></div><div class="streak"><small>Current streak</small><br><b id="streakSide">0</b> 🔥<br><small>days</small></div></aside>
-<main class="main"><header class="top"><div class="search-wrap"><div class="search"><input id="globalSearch" type="search" name="student-life-search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search targets, classes, goals, notes…" onkeydown="this._manualInput=true" onpaste="this._manualInput=true" oninput="if(this._manualInput) searchAll(this.value)"></div><div id="searchResults"></div></div><div class="top-actions"><button class="icon-btn" onclick="go('focus')">⏱ Focus</button><button class="icon-btn" onclick="quickTarget()">＋ Add</button></div></header><section class="content" id="app"></section></main></div>
-<nav class="mobile-nav"><button onclick="go('home')"><b>⌂</b>Home</button><button onclick="go('ai')"><b>▣</b>Planner</button><button onclick="quickTarget()"><b>＋</b>Add</button><button onclick="go('focus')"><b>◷</b>Focus</button><button onclick="go('settings')"><b>•••</b>More</button></nav><div id="toast" class="toast" style="display:none"></div>
+<div class="app"><aside class="side"><div class="brand"><div class="brand-icon" id="brandIcon">🎓</div><div><b id="brandNameSide">Student Life</b><small>Focus · Plan · Achieve</small></div></div><div class="nav"><div class="nav-title">Main</div><button data-page="home" onclick="go('home')">🏠 <span>Dashboard</span></button><button data-page="ai" onclick="go('ai')">▣ <span>Planner</span></button><button data-page="assistant" onclick="go('assistant')">🤖 <span>AI Assistant</span></button><button data-page="study" onclick="go('study')">◎ <span>Targets</span></button><button data-page="classes" onclick="go('classes')">🎓 <span>Live Classes</span></button><button data-page="focus" onclick="go('focus')">⏱ <span>Focus Timer</span></button><button data-page="notes" onclick="go('notes')">📄 <span>Notes & PDFs</span></button><div class="nav-title">Personal</div><button data-page="routine" onclick="go('routine')">◷ <span>Routine</span></button><button data-page="challenge" onclick="go('challenge')">🎯 <span>Goals</span></button><button data-page="workout" onclick="go('workout')">🏃 <span>Workout</span></button><button data-page="settings" onclick="go('settings')">⚙ <span>Settings</span></button></div><div class="streak"><small>Current streak</small><br><b id="streakSide">0</b> 🔥<br><small>days</small></div></aside>
+<main class="main"><header class="top"><div class="search-wrap"><div class="search"><input id="globalSearch" type="search" name="student-life-search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search targets, classes, goals, notes…" onkeydown="this._manualInput=true" onpaste="this._manualInput=true" oninput="if(this._manualInput) searchAll(this.value)"></div><div id="searchResults"></div></div><div class="top-actions"><button class="icon-btn" onclick="go('assistant')">🤖 AI</button><button class="icon-btn" onclick="go('focus')">⏱ Focus</button><button class="icon-btn" onclick="quickTarget()">＋ Add</button></div></header><section class="content" id="app"></section></main></div>
+<nav class="mobile-nav"><button onclick="go('home')"><b>⌂</b>Home</button><button onclick="go('assistant')"><b>🤖</b>AI</button><button onclick="go('ai')"><b>▣</b>Planner</button><button onclick="quickTarget()"><b>＋</b>Add</button><button onclick="go('focus')"><b>◷</b>Focus</button><button onclick="go('settings')"><b>•••</b>More</button></nav><div id="toast" class="toast" style="display:none"></div>
 <script>
 const KEY='studentLifeShareV1';
 const defaultData={targets:[],classes:[],routine:[],goals:[],workouts:[],notes:[],folders:['General'],done:{},settings:{focus:25,theme:'dark',name:'Student',brandName:'Student Life',brandLogo:'',timerSound:true},sessions:[],plans:{}};
 let d=load(); let current='home', plannerDate=todayLocal(), timer=null, timerLeft=0, timerRunning=false, pdfDB=null, focusSubject='';
+document.querySelector('meta[name=theme-color]')?.setAttribute('content','#07111f');
+
 function load(){try{let raw=localStorage.getItem(KEY);if(!raw){let legacy=JSON.parse(localStorage.getItem('studyLifeV3')||'null');if(legacy){let migrated=structuredClone(defaultData);migrated.targets=(legacy.study||[]).map((t,i)=>({id:t.id||'t-'+Date.now()+i,title:t.t||'Study task',subject:t.s||'Study',date:t.date||todayLocal(),time:t.time||'',minutes:+t.m||0,priority:'Normal'}));migrated.classes=legacy.classes||[];migrated.routine=legacy.routine||[];migrated.goals=(legacy.goals||[]).map((g,i)=>({id:g.id||'g-'+Date.now()+i,title:g.t||g.title||'Goal',date:g.date||todayLocal(),cat:g.p||g.cat||'Study',progress:g.progress||0,note:g.m||g.note||''}));migrated.workouts=legacy.workout||legacy.workouts||[];migrated.notes=legacy.notes||[];migrated.folders=legacy.noteFolders||['General'];migrated.done={};Object.keys(legacy.done||{}).forEach(k=>{if(k.startsWith('study-'))migrated.done['t-'+k.slice(6)]=legacy.done[k];else if(k.startsWith('goal-'))migrated.done['g-'+k.slice(5)]=legacy.done[k]});migrated.settings.focusMinutes=legacy.settings?.focusMinutes||25;raw=JSON.stringify(migrated);localStorage.setItem(KEY,raw)}}let x=JSON.parse(raw||'null')||structuredClone(defaultData);x=Object.assign(structuredClone(defaultData),x);x.targets=x.targets||x.study||[];x.classes=x.classes||[];x.routine=x.routine||[];x.goals=x.goals||[];x.workouts=x.workouts||x.workout||[];x.notes=x.notes||[];x.folders=x.folders||x.noteFolders||['General'];x.done=x.done||{};x.sessions=x.sessions||[];x.settings=Object.assign({},defaultData.settings,x.settings||{});x.settings.name=(x.settings.name||'Student').trim()||'Student';x.settings.brandName=(x.settings.brandName||'Student Life').trim()||'Student Life';x.settings.brandLogo=typeof x.settings.brandLogo==='string'?x.settings.brandLogo:'';x.targets.forEach((t,i)=>{if(!t.id)t.id='t-'+Date.now()+i;t.start=t.start||t.time||'';t.end=t.end||((t.start&&t.minutes)?addMin(t.start,+t.minutes):'');t.time=t.start||t.time||''});x.classes.forEach((c,i)=>{if(!c.id)c.id='c-'+Date.now()+i;c.days=Array.isArray(c.days)?c.days:(c.day!=null?[+c.day]:[1,2,3,4,5]);c.start=c.start||c.time||'16:00';c.end=c.end||addMin(c.start,60)});x.routine.forEach((r,i)=>{if(!r.id)r.id='r-'+Date.now()+i;r.days=Array.isArray(r.days)?r.days:[0,1,2,3,4,5,6];r.start=r.start||r.time||'06:00';r.end=r.end||addMin(r.start,60)});x.folders=(Array.isArray(x.folders)?x.folders:[]).map(f=>typeof f==='string'?f:(f?.name||f?.title||'General')).filter(Boolean);if(!x.folders.some(f=>f.toLowerCase()==='general'))x.folders.unshift('General');x.folders=[...new Set(x.folders)];x.notes=(Array.isArray(x.notes)?x.notes:[]).map(n=>{n=n||{};if(typeof n.folder!=='string')n.folder=n.folder?.name||n.folder?.title||'General';if(typeof n.title!=='string')n.title=n.title?.name||n.title?.title||'Untitled';if(typeof n.subject!=='string')n.subject=n.subject?.name||n.subject?.title||'';if(typeof n.file!=='string'&&n.file!=null)n.file=n.file?.name||n.file?.title||'';if(!n.id)n.id='n-'+Date.now()+Math.random();return n});x.notes.forEach(n=>{n.folder=n.folder||'General'});return x}catch(e){return structuredClone(defaultData)}}
 async function save(){
 
@@ -154,7 +205,7 @@ function isDone(type,id){return !!d.done[type+id]} function setDone(type,id,v){d
 function streak(){let dates=new Set(d.sessions.map(s=>s.date));d.targets.filter(t=>isDone('t-',t.id)).forEach(t=>dates.add(t.completedDate||t.date));let n=0,dt=new Date();while(dates.has(dt.toISOString().slice(0,10))||dates.has(dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0'))){n++;dt.setDate(dt.getDate()-1)}return n}
 function updateSide(){let e=document.getElementById('streakSide');if(e)e.textContent=streak();let n=document.getElementById('brandNameSide'),i=document.getElementById('brandIcon');if(n)n.textContent=d.settings.brandName||'Student Life';if(i)i.innerHTML=d.settings.brandLogo?`<img src="${esc(d.settings.brandLogo)}" alt="Logo" style="width:100%;height:100%;object-fit:cover;border-radius:11px">`:'🎓';document.title=timerRunning?document.title:(d.settings.brandName||'Student Life')}
 function go(p){current=p;window.scrollTo({top:0,behavior:'smooth'});render();document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===p));}
-function render(){updateSide();let a=document.getElementById('app');if(current==='home')return home(a);if(current==='ai')return planner(a);if(current==='study')return targets(a);if(current==='classes')return classes(a);if(current==='focus')return focus(a);if(current==='notes')return notes(a);if(current==='routine')return routine(a);if(current==='challenge')return goals(a);if(current==='workout')return workout(a);if(current==='settings')return settings(a)}
+function render(){updateSide();let a=document.getElementById('app');if(current==='home')return home(a);if(current==='assistant')return aiAssistant(a);if(current==='ai')return planner(a);if(current==='study')return targets(a);if(current==='classes')return classes(a);if(current==='focus')return focus(a);if(current==='notes')return notes(a);if(current==='routine')return routine(a);if(current==='challenge')return goals(a);if(current==='workout')return workout(a);if(current==='settings')return settings(a)}
 function home(a){let t=todayLocal(),dn=dayOf(t),ts=d.targets.filter(x=>x.date===t),cs=d.classes.filter(x=>x.days.includes(dn)).sort((a,b)=>a.start.localeCompare(b.start)),rs=d.routine.filter(x=>x.days.includes(dn)).sort((a,b)=>a.start.localeCompare(b.start)),done=ts.filter(x=>isDone('t-',x.id)).length,focus=d.sessions.filter(x=>x.date===t).reduce((n,x)=>n+x.minutes,0),pct=ts.length?Math.round(done/ts.length*100):0;let hr=new Date().getHours(),g=hr<12?'Good morning':hr<18?'Good afternoon':'Good evening';a.innerHTML=`<div class="hero"><div><div class="eyebrow">${g} 👋</div><h1>${esc(d.settings.brandName||'Student Life')}</h1><p>Everything you need for a focused study day.</p></div><div class="date-pill">${fmtDate(t)}</div></div><div class="grid4"><div class="stat"><div class="num">${ts.length}</div><small>Today's targets</small></div><div class="stat"><div class="num">${done}</div><small>Targets completed</small></div><div class="stat"><div class="num">${Math.floor(focus/60)}h ${focus%60}m</div><small>Focus today</small></div><div class="stat"><div class="num">${cs.length}</div><small>Live classes</small></div></div><div class="card" style="margin-top:16px"><div class="section-head" style="display:flex;justify-content:space-between"><div><h2>Quick actions</h2><div class="muted">Jump straight into what you need.</div></div></div><div class="quick"><button class="q1" onclick="quickTarget()">◎ Add Target<small>Plan a study task</small></button><button class="q2" onclick="go('classes')">🎓 Live Classes<small>${cs.length} today</small></button><button class="q3" onclick="go('notes')">📄 Notes & PDFs<small>${d.notes.length} saved</small></button><button class="q4" onclick="go('focus')">⏱ Focus Timer<small>Start ${d.settings.focus} min</small></button></div></div><div class="layout2"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><h2>Today's Plan</h2><button class="secondary" onclick="go('ai')">Open Planner</button></div>${ts.slice().sort(sortTarget).map(t=>targetRow(t,true)).join('')||'<div class="empty">No targets for today. Add one and get started.</div>'}</div><div><div class="card"><h3>Daily Progress</h3><div class="progress-ring" style="--progress:${pct*3.6}deg"><span>${pct}%</span></div><div class="side-stat"><span>Done</span><b>${done}</b></div><div class="side-stat"><span>Pending</span><b>${Math.max(0,ts.length-done)}</b></div></div><div class="card"><h3>Next up</h3>${[...rs.map(x=>({kind:'routine',x})),...cs.map(x=>({kind:'class',x}))].sort((a,b)=>a.x.start.localeCompare(b.x.start)).slice(0,4).map(z=>`<div class="item"><b>${fmtTime(z.x.start)}</b> <span class="tag ${z.kind==='class'?'purple':'green'}">${z.kind==='class'?'Live Class':z.x.c||'Routine'}</span><div class="item-sub">${esc(z.kind==='class'?z.x.subject:z.x.t)}</div></div>`).join('')||'<div class="empty">Nothing scheduled.</div>'}</div></div></div>`}
 function timeParts(t){if(!t)return {h:'12',m:'00',p:'AM'};let [hh,mm]=t.split(':').map(Number),p=hh>=12?'PM':'AM',h=hh%12||12;return {h:String(h),m:String(mm).padStart(2,'0'),p}}
 function timeField(prefix,label,value=''){let q=timeParts(value);let mins=Array.from({length:60},(_,i)=>String(i).padStart(2,'0')).map(m=>`<option value="${m}" ${q.m===m?'selected':''}>${m}</option>`).join('');let hrs=Array.from({length:12},(_,i)=>String(i+1)).map(h=>`<option value="${h}" ${q.h===h?'selected':''}>${h}</option>`).join('');return `<div class="field"><label>${label}</label><div class="time-picker"><select class="select tp-hour" id="${prefix}H">${hrs}</select><span class="time-sep">:</span><select class="select tp-minute" id="${prefix}M">${mins}</select><select class="select tp-period" id="${prefix}P"><option ${q.p==='AM'?'selected':''}>AM</option><option ${q.p==='PM'?'selected':''}>PM</option></select></div></div>`}
@@ -202,6 +253,294 @@ function routine(a){a.innerHTML=`<div class="hero"><div><div class="eyebrow">Rep
 function addRoutine(){let title=v('rTitle'),start=readTime('rStart'),end=readTime('rEnd'),ds=checked('rd');if(!title||!start||!end||!ds.length)return toast('Fill the routine and select days');if(duration(start,end)<=0)return toast('End time must be after start time');d.routine.push({id:id(),title,cat:v('rCat'),start,end,days:ds});save();toast('Routine added');render()}
 function editRoutine(id){let x=d.routine.find(r=>r.id===id);if(!x)return;let t=prompt('Routine:',x.title);if(t===null)return;let stRaw=prompt('Start time (e.g. 6:30 AM):',fmtTime(x.start));if(stRaw===null)return;let enRaw=prompt('End time (e.g. 7:30 AM):',fmtTime(x.end));if(enRaw===null)return;let st=parseTimeInput(stRaw),en=parseTimeInput(enRaw);if(!st||!en)return toast('Use times like 6:30 AM');if(duration(st,en)<=0)return toast('End time must be after start time');let ds=prompt('Days (0=Sun..6=Sat):',x.days.join(','));if(ds===null)return;let p=ds.split(',').map(Number).filter(n=>n>=0&&n<=6);if(!p.length)return;x.title=t.trim()||x.title;x.start=st;x.end=en;x.days=[...new Set(p)];save();toast('Routine updated');render()}
 function delRoutine(id){if(!confirm('Delete this routine item?'))return;d.routine=d.routine.filter(x=>x.id!==id);save();toast('Routine deleted');render()}
+
+/* ===== AI Study Assistant ===== */
+const AI_KEY='studentLifeGroqKeyV1';
+const AI_MODEL='openai/gpt-oss-120b';
+const AI_VISION_MODEL='qwen/qwen3.6-27b';
+const AI_CHATS='studentLifeAIChatsV3';
+const AI_ACTIVE='studentLifeAIActiveV3';
+const AI_OWNER='studentLifeAIChatOwnerV1';
+const AI_MAX_HISTORY=40;
+let aiChats=loadAIChats();
+let aiActiveId=localStorage.getItem(AI_ACTIVE)||'';
+let aiFiles=[];
+let aiAbortController=null;
+
+function getAIKey(){try{return localStorage.getItem(AI_KEY)||''}catch(e){return ''}}
+function setAIKey(v){try{if(v)localStorage.setItem(AI_KEY,v);else localStorage.removeItem(AI_KEY)}catch(e){}}
+function loadAIChats(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(AI_CHATS)||'null');
+    if(Array.isArray(saved))return saved;
+    const legacy=JSON.parse(localStorage.getItem('studentLifeAIChatsV2')||'[]');
+    return Array.isArray(legacy)?legacy:[];
+  }catch(e){return []}
+}
+function saveAIChats(){
+  try{
+    d.aiChats=aiChats;
+    localStorage.setItem(AI_CHATS,JSON.stringify(aiChats));
+    localStorage.setItem(AI_ACTIVE,aiActiveId||'');
+    localStorage.setItem(KEY,JSON.stringify(d));
+    save();
+  }catch(e){console.warn('AI chat save failed',e)}
+}
+function loadAIChatsFromData(userId=''){
+  let owner='';try{owner=localStorage.getItem(AI_OWNER)||''}catch(e){}
+  if(userId && owner && owner!==userId){
+    aiChats=Array.isArray(d.aiChats)?d.aiChats:[];
+    aiActiveId=aiChats[0]?.id||'';
+  }else if(Array.isArray(d.aiChats)){
+    aiChats=d.aiChats;
+    if(!aiChats.some(x=>x.id===aiActiveId))aiActiveId=aiChats[0]?.id||'';
+  }
+  if(userId)try{localStorage.setItem(AI_OWNER,userId)}catch(e){}
+  try{localStorage.setItem(AI_CHATS,JSON.stringify(aiChats));localStorage.setItem(AI_ACTIVE,aiActiveId||'')}catch(e){}
+}
+function makeChat(title='New Chat'){
+  const c={id:id(),title:title||'New Chat',createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),messages:[]};
+  aiChats.unshift(c);aiActiveId=c.id;saveAIChats();return c;
+}
+function activeAIChat(){let c=aiChats.find(x=>x.id===aiActiveId);if(!c)c=makeChat();return c}
+function aiChatTitleFromText(s){s=(s||'').trim().replace(/\s+/g,' ');return s.length>42?s.slice(0,42)+'…':(s||'New Chat')}
+function newAIChat(){makeChat();aiFiles=[];render();setTimeout(()=>document.getElementById('aiInput')?.focus(),50)}
+function deleteAIChat(cid){if(!confirm('Delete this chat?'))return;aiChats=aiChats.filter(x=>x.id!==cid);if(aiActiveId===cid)aiActiveId=aiChats[0]?.id||'';saveAIChats();aiFiles=[];render()}
+function switchAIChat(cid){if(!aiChats.some(x=>x.id===cid))return;aiActiveId=cid;aiFiles=[];saveAIChats();render()}
+function clearAIChat(){const c=activeAIChat();if(!confirm('Clear messages in this chat?'))return;c.messages=[];c.title='New Chat';c.updatedAt=new Date().toISOString();saveAIChats();render()}
+function addAIFile(input){
+  const files=[...(input.files||[])];
+  for(const f of files){
+    if(f.size>8*1024*1024){toast('File too large: max 8 MB');continue}
+    if(aiFiles.some(x=>x.name===f.name&&x.size===f.size))continue;
+    aiFiles.push(f);
+  }
+  input.value='';render();
+}
+function removeAIFile(i){aiFiles.splice(i,1);render()}
+async function readDataURL(file){return await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(String(r.result));r.onerror=reject;r.readAsDataURL(file)})}
+async function extractPDFText(file){
+  if(!window.pdfjsLib)throw new Error('PDF reader is still loading. Please try again in a moment.');
+  const buf=await file.arrayBuffer(),pdf=await window.pdfjsLib.getDocument({data:buf}).promise;
+  let out='';
+  for(let i=1;i<=pdf.numPages;i++){
+    const pg=await pdf.getPage(i),tc=await pg.getTextContent();
+    out+=`\n--- Page ${i} ---\n`+tc.items.map(x=>x.str).join(' ');
+    if(out.length>90000)break;
+  }
+  return out.slice(0,90000);
+}
+async function prepareAIFile(file){
+  const type=file.type||'';
+  if(type==='text/plain'||type==='text/markdown'||type==='text/csv'||type==='application/json')return {name:file.name,type:'text',text:(await file.text()).slice(0,90000)};
+  if(type==='application/pdf')return {name:file.name,type:'pdf',text:await extractPDFText(file)};
+  if(type.startsWith('image/')){
+    if(file.size>2.5*1024*1024)throw new Error(`${file.name}: image should be under 2.5 MB for persistent chat context.`);
+    return {name:file.name,type:'image',dataUrl:await readDataURL(file)};
+  }
+  return {name:file.name,type:'unsupported'};
+}
+function aiContext(){
+  const t=todayLocal(),dn=dayOf(t),targets=d.targets||[],classes=d.classes||[],goals=d.goals||[],sessions=d.sessions||[],routine=d.routine||[],workouts=d.workouts||[],notes=d.notes||[];
+  const todayTargets=targets.filter(x=>x.date===t),todayClasses=classes.filter(x=>x.days.includes(dn));
+  return {
+    date:t,student:d.settings?.name||'Student',
+    noteFolders:Array.isArray(d.folders)?d.folders.slice():['General'],
+    todayTargets:todayTargets.map(x=>({title:x.title,subject:x.subject,date:x.date,start:x.start||x.time||'',end:x.end||'',minutes:x.minutes||0,priority:x.priority||'Normal',status:isDone('t-',x.id)?'done':'pending'})),
+    pendingToday:todayTargets.filter(x=>!isDone('t-',x.id)).length,
+    completedToday:todayTargets.filter(x=>isDone('t-',x.id)).length,
+    todayClasses:todayClasses.map(x=>({subject:x.subject,name:x.name,start:x.start,end:x.end,meta:x.meta||''})),
+    goals:goals.slice(0,30).map(x=>({title:x.title,date:x.date,category:x.cat,progress:x.progress||0,note:x.note||''})),
+    routine:routine.slice(0,30).map(x=>({title:x.title,category:x.cat,start:x.start,end:x.end,days:x.days})),
+    recentFocus:sessions.slice(-20).map(x=>({date:x.date,minutes:x.minutes,subject:x.subject||'Focus'})),
+    workouts:workouts.slice(-15).map(x=>({date:x.date,title:x.title,minutes:x.minutes})),
+    notes:notes.slice(-30).map(x=>({title:x.title,subject:x.subject||'',folder:x.folder||'General',type:x.type||'note',text:x.type==='text'?String(x.text||'').slice(0,3000):''}))
+  };
+}
+function aiQuickPrompt(kind){
+  const prompts={plan:'Mere aaj ke targets aur classes ko dekhkar realistic study plan bana do. Priority aur breaks bhi suggest karo.',backlog:'Mere current app data ke basis par backlog ko systematically clear karne ka practical plan batao.',revise:'Aaj ke liye revision strategy banao: kya pehle revise karun, kitna question practice karun, aur kab recall karun?',analyze:'Meri current study progress analyze karo aur 3 sabse important improvements batao.'};
+  const ta=document.getElementById('aiInput');if(ta){ta.value=prompts[kind]||prompts.plan;ta.focus()}
+}
+function markdownInline(s){
+  s=esc(s);
+  s=s.replace(/`([^`]+)`/g,'<code>$1</code>');
+  s=s.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+  s=s.replace(/__([^_]+)__/g,'<strong>$1</strong>');
+  s=s.replace(/(^|[^*])\*([^*]+)\*(?!\*)/g,'$1<em>$2</em>');
+  s=s.replace(/(^|\s)(https?:\/\/[^\s<]+)/g,'$1<a href="$2" target="_blank" rel="noopener">$2</a>');
+  return s;
+}
+function markdownToHtml(md){
+  const lines=String(md||'').replace(/\r/g,'').split('\n'),out=[];let inCode=false,code=[];
+  const flush=()=>{if(code.length){out.push('<pre><code>'+esc(code.join('\n'))+'</code></pre>');code=[]}};
+  for(const line of lines){
+    if(/^\s*```/.test(line)){if(inCode){flush();inCode=false}else{inCode=true}continue}
+    if(inCode){code.push(line);continue}
+    if(/^###\s+/.test(line)){out.push('<h3>'+markdownInline(line.replace(/^###\s+/,''))+'</h3>');continue}
+    if(/^##\s+/.test(line)){out.push('<h2>'+markdownInline(line.replace(/^##\s+/,''))+'</h2>');continue}
+    if(/^#\s+/.test(line)){out.push('<h1>'+markdownInline(line.replace(/^#\s+/,''))+'</h1>');continue}
+    if(/^\s*[-*]\s+/.test(line)){out.push('<li>'+markdownInline(line.replace(/^\s*[-*]\s+/,''))+'</li>');continue}
+    if(/^\s*\d+[.)]\s+/.test(line)){out.push('<li>'+markdownInline(line.replace(/^\s*\d+[.)]\s+/,''))+'</li>');continue}
+    if(/^>\s?/.test(line)){out.push('<blockquote>'+markdownInline(line.replace(/^>\s?/,''))+'</blockquote>');continue}
+    if(!line.trim()){out.push('<div style="height:6px"></div>');continue}
+    out.push('<p>'+markdownInline(line)+'</p>');
+  }
+  if(inCode)flush();
+  let html=out.join('');html=html.replace(/(?:<li>.*?<\/li>\s*){2,}/gs,m=>'<ul>'+m+'</ul>');
+  return html;
+}
+function aiAttachmentParts(attachments){
+  const parts=[];
+  for(const a of attachments||[]){
+    if(a.type==='text'||a.type==='pdf')parts.push({type:'text',text:`Attached file: ${a.name}\n${a.text||''}`});
+    else if(a.type==='image'&&a.dataUrl)parts.push({type:'image_url',image_url:{url:a.dataUrl}});
+    else parts.push({type:'text',text:`Attached file: ${a.name}. The browser could not extract usable content from this file, so do not claim to have read it.`});
+  }
+  return parts;
+}
+const AI_APP_TOOLS=[
+  {type:'function',function:{name:'create_folder',description:'Create a new folder in the app Notes & PDFs library when the user asks you to create a folder. Do not create duplicates. This changes app data.',parameters:{type:'object',properties:{name:{type:'string',description:'Folder name to create'}},required:['name']}}},
+  {type:'function',function:{name:'create_targets',description:'Create one or more study targets in the app when the user explicitly asks to add/set/save targets, or asks for a plan and says to put it into the app. Use actual dates and times where known. This changes app data.',parameters:{type:'object',properties:{targets:{type:'array',items:{type:'object',properties:{title:{type:'string'},subject:{type:'string'},date:{type:'string',description:'YYYY-MM-DD'},start:{type:'string',description:'24-hour HH:MM or empty'},end:{type:'string',description:'24-hour HH:MM or empty'},minutes:{type:'number'},priority:{type:'string',enum:['High','Normal','Low']}},required:['title','date']}}},required:['targets']}}}
+];
+function executeAIAppTool(name,args){
+  try{
+    if(name==='create_folder'){
+      const n=String(args?.name||'').trim().replace(/\s+/g,' ');
+      if(!n)return {success:false,message:'Folder name is required.'};
+      if(n.length>60)return {success:false,message:'Folder name is too long.'};
+      if(n.toLowerCase()==='all')return {success:false,message:'All is reserved.'};
+      if((d.folders||[]).some(x=>String(x).toLowerCase()===n.toLowerCase()))return {success:true,created:false,name:n,message:'Folder already exists.'};
+      d.folders.push(n); save(); render(); return {success:true,created:true,name:n,message:'Folder created.'};
+    }
+    if(name==='create_targets'){
+      const arr=Array.isArray(args?.targets)?args.targets:[]; const created=[];
+      for(const t of arr){
+        const title=String(t?.title||'').trim(), date=String(t?.date||'').trim();
+        if(!title||!/^\d{4}-\d{2}-\d{2}$/.test(date)) continue;
+        let start=String(t?.start||'').trim(), end=String(t?.end||'').trim();
+        if(start && !parseTimeInput(start)) start=''; else if(start) start=parseTimeInput(start);
+        if(end && !parseTimeInput(end)) end=''; else if(end) end=parseTimeInput(end);
+        let minutes=Number(t?.minutes)||0; if(start&&end){const dur=duration(start,end);if(!dur)continue;minutes=dur}
+        const target={id:id(),title,subject:String(t?.subject||'Study').trim()||'Study',date,start,end,time:start,minutes,priority:['High','Normal','Low'].includes(t?.priority)?t.priority:'Normal'};
+        d.targets.push(target); created.push(target);
+      }
+      if(created.length){save();render();}
+      return {success:true,created:created.map(x=>({id:x.id,title:x.title,subject:x.subject,date:x.date,start:x.start,end:x.end,minutes:x.minutes,priority:x.priority})),message:created.length?`${created.length} target(s) added to the app.`:'No valid targets were added.'};
+    }
+    return {success:false,message:'Unknown app action.'};
+  }catch(e){return {success:false,message:e?.message||'App action failed.'}}
+}
+function buildSystemPrompt(){return `You are the natural, context-aware study assistant inside a student's personal study app. Your job is to have a real conversation, not behave like a rigid question-answer bot.
+
+LANGUAGE & STYLE
+- Reply in the user's language and style. If the user writes Hinglish, use natural Hinglish. If Hindi, use Hindi. If English, use English. Match casual/formal tone naturally.
+- Never start with generic phrases like "How can I help you?" unless the user explicitly asks what you can do.
+- Do not say "As an AI" or add unnecessary disclaimers.
+- Be warm, direct, practical and conversational. Do not turn casual conversation into a study lecture.
+- If the user says "haan", "nahi", "yeh wala", "isko samjha", "aage bata", "kal wali baat" or another short/ambiguous follow-up, infer its meaning from the recent messages in THIS chat before asking a clarification. Ask only when genuinely ambiguous.
+- If the user says "short mein batao", keep it concise. If they say "detail mein samjhao", explain in depth.
+
+CONTEXT & MEMORY
+- The conversation messages supplied below are the authoritative recent context for THIS chat. Maintain continuity and do not make the user repeat context.
+- Never mix this chat with another saved chat. A new chat is independent.
+- Use the app data when relevant: targets, classes, routine, goals, focus sessions, workouts and notes.
+- Treat app data as facts. Never invent missing targets, progress, classes, file contents or study history. If something is not in app data or attached-file content, say that it is not available.
+- If the user corrects you, accept the correction and continue using the corrected information.
+
+STUDY ASSISTANT BEHAVIOR
+- For study questions, prefer: concept → simple explanation → example → small practice/question. Adapt the level to the student's confusion.
+- If the student is confused, simplify further, use an analogy, then check understanding.
+- When the student discusses a plan, give practical suggestions only when useful; don't lecture.
+- Use the student's actual targets/classes/goals when making plans. Respect completed work and avoid scheduling impossible overlaps.
+
+FILES
+- Attached file contents are part of the current conversation when provided. Use them for follow-ups later in this same chat.
+- If a file's contents are not available, say so. Never pretend you read a file you cannot access.
+
+FORMATTING
+- Markdown is supported. Use headings, bullets, numbered lists, bold, inline code and fenced code/formulas when they improve readability.
+- Keep long answers divided into readable sections.
+
+APP ACTIONS
+- You have controlled app actions. Use create_folder only when the user asks to create a folder in the app. Use create_targets only when the user explicitly asks to add/set/save targets, or asks for a plan and explicitly wants it added to the app.
+- Do not call an app action for a hypothetical plan or when the user only asks for advice.
+- After an action succeeds, briefly confirm what actually changed. Never claim an action succeeded unless the tool result says it succeeded.
+- If required details are missing, infer only from current chat/app context when reasonable; otherwise ask a focused question.
+
+APP DATA (facts only; do not invent beyond this):
+${JSON.stringify(aiContext())}`}
+function renderAIMessage(m){
+  const att=m.attachments?.length?`<div class="ai-attachment-note">📎 ${m.attachments.map(x=>esc(x.name)).join(', ')}</div>`:'';
+  return `<div class="ai-msg ${m.role==='user'?'user':'bot'}">${m.role==='user'?esc(m.text||''):markdownToHtml(m.text||'')}${att}</div>`;
+}
+function aiAssistant(a){
+  const c=activeAIChat(),key=getAIKey(),msgs=c.messages||[];
+  a.innerHTML=`<div class="ai-page-shell" id="aiPageShell"><div class="hero"><div><div class="eyebrow">AI study coach</div><h1>🤖 AI Assistant</h1><p>Natural conversation with your targets, classes, goals and study files in context.</p></div><div class="actions"><button class="secondary ai-fullscreen-btn" onclick="toggleAIFullscreen()">⛶ Full Screen</button><button class="primary" onclick="newAIChat()">＋ New Chat</button></div></div>
+  <div class="ai-wrap"><div class="ai-chat"><div class="ai-head"><div><h2>${esc(c.title||'New Chat')}</h2><div class="ai-status">${key?'Groq connected':'Add your Groq API key'} • ${msgs.length} messages</div></div><div class="ai-head-actions"><button class="ai-stop" id="aiStop" onclick="stopAI()">Stop</button><button class="secondary" onclick="clearAIChat()">Clear</button></div></div>
+  <div class="ai-messages" id="aiMessages">${msgs.length?msgs.map(renderAIMessage).join(''):`<div class="ai-msg system">Start normally — for example, ask me to explain a topic, plan today, or continue something we were discussing.</div>`}</div>
+  <div class="ai-compose"><div class="ai-compose-row"><textarea class="textarea" id="aiInput" placeholder="Message your study assistant…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendAI()}"></textarea><button class="primary" id="aiSend" onclick="sendAI()">Send</button></div>
+  <div class="ai-file-row"><label class="ai-file-btn">📎 Attach files<input id="aiFileInput" type="file" multiple accept=".txt,.md,.csv,.json,.pdf,.png,.jpg,.jpeg,.webp" style="display:none" onchange="addAIFile(this)"></label><span class="ai-mini">Text/PDF content is remembered in this chat; images are retained when small enough.</span></div><div class="ai-file-list">${aiFiles.map((f,i)=>`<div class="ai-file-chip">📄 ${esc(f.name)} <button onclick="removeAIFile(${i})">✕</button></div>`).join('')}</div></div></div>
+  <div class="ai-side"><div class="card"><h3>Saved Chats</h3><div class="ai-chat-list">${aiChats.length?aiChats.map(x=>`<div class="ai-chat-item ${x.id===aiActiveId?'active':''}" onclick="switchAIChat('${x.id}')"><span>${esc(x.title||'New Chat')}</span><small>${x.messages?.length||0}</small><button class="danger" style="padding:3px 7px" onclick="event.stopPropagation();deleteAIChat('${x.id}')">×</button></div>`).join(''):'<div class="muted">No saved chats yet.</div>'}</div></div>
+  <div class="card"><h3>Quick prompts</h3><div class="ai-quick"><button onclick="aiQuickPrompt('plan')">📅 Make today’s plan</button><button onclick="aiQuickPrompt('backlog')">📚 Help with backlog</button><button onclick="aiQuickPrompt('revise')">🔁 Revision strategy</button><button onclick="aiQuickPrompt('analyze')">📊 Analyze progress</button></div></div>
+  <div class="card"><h3>Groq API Key</h3><div class="field"><input class="input" id="aiKey" type="password" placeholder="Paste Groq API key" value="${esc(key)}"></div><div class="actions"><button class="primary" onclick="saveAIKeyUI()">Save key</button><button class="danger" onclick="removeAIKeyUI()">Remove</button></div><div class="ai-mini" style="margin-top:9px">Stored only in this browser's local storage. For a public app, move the API call to a secure backend so the key is not exposed.</div></div></div></div></div>`;
+  setTimeout(()=>{const e=document.getElementById('aiMessages');if(e)e.scrollTop=e.scrollHeight},0);
+}
+async function toggleAIFullscreen(){const el=document.getElementById('aiPageShell');if(!el)return;try{if(document.fullscreenElement){await document.exitFullscreen?.()}else if(el.requestFullscreen){await el.requestFullscreen()}}catch(e){toast('Full screen is not available in this browser')}}
+document.addEventListener('fullscreenchange',()=>{const b=document.querySelector('.ai-fullscreen-btn');if(b)b.textContent=document.fullscreenElement?'✕ Exit Full Screen':'⛶ Full Screen'});
+
+function saveAIKeyUI(){const k=(document.getElementById('aiKey')?.value||'').trim();if(!k)return toast('Paste a Groq API key first');setAIKey(k);toast('Groq API key saved');render()}
+function removeAIKeyUI(){setAIKey('');toast('Groq API key removed');render()}
+function quickAI(t){const e=document.getElementById('aiInput');if(e){e.value=t;e.focus()}else{const c=activeAIChat();c.messages.push({role:'user',text:t});saveAIChats();render()}}
+function stopAI(){try{aiAbortController?.abort()}catch(e){} }
+async function sendAI(){
+  const key=getAIKey(),input=document.getElementById('aiInput'),btn=document.getElementById('aiSend'),text=(input?.value||'').trim();
+  if(!key)return toast('Add your Groq API key first');
+  if(!text&&!aiFiles.length)return toast('Type a message or attach a file');
+  const c=activeAIChat(); let attachments=[];
+  try{for(const f of aiFiles)attachments.push(await prepareAIFile(f));}catch(e){return toast(e.message||'Could not read attachment')}
+  aiFiles=[];
+  if(text||attachments.length){c.messages.push({role:'user',text:text||'Please help me with the attached file.',attachments});if(c.title==='New Chat')c.title=aiChatTitleFromText(text||attachments[0]?.name||'File study');}
+  c.updatedAt=new Date().toISOString();saveAIChats();
+  const box=document.getElementById('aiMessages'); if(!box)return;
+  const lastUser=c.messages[c.messages.length-1];
+  if(lastUser){box.insertAdjacentHTML('beforeend',renderAIMessage(lastUser));}
+  const holder=document.createElement('div');holder.className='ai-msg bot';holder.innerHTML='<span class="ai-loading"><i></i><i></i><i></i> Thinking…</span>';box.appendChild(holder);box.scrollTop=box.scrollHeight;
+  if(btn)btn.disabled=true;const stop=document.getElementById('aiStop');if(stop)stop.classList.add('show');if(input)input.disabled=true;
+  try{
+    const history=c.messages.slice(-AI_MAX_HISTORY).map(m=>({role:m.role==='model'?'assistant':m.role,content:m.role==='user'?[{type:'text',text:m.text||''},...aiAttachmentParts(m.attachments)]:String(m.text||'')}));
+    const hasImage=attachments.some(x=>x.type==='image');
+    const messages=[{role:'system',content:buildSystemPrompt()},...history];
+    aiAbortController=new AbortController();
+    const base={model:hasImage?AI_VISION_MODEL:AI_MODEL,messages,temperature:0.7,max_completion_tokens:4096,tools:AI_APP_TOOLS,tool_choice:'auto'};
+    const first=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},body:JSON.stringify({...base,stream:true}),signal:aiAbortController.signal});
+    if(!first.ok){let er={};try{er=await first.json()}catch(e){}throw new Error(er?.error?.message||`Groq request failed (${first.status})`)}
+    if(!first.body)throw new Error('Streaming is not available in this browser.');
+    const reader=first.body.getReader(),decoder=new TextDecoder();let buffer='',answer='',toolMap={};
+    while(true){const {value,done}=await reader.read();if(done)break;buffer+=decoder.decode(value,{stream:true});const lines=buffer.split('\n');buffer=lines.pop()||'';for(const raw of lines){const line=raw.trim();if(!line.startsWith('data:'))continue;const payload=line.slice(5).trim();if(payload==='[DONE]')continue;let obj;try{obj=JSON.parse(payload)}catch(e){continue}const delta=obj?.choices?.[0]?.delta;if(delta?.content){answer+=delta.content;holder.innerHTML=markdownToHtml(answer);box.scrollTop=box.scrollHeight}for(const tc of (delta?.tool_calls||[])){const i=tc.index??0;toolMap[i]??={id:'',type:'function',function:{name:'',arguments:''}};if(tc.id)toolMap[i].id=tc.id;if(tc.function?.name)toolMap[i].function.name+=tc.function.name;if(tc.function?.arguments)toolMap[i].function.arguments+=tc.function.arguments;}}}
+    const toolCalls=Object.values(toolMap).filter(x=>x.function.name);
+    if(toolCalls.length){
+      if(answer.trim())messages.push({role:'assistant',content:answer,tool_calls:toolCalls});else messages.push({role:'assistant',content:null,tool_calls:toolCalls});
+      for(const tc of toolCalls){let args={};try{args=JSON.parse(tc.function.arguments||'{}')}catch(e){}const result=executeAIAppTool(tc.function.name,args);messages.push({role:'tool',tool_call_id:tc.id,name:tc.function.name,content:JSON.stringify(result)});}
+      holder.innerHTML='<span class="ai-loading"><i></i><i></i><i></i> Updating…</span>';box.scrollTop=box.scrollHeight;
+      const finalRes=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},body:JSON.stringify({model:AI_MODEL,messages,temperature:0.7,max_completion_tokens:2048,stream:true}),signal:aiAbortController.signal});
+      if(!finalRes.ok){let er={};try{er=await finalRes.json()}catch(e){}throw new Error(er?.error?.message||`Groq final response failed (${finalRes.status})`)}
+      const fr=finalRes.body.getReader(),fd=new TextDecoder();buffer='';answer='';
+      while(true){const {value,done}=await fr.read();if(done)break;buffer+=fd.decode(value,{stream:true});const lines=buffer.split('\n');buffer=lines.pop()||'';for(const raw of lines){const line=raw.trim();if(!line.startsWith('data:'))continue;const payload=line.slice(5).trim();if(payload==='[DONE]')continue;let obj;try{obj=JSON.parse(payload)}catch(e){continue}const delta=obj?.choices?.[0]?.delta?.content;if(delta){answer+=delta;holder.innerHTML=markdownToHtml(answer);box.scrollTop=box.scrollHeight;}}}
+    }
+    answer=answer.trim();if(!answer)answer='Done.';
+    c.messages.push({role:'model',text:answer});c.updatedAt=new Date().toISOString();saveAIChats();
+    const titleEl=document.querySelector('.ai-head h2'); if(titleEl) titleEl.textContent=c.title||'New Chat';
+    const statusEl=document.querySelector('.ai-status'); if(statusEl) statusEl.textContent=(getAIKey()?'Groq connected':'Add your Groq API key')+' • '+c.messages.length+' messages';
+  }catch(err){
+    if(err?.name==='AbortError'){holder.remove();return}
+    const msg=`⚠️ ${err.message||'AI request failed'}`;holder.innerHTML=markdownToHtml(msg);c.messages.push({role:'model',text:msg});c.updatedAt=new Date().toISOString();saveAIChats();
+  }finally{aiAbortController=null;if(btn)btn.disabled=false;if(input)input.disabled=false;const stop=document.getElementById('aiStop');if(stop)stop.classList.remove('show')}
+}
+
+function aiHistory(){return activeAIChat()?.messages||[]}
+function saveAIHistory(h){const c=activeAIChat();if(c){c.messages=h;c.updatedAt=new Date().toISOString();saveAIChats()}}
+function renderAIHistory(){render()}
+
 function planner(a){let dt=plannerDate,dn=dayOf(dt),targetsToday=d.targets.filter(x=>x.date===dt).sort(sortTarget),classesToday=d.classes.filter(x=>x.days.includes(dn)).map(c=>({time:c.start,title:c.subject,sub:c.name||'Live Class',mins:duration(c.start,c.end),kind:'class',id:c.id})),targetBlocks=targetsToday.map(t=>({time:t.start||t.time,title:t.title,sub:(t.subject||'Study')+(t.start&&t.end?' • '+fmtTime(t.start)+' – '+fmtTime(t.end):''),mins:t.minutes||45,kind:'target',id:t.id,done:isDone('t-',t.id)})),blocks=[...targetBlocks,...classesToday].sort((a,b)=>(a.time||'99:99').localeCompare(b.time||'99:99')),done=targetsToday.filter(x=>isDone('t-',x.id)).length,pct=targetsToday.length?Math.round(done/targetsToday.length*100):0,totalMin=targetsToday.reduce((n,x)=>n+(+x.minutes||0),0);a.innerHTML=`<div class="planner"><div class="planner-top"><div class="planner-title"><h2>Planner</h2><p>Plan your day. Stay focused. Achieve your goals.</p></div><div class="planner-controls"><input class="planner-date" type="date" value="${dt}" onchange="plannerDate=this.value;render()"><button class="secondary" onclick="plannerDate=todayLocal();render()">Today</button></div></div><div class="planner-body"><div class="planner-stats"><div class="pstat"><b>${blocks.length}</b><small>Today's blocks</small></div><div class="pstat"><b>${done}</b><small>Targets done</small></div><div class="pstat"><b>${Math.floor(totalMin/60)}h ${totalMin%60}m</b><small>Study planned</small></div><div class="pstat"><b>${targetsToday.length-done}</b><small>Pending</small></div></div><div class="planner-grid"><main class="planner-main"><div class="planner-tabs"><button class="planner-tab active">Day</button><button class="planner-tab" onclick="plannerWeek()">Week</button><button class="planner-tab" onclick="plannerMonth()">Month</button></div><div style="padding:14px 18px;color:#8294aa;font-size:13px;font-weight:800">${fmtDate(dt)}</div><div class="timeline">${blocks.map(b=>`<div class="timeline-row"><div class="timeline-time">${b.time?fmtTime(b.time):'—'}</div><div class="timeline-line"><span class="timeline-dot"></span></div><div class="timeline-card"><div><b class="${b.done?'done':''}">${esc(b.title)}</b><small>${esc(b.sub)} • ${b.kind==='class'?'Live Class':b.mins+' min'}</small></div><span class="tag ${b.kind==='class'?'purple':''}">${b.kind==='class'?'CLASS':b.mins+'m'}</span></div>${b.kind==='target'?`<label class="check target-checkbox" title="${b.done?'Mark as pending':'Mark as completed'}"><input type="checkbox" ${b.done?'checked':''} onchange="toggleTarget('${b.id}')"><span class="box-mark"></span></label>`:'<span></span>'}</div>`).join('')||'<div class="empty">Nothing planned for this date.</div>'}<button class="planner-add" onclick="quickTarget()">＋ Add New Time Block</button></div></main><aside><div class="p-side-card"><h3>Daily Progress</h3><div class="progress-ring" style="--progress:${pct*3.6}deg"><span>${pct}%</span></div><div class="side-stat"><span>Completed</span><b>${done}</b></div><div class="side-stat"><span>Planned</span><b>${targetsToday.length}</b></div></div><div class="p-side-card" style="margin-top:12px"><h3>Quick Add</h3><div class="quick-add"><button onclick="quickTarget()">＋ Study Target</button><button onclick="addBreak()">＋ Break</button><button onclick="addPlannerClass()">＋ Class</button></div></div><div class="p-side-card" style="margin-top:12px"><h3>Focus Tip</h3><p class="muted">Use a realistic plan. Leave space for breaks and unfinished work.</p></div></aside></div></div></div>`}
 function duration(a,b){if(!a||!b)return 0;let [h,m]=a.split(':').map(Number),[H,M]=b.split(':').map(Number);let x=H*60+M-(h*60+m);return x>0?x:0}
 function plannerWeek(){let base=new Date(plannerDate+'T12:00:00'),sun=new Date(base);sun.setDate(base.getDate()-base.getDay());let html='';for(let i=0;i<7;i++){let z=new Date(sun);z.setDate(sun.getDate()+i);let s=z.getFullYear()+'-'+String(z.getMonth()+1).padStart(2,'0')+'-'+String(z.getDate()).padStart(2,'0');let count=d.targets.filter(t=>t.date===s).length+d.classes.filter(c=>c.days.includes(z.getDay())).length;html+=`<div class="item"><b>${days()[i]} • ${fmtDate(s)}</b><div class="item-sub">${count} planned blocks</div><button class="secondary" onclick="plannerDate='${s}';render()">Open day</button></div>`}document.getElementById('app').innerHTML=`<div class="planner"><div class="planner-top"><div class="planner-title"><h2>Planner · Week</h2><p>Weekly overview</p></div><button class="secondary" onclick="render()">Day view</button></div><div class="planner-body"><div class="card" style="background:#0a1727">${html}</div></div></div>`}
@@ -234,7 +573,7 @@ function addGoal(){let title=v('gTitle'),date=v('gDate');if(!title||!date)return
 function toggleGoal(id){let g=d.goals.find(x=>x.id===id);if(!g)return;let done=!isDone('g-',id);setDone('g-',id,done);if(done)g.progress=100;save();toast(done?'Goal completed ✓':'Goal reopened');render()}
 function editGoal(id){let g=d.goals.find(x=>x.id===id);if(!g)return;let t=prompt('Goal:',g.title);if(t===null)return;let date=prompt('Due date:',g.date);if(date===null)return;let p=prompt('Progress %:',g.progress||0);if(p===null)return;g.title=t.trim()||g.title;g.date=date.trim()||g.date;g.progress=Math.max(0,Math.min(100,+p||0));if(g.progress>=100)setDone('g-',id,true);save();render()}
 function delGoal(id){if(!confirm('Delete goal?'))return;d.goals=d.goals.filter(x=>x.id!==id);delete d.done['g-'+id];save();render()}
-function settings(a){a.innerHTML=`<div class="hero"><div><div class="eyebrow">Control center</div><h1>Settings</h1><p>Keep your study system safe and portable.</p></div></div><div class="layout2"><div class="card"><h2>Data</h2><p class="muted">Export a backup before moving to another computer. Importing replaces current planner data.</p><div class="actions"><button class="primary" onclick="exportData()">Export Backup</button><button class="secondary" onclick="document.getElementById('importFile').click()">Import Backup</button><input id="importFile" type="file" accept="application/json" style="display:none" onchange="importData(this.files[0])"></div><hr style="border-color:#1b2d45;margin:20px 0"><button class="danger" onclick="resetData()">Reset All App Data</button><button class="danger" onclick="logout()">🚪 Logout</button></div><div class="card"><h2>Profile & preferences</h2><div class="field"><label>Your name</label><div class="row"><input class="input" id="profileName" value="${esc(d.settings.name)}" placeholder="Your name"><button class="primary" onclick="saveProfileName()">Save Name</button></div></div><hr style="border-color:#1b2d45;margin:20px 0"><h3>App Branding</h3><div class="field"><label>App name</label><div class="row"><input class="input" id="brandName" value="${esc(d.settings.brandName||'Student Life')}" placeholder="e.g. Chitranshu JEE Targets"><button class="primary" onclick="saveBrandName()">Save App Name</button></div><small class="muted">This name will replace “Student Life” across the main dashboard and sidebar.</small></div><div class="field"><label>Logo</label><div class="row"><input class="input" type="file" id="brandLogoFile" accept="image/png,image/jpeg,image/webp,image/gif" onchange="saveBrandLogo(this)"><button class="secondary" onclick="resetBrandLogo()">Reset Logo</button></div><div class="item-sub">Upload PNG/JPG/WebP/GIF (max 2 MB). It is saved with your app data.</div></div><div class="field"><label>Default focus minutes</label><input class="input" type="number" min="1" max="180" value="${d.settings.focus}" onchange="d.settings.focus=Math.max(1,Math.min(180,+this.value||25));save();toast('Saved')"></div><div class="field"><label>Tip</label><div class="empty">Use Planner for the day, Targets for individual tasks, and Goals for longer outcomes.</div></div></div></div>`}
+function settings(a){a.innerHTML=`<div class="hero"><div><div class="eyebrow">Control center</div><h1>Settings</h1><p>Keep your study system safe and portable.</p></div></div><div class="layout2"><div class="card"><h2>Data</h2><p class="muted">Export a backup before moving to another computer. Importing replaces current planner data.</p><div class="actions"><button class="primary" onclick="exportData()">Export Backup</button><button class="secondary" onclick="document.getElementById('importFile').click()">Import Backup</button><input id="importFile" type="file" accept="application/json" style="display:none" onchange="importData(this.files[0])"></div><hr style="border-color:#1b2d45;margin:20px 0"><button class="danger" onclick="resetData()">Reset All App Data</button><button class="danger" onclick="logout()">🚪 Logout</button></div><div class="card"><h2>Profile & preferences</h2><div class="field"><label>Your name</label><div class="row"><input class="input" id="profileName" value="${esc(d.settings.name)}" placeholder="Your name"><button class="primary" onclick="saveProfileName()">Save Name</button></div></div><hr style="border-color:#1b2d45;margin:20px 0"><h3>App Branding</h3><div class="field"><label>App name</label><div class="row"><input class="input" id="brandName" value="${esc(d.settings.brandName||'Student Life')}" placeholder="e.g. Chitranshu JEE Targets"><button class="primary" onclick="saveBrandName()">Save App Name</button></div><small class="muted">This name will replace “Student Life” across the main dashboard and sidebar.</small></div><div class="field"><label>Logo</label><div class="row"><input class="input" type="file" id="brandLogoFile" accept="image/png,image/jpeg,image/webp,image/gif" onchange="saveBrandLogo(this)"><button class="secondary" onclick="resetBrandLogo()">Reset Logo</button></div><div class="item-sub">Upload PNG/JPG/WebP/GIF (max 2 MB). It is saved with your app data.</div></div><div class="field"><label>Default focus minutes</label><input class="input" type="number" min="1" max="180" value="${d.settings.focus}" onchange="d.settings.focus=Math.max(1,Math.min(180,+this.value||25));save();toast('Saved')"></div></div><div class="field"><label>Tip</label><div class="empty">Use Planner for the day, Targets for individual tasks, and Goals for longer outcomes.</div></div></div></div>`}
 function saveProfileName(){let n=v('profileName');if(!n)return toast('Enter your name');d.settings.name=n.slice(0,40);save();toast('Name saved');render()}
 function saveBrandName(){let n=v('brandName');if(!n)return toast('Enter an app name');d.settings.brandName=n.trim().slice(0,40)||'Student Life';save();toast('App name saved ✓');render()}
 function saveBrandLogo(input){let file=input?.files?.[0];if(!file)return;if(!file.type.startsWith('image/'))return toast('Please choose an image');if(file.size>2*1024*1024)return toast('Logo must be under 2 MB');let r=new FileReader();r.onload=()=>{let img=new Image();img.onload=()=>{let c=document.createElement('canvas'),max=256,scale=Math.min(1,max/Math.max(img.width,img.height));c.width=Math.max(1,Math.round(img.width*scale));c.height=Math.max(1,Math.round(img.height*scale));c.getContext('2d').drawImage(img,0,0,c.width,c.height);d.settings.brandLogo=c.toDataURL('image/png');save();toast('Logo saved ✓');render()};img.src=r.result};r.readAsDataURL(file)}
@@ -532,6 +871,7 @@ async function loadStudyDataFromSupabase(){
 
     if(remote && remote.data){
       d = Object.assign(structuredClone(defaultData), remote.data);
+      if(typeof loadAIChatsFromData === 'function') loadAIChatsFromData(user.id);
       localStorage.setItem(KEY, JSON.stringify(d));
       if(typeof render === "function") render();
       console.log("✅ Data loaded from Supabase");
